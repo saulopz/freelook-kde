@@ -16,6 +16,7 @@ on a modern Plasma.
 | **Window decoration** | Thin black-outlined border, raised L-shaped resize corners, window menu button with a hollow triangle, centered title with an etched separator, pushpin | KWin Aurorae, QML |
 | **Application style** | Oblong buttons with a default ring, hollow arrows, check marks that overflow their box, rectangular exclusive settings, tabs drawn as exclusive settings, underlined text fields, numeric fields with [▲][▼] boxes, combo boxes as menu buttons, sliders with a drag box, menus where the chosen item sinks in, menu bar entries as menu buttons, and the OPEN LOOK **elevator** scroll bar | Qt 6 `QStyle` plugin, C++ |
 | **GTK 3 theme** | The same look for GTK 3 programs (Firefox, GIMP, Inkscape, LibreOffice and others): oblong buttons, underlined fields, the ✓ that overflows, exclusive settings, tabs, menus, sliders and an elevator-like scroll bar | GTK 3 CSS |
+| **Fonts** | The Go family by Bigelow & Holmes, the designers of Lucida (the OpenWindows typeface): Go for the interface, Go Bold for window titles, Go Mono for fixed width | TrueType, BSD 3-Clause |
 | **Plasma style** | Panel, menus, tooltips and widgets with the OPEN LOOK pop-up window frame, oblong buttons, sunken selection | Plasma SVG theme |
 | **Color scheme** | The OpenWindows 3 palette: `#cccccc`, `#b7b7b7`, `#a0a0a0` and white | KDE color scheme |
 | **Global theme** | Applies all of the above in one click, including the title bar button layout | Plasma look-and-feel package |
@@ -78,8 +79,8 @@ The first time, log out and back in so every application finds the style
 
 Options: `--no-style` skips the C++ build; `--help` lists everything.
 
-Suggested extra: a bold sans-serif window title font, around 10 pt
-(*System Settings > Text & Fonts > Window title*).
+The global theme also sets the fonts (Go, Go Bold for titles, Go Mono). To keep
+your own fonts, choose them again in *System Settings > Text & Fonts*.
 
 ## Uninstall
 
@@ -105,6 +106,7 @@ freelook/
 ├── style/               Qt application style (C++) and the test gallery
 ├── plasma/              Plasma style (generated), global theme, wallpaper
 ├── gtk/                 GTK 3 theme (CSS; pictures generated)
+├── fonts/Go/            the Go fonts (BSD 3-Clause)
 ├── tools/               generators, previews, test harnesses, try-panel.sh
 ├── extras/              the first decoration, as an SVG Aurorae theme
 └── docs/screenshots/
@@ -201,6 +203,9 @@ GPL-3.0-or-later. See [LICENSE](LICENSE).
 `tools/qml-test/stubs/org/kde/kwin/decoration/{Decoration,ButtonGroup,DecorationButton}.qml`
 are copied from [Aurorae](https://invent.kde.org/plasma/aurorae) and keep
 their original GPL-2.0-or-later license.
+
+The Go fonts in `fonts/Go/` are by Bigelow & Holmes, unchanged, under their
+own BSD 3-Clause license ([fonts/Go/LICENSE](fonts/Go/LICENSE)).
 
 ### Trademarks and originality
 

@@ -16,6 +16,7 @@ de 1991, rodando num Plasma moderno.
 | **Decoração de janela** | Borda fina com contorno preto, cantos de redimensionamento em L em relevo, botão de menu com triângulo vazado, título centralizado com separador entalhado, pushpin | Aurorae do KWin, QML |
 | **Estilo dos programas** | Botões oblongos com anel no botão padrão, setas vazadas, ✓ que transborda da caixinha, opções exclusivas retangulares, abas desenhadas como opções exclusivas, campos de texto sublinhados, campos numéricos com as caixinhas [▲][▼], combos como botões de menu, sliders com o bloquinho de arrastar, menus em que o item escolhido afunda, a barra de menus com botões de menu e a barra de rolagem **elevador** do OPEN LOOK | Plugin `QStyle` do Qt 6, C++ |
 | **Tema GTK 3** | O mesmo visual nos programas em GTK 3 (Firefox, GIMP, Inkscape, LibreOffice e outros): botões oblongos, campos sublinhados, o ✓ que transborda, opções exclusivas, abas, menus, sliders e uma barra de rolagem parecida com o elevador | CSS do GTK 3 |
+| **Fontes** | A família Go, da Bigelow & Holmes, os desenhistas da Lucida (a fonte do OpenWindows): Go na interface, Go Bold no título das janelas, Go Mono na largura fixa | TrueType, BSD 3-Clause |
 | **Estilo do Plasma** | Painel, menus, dicas e plasmoides com a moldura das janelas pop-up do OPEN LOOK, botões oblongos, seleção afundada | Tema SVG do Plasma |
 | **Esquema de cores** | A paleta do OpenWindows 3: `#cccccc`, `#b7b7b7`, `#a0a0a0` e branco | Esquema de cores do KDE |
 | **Tema global** | Aplica tudo isso de uma vez, inclusive a ordem dos botões da barra de título | Pacote de tema global do Plasma |
@@ -72,8 +73,8 @@ acharem o estilo (ele fica em `~/.local/lib/qt6/plugins`, anunciado pelo
 
 Opções: `--no-style` pula a compilação do C++; `--help` mostra todas.
 
-Sugestão: uma fonte sem serifa em negrito, perto de 10 pt, para o título das
-janelas (*Configurações do Sistema → Texto e Fontes → Título da janela*).
+O tema global também define as fontes (Go, Go Bold nos títulos, Go Mono). Para
+manter as suas, escolha-as de novo em *Configurações do Sistema → Texto e Fontes*.
 
 ## Desinstalar
 
@@ -143,6 +144,9 @@ A história completa está no [CHANGELOG.md](CHANGELOG.md) (em inglês).
 ## Licença
 
 GPL-3.0-or-later. Veja o arquivo [LICENSE](LICENSE).
+
+As fontes Go em `fonts/Go/` são da Bigelow & Holmes, sem modificações, sob a
+licença BSD 3-Clause delas ([fonts/Go/LICENSE](fonts/Go/LICENSE)).
 
 ### Marcas e originalidade
 

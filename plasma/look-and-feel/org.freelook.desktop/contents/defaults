@@ -3,6 +3,14 @@ widgetStyle=FreeLook
 
 [kdeglobals][General]
 ColorScheme=FreeLook
+font=Go,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Go,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Go,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Go,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=Go Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[kdeglobals][WM]
+activeFont=Go,10,-1,5,700,0,0,0,0,0,0,0,0,0,0,1
 
 [plasmarc][Theme]
 name=FreeLook

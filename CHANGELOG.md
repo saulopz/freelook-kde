@@ -21,8 +21,14 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   The clock and weather widgets keep the settings of your own panels.
   Kicker in Plasma 6.8 has no text label, so its button is a picture of an
   OPEN LOOK "Workspace ▽" menu button.
-- Plasma style: menu bar entries (global menu, window list) drawn as OPEN
-  LOOK menu buttons instead of Breeze's highlight, which came out black.
+- Fonts: the Go family by Bigelow & Holmes (the designers of Lucida),
+  installed with the theme; the global theme sets Go for the interface, Go
+  Bold for window titles and Go Mono for fixed width. `uninstall.sh` puts
+  the Plasma default fonts back if Go is in use.
+- Plasma style: menu bar entries (global menu, window list) drawn as a
+  raised box, sunken while open, instead of Breeze's highlight, which came
+  out black. (A first version with round ends made the window list resize
+  in a loop, with plasmashell at 200% CPU.)
 - `install.sh --no-style` no longer drops the Qt plugin path from the
   session file when the style was installed before.
 - Application style: Plasma's own menus (desktop context menu, panel menus)

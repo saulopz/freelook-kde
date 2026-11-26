@@ -89,6 +89,21 @@ if [ -f "$GTK_SETTINGS" ] && grep -q '^gtk-theme-name *= *FreeLook *$' "$GTK_SET
     echo "==> GTK theme set back to Breeze"
 fi
 
+# Fonts: if the session uses the Go fonts installed by FreeLook, go back to
+# Plasma's default fonts (removing the keys restores the defaults).
+if [ "$(read_setting kdeglobals General font | cut -d, -f1)" = "Go" ]; then
+    for tool in kwriteconfig6 kwriteconfig5; do
+        if command -v "$tool" >/dev/null 2>&1; then
+            for key in font menuFont toolBarFont smallestReadableFont fixed; do
+                "$tool" --file kdeglobals --group General --key "$key" --delete
+            done
+            "$tool" --file kdeglobals --group WM --key activeFont --delete
+            echo "==> Fonts set back to the Plasma defaults"
+            break
+        fi
+    done
+fi
+
 # Wallpaper: if the desktop shows the FreeLook wallpaper, go back to the default one.
 APPLETS="$CONFIG/plasma-org.kde.plasma.desktop-appletsrc"
 if [ -f "$APPLETS" ] && grep -q "wallpapers/FreeLook" "$APPLETS" 2>/dev/null; then
@@ -110,6 +125,7 @@ for path in \
     "$DATA/plasma/look-and-feel/$LNF_ID" \
     "$DATA/wallpapers/FreeLook" \
     "$DATA/themes/FreeLook" \
+    "$DATA/fonts/FreeLook" \
     "$HOME/.local/lib/qt6/plugins/styles/libfreelook.so" \
     "$CONFIG/plasma-workspace/env/freelook.sh"
 do

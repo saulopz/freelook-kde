@@ -244,14 +244,15 @@ def button_file():
 
 
 def menubaritem_file():
-    """Menu bar entries (global menu, window list): OPEN LOOK menu buttons,
-    always outlined, sunken while their menu is open."""
+    """Menu bar entries (global menu, window list): a raised box, sunken while
+    the menu is open. Small borders on purpose: the window list sizes itself
+    from these margins, and with the 12 px round ends of the buttons the
+    Plasma panel kept resizing it in a loop (plasmashell at 200% CPU)."""
     body = ""
-    width = 2 * R + 24
-    for i, (prefix, pressed) in enumerate([("normal", False), ("hover", False), ("pressed", True)]):
-        body += button(prefix, i * (width + 10), 0, pressed)
-        body += hints(prefix, i * (width + 10), 40, (4, 12, 4, 12))
-    return document(3 * (width + 10), 80, body)
+    for i, (prefix, drawing) in enumerate([("normal", raised), ("hover", raised), ("pressed", sunken)]):
+        body += frame(prefix, i * 30, 0, (2, 2, 2, 2), drawing)
+        body += hints(prefix, i * 30, 30, (3, 8, 3, 8))
+    return document(90, 60, body)
 
 
 def viewitem_file():
