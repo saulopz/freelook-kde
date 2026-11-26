@@ -1,0 +1,14 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "saulo.popov.zambiasi@ufsc.br",
+                "Name": "Saulo Popov Zambiasi"
+            }
+        ],
+        "Id": "FreeLook",
+        "License": "GPL-3.0-or-later",
+        "Name": "FreeLook (OpenWindows blue)",
+        "Name[pt_BR]": "FreeLook (azul do OpenWindows)"
+    }
+}

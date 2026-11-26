@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "Plasma/Theme",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "saulo.popov.zambiasi@ufsc.br",
+                "Name": "Saulo Popov Zambiasi"
+            }
+        ],
+        "Category": "",
+        "Description": "Plasma style inspired by OPEN LOOK (Sun OpenWindows)",
+        "Description[pt_BR]": "Estilo do Plasma inspirado no OPEN LOOK (Sun OpenWindows)",
+        "EnabledByDefault": true,
+        "Id": "FreeLook",
+        "License": "GPL-3.0-or-later",
+        "Name": "FreeLook",
+        "Version": "0.7",
+        "Website": ""
+    },
+    "X-Plasma-API": "5.0"
+}

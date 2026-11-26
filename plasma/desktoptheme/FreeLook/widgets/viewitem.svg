@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="120" height="30" viewBox="0 0 120 30">
+ <style type="text/css" id="current-color-scheme">
+  .ColorScheme-Background { color:#cccccc; stop-color:#cccccc; }
+  .ColorScheme-Text { color:#000000; stop-color:#000000; }
+ </style>
+ <g id="normal-topleft">
+  <rect x="0" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-top">
+  <rect x="2" y="0" width="20" height="2" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-topright">
+  <rect x="22" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-left">
+  <rect x="0" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-center">
+  <rect x="2" y="2" width="20" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-right">
+  <rect x="22" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-bottomleft">
+  <rect x="0" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-bottom">
+  <rect x="2" y="22" width="20" height="2" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-bottomright">
+  <rect x="22" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="hover-topleft">
+  <rect x="30" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="0" width="2" height="1" fill="#ffffff"/>
+  <rect x="30" y="0" width="1" height="2" fill="#ffffff"/>
+ </g>
+ <g id="hover-top">
+  <rect x="32" y="0" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="32" y="0" width="20" height="1" fill="#ffffff"/>
+ </g>
+ <g id="hover-topright">
+  <rect x="52" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="52" y="0" width="2" height="1" fill="#ffffff"/>
+  <rect x="53" y="0" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="hover-left">
+  <rect x="30" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="2" width="1" height="20" fill="#ffffff"/>
+ </g>
+ <g id="hover-center">
+  <rect x="32" y="2" width="20" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="hover-right">
+  <rect x="52" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="53" y="2" width="1" height="20" fill="#808080"/>
+ </g>
+ <g id="hover-bottomleft">
+  <rect x="30" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="22" width="1" height="2" fill="#ffffff"/>
+  <rect x="30" y="23" width="2" height="1" fill="#808080"/>
+ </g>
+ <g id="hover-bottom">
+  <rect x="32" y="22" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="32" y="23" width="20" height="1" fill="#808080"/>
+ </g>
+ <g id="hover-bottomright">
+  <rect x="52" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="52" y="23" width="2" height="1" fill="#808080"/>
+  <rect x="53" y="22" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="selected-topleft">
+  <rect x="60" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="0" width="2" height="2" fill="#b7b7b7"/>
+  <rect x="60" y="0" width="2" height="1" fill="#808080"/>
+  <rect x="60" y="0" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="selected-top">
+  <rect x="62" y="0" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="62" y="0" width="20" height="2" fill="#b7b7b7"/>
+  <rect x="62" y="0" width="20" height="1" fill="#808080"/>
+ </g>
+ <g id="selected-topright">
+  <rect x="82" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="82" y="0" width="2" height="2" fill="#b7b7b7"/>
+  <rect x="82" y="0" width="2" height="1" fill="#808080"/>
+  <rect x="83" y="0" width="1" height="2" fill="#ffffff"/>
+ </g>
+ <g id="selected-left">
+  <rect x="60" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="2" width="2" height="20" fill="#b7b7b7"/>
+  <rect x="60" y="2" width="1" height="20" fill="#808080"/>
+ </g>
+ <g id="selected-center">
+  <rect x="62" y="2" width="20" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="62" y="2" width="20" height="20" fill="#b7b7b7"/>
+ </g>
+ <g id="selected-right">
+  <rect x="82" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="82" y="2" width="2" height="20" fill="#b7b7b7"/>
+  <rect x="83" y="2" width="1" height="20" fill="#ffffff"/>
+ </g>
+ <g id="selected-bottomleft">
+  <rect x="60" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="22" width="2" height="2" fill="#b7b7b7"/>
+  <rect x="60" y="22" width="1" height="2" fill="#808080"/>
+  <rect x="60" y="23" width="2" height="1" fill="#ffffff"/>
+ </g>
+ <g id="selected-bottom">
+  <rect x="62" y="22" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="62" y="22" width="20" height="2" fill="#b7b7b7"/>
+  <rect x="62" y="23" width="20" height="1" fill="#ffffff"/>
+ </g>
+ <g id="selected-bottomright">
+  <rect x="82" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="82" y="22" width="2" height="2" fill="#b7b7b7"/>
+  <rect x="82" y="23" width="2" height="1" fill="#ffffff"/>
+  <rect x="83" y="22" width="1" height="2" fill="#ffffff"/>
+ </g>
+ <g id="selected+hover-topleft">
+  <rect x="90" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="0" width="2" height="2" fill="#b7b7b7"/>
+  <rect x="90" y="0" width="2" height="1" fill="#808080"/>
+  <rect x="90" y="0" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="selected+hover-top">
+  <rect x="92" y="0" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="92" y="0" width="20" height="2" fill="#b7b7b7"/>
+  <rect x="92" y="0" width="20" height="1" fill="#808080"/>
+ </g>
+ <g id="selected+hover-topright">
+  <rect x="112" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="112" y="0" width="2" height="2" fill="#b7b7b7"/>
+  <rect x="112" y="0" width="2" height="1" fill="#808080"/>
+  <rect x="113" y="0" width="1" height="2" fill="#ffffff"/>
+ </g>
+ <g id="selected+hover-left">
+  <rect x="90" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="2" width="2" height="20" fill="#b7b7b7"/>
+  <rect x="90" y="2" width="1" height="20" fill="#808080"/>
+ </g>
+ <g id="selected+hover-center">
+  <rect x="92" y="2" width="20" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="92" y="2" width="20" height="20" fill="#b7b7b7"/>
+ </g>
+ <g id="selected+hover-right">
+  <rect x="112" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="112" y="2" width="2" height="20" fill="#b7b7b7"/>
+  <rect x="113" y="2" width="1" height="20" fill="#ffffff"/>
+ </g>
+ <g id="selected+hover-bottomleft">
+  <rect x="90" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="22" width="2" height="2" fill="#b7b7b7"/>
+  <rect x="90" y="22" width="1" height="2" fill="#808080"/>
+  <rect x="90" y="23" width="2" height="1" fill="#ffffff"/>
+ </g>
+ <g id="selected+hover-bottom">
+  <rect x="92" y="22" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="92" y="22" width="20" height="2" fill="#b7b7b7"/>
+  <rect x="92" y="23" width="20" height="1" fill="#ffffff"/>
+ </g>
+ <g id="selected+hover-bottomright">
+  <rect x="112" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="112" y="22" width="2" height="2" fill="#b7b7b7"/>
+  <rect x="112" y="23" width="2" height="1" fill="#ffffff"/>
+  <rect x="113" y="22" width="1" height="2" fill="#ffffff"/>
+ </g>
+</svg>

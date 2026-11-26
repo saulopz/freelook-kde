@@ -1,0 +1,6 @@
+module org.kde.kwin.decoration
+Decoration 1.0 Decoration.qml
+ButtonGroup 1.0 ButtonGroup.qml
+DecorationButton 1.0 DecorationButton.qml
+DecorationOptions 1.0 DecorationOptions.qml
+Borders 1.0 Borders.qml

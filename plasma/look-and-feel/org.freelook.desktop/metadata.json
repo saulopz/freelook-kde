@@ -1,0 +1,19 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "saulo.popov.zambiasi@ufsc.br",
+                "Name": "Saulo Popov Zambiasi"
+            }
+        ],
+        "Category": "",
+        "Description": "Theme inspired by OPEN LOOK (Sun OpenWindows): window decoration, colors, application and Plasma styles",
+        "Id": "org.freelook.desktop",
+        "License": "GPL-3.0-or-later",
+        "Name": "FreeLook",
+        "Version": "0.7",
+        "Website": "",
+        "Description[pt_BR]": "Tema inspirado no OPEN LOOK (Sun OpenWindows): decoração, cores, estilo dos programas e do Plasma"
+    }
+}

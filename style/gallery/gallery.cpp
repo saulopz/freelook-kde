@@ -1,0 +1,261 @@
+// FreeLook: widget gallery used to test the style.
+//
+//   QT_PLUGIN_PATH=<dir containing styles/> ./freelook-gallery output.png
+//
+// 1. Loads the "FreeLook" style through the plugin system (as applications do).
+// 2. Tests the elevator scroll bar with simulated clicks (arrows, anchors, drag).
+// 3. Saves a screenshot with the widgets and a few pressed states.
+// The exit code is 0 only if every check passes.
+//
+// SPDX-FileCopyrightText: 2026 Saulo Popov Zambiasi <saulo.popov.zambiasi@ufsc.br>
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+#include <QApplication>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QGroupBox>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QMenu>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QProgressBar>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QScrollBar>
+#include <QSlider>
+#include <QSpinBox>
+#include <QStyle>
+#include <QStyleFactory>
+#include <QStyleOption>
+#include <QTabWidget>
+#include <QTextEdit>
+#include <QTimer>
+#include <QVBoxLayout>
+
+#include <cstdio>
+
+// Paints states that cannot be "held" in a screenshot.
+class States : public QWidget
+{
+public:
+    States() { setFixedSize(600, 64); }
+
+protected:
+    void paintEvent(QPaintEvent *) override
+    {
+        QPainter p(this);
+        QStyle *s = style();
+        int x = 4;
+        auto button = [&](const QString &text, QStyle::State extra, QStyleOptionButton::ButtonFeatures f) {
+            QStyleOptionButton o;
+            o.initFrom(this);
+            o.text = text;
+            o.state |= extra | QStyle::State_Raised;
+            o.features = f;
+            o.rect = QRect(x, 4, 96, 24);
+            s->drawControl(QStyle::CE_PushButton, &o, &p, this);
+            x += 104;
+        };
+        button(QStringLiteral("Pressed"), QStyle::State_Sunken, QStyleOptionButton::None);
+        button(QStringLiteral("Print"), QStyle::State_None, QStyleOptionButton::HasMenu);
+
+        auto bar = [&](QStyle::SubControl active, int value, bool whitePalette = false) {
+            QStyleOptionSlider o;
+            o.initFrom(this);
+            o.orientation = Qt::Horizontal;
+            o.minimum = 0; o.maximum = 100; o.pageStep = 30; o.singleStep = 1;
+            o.sliderPosition = o.sliderValue = value;
+            o.rect = QRect(x, 6, 110, 16);
+            o.subControls = QStyle::SC_All;
+            o.activeSubControls = active;
+            if (whitePalette) {   // mimics Kirigami QML lists
+                o.palette.setColor(QPalette::Window, Qt::white);
+                o.palette.setColor(QPalette::Button, Qt::white);
+            }
+            if (active != QStyle::SC_None) o.state |= QStyle::State_Sunken;
+            s->drawComplexControl(QStyle::CC_ScrollBar, &o, &p, this);
+            x += 118;
+        };
+        bar(QStyle::SC_ScrollBarSubLine, 40);
+        bar(QStyle::SC_ScrollBarSlider, 0);
+        bar(QStyle::SC_None, 60, true);
+        p.drawText(QRect(4, 36, 592, 24), Qt::AlignLeft | Qt::AlignVCenter,
+                   QStringLiteral("states: pressed · menu · ◀ pressed · elevator pressed at start · white palette (QML)"));
+    }
+};
+
+static void click(QWidget *w, const QPoint &pos)
+{
+    const QPointF g = w->mapToGlobal(QPointF(pos));
+    QMouseEvent press(QEvent::MouseButtonPress, QPointF(pos), g, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QApplication::sendEvent(w, &press);
+    QMouseEvent release(QEvent::MouseButtonRelease, QPointF(pos), g, Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QApplication::sendEvent(w, &release);
+}
+
+static int testElevator()
+{
+    int failures = 0;
+    auto check = [&](const char *name, bool ok) {
+        std::printf("  %-46s %s\n", name, ok ? "ok" : "FAILED");
+        if (!ok) ++failures;
+    };
+    QScrollBar sb(Qt::Vertical);
+    sb.setRange(0, 1000);
+    sb.setPageStep(100);
+    sb.setSingleStep(10);
+    sb.resize(16, 300);
+    sb.show();
+    sb.setValue(500);
+
+    QStyleOptionSlider opt;
+    opt.initFrom(&sb);
+    opt.orientation = sb.orientation();
+    opt.minimum = sb.minimum(); opt.maximum = sb.maximum();
+    opt.sliderPosition = opt.sliderValue = sb.value();
+    opt.pageStep = sb.pageStep(); opt.singleStep = sb.singleStep();
+    opt.upsideDown = false;
+    QStyle *s = sb.style();
+    auto rect = [&](QStyle::SubControl sc) { return s->subControlRect(QStyle::CC_ScrollBar, &opt, sc, &sb); };
+
+    const QRect sub = rect(QStyle::SC_ScrollBarSubLine), add = rect(QStyle::SC_ScrollBarAddLine);
+    const QRect elev = rect(QStyle::SC_ScrollBarSlider);
+    check("arrows sit inside the elevator", elev.contains(sub) && elev.contains(add));
+    check("hit test: up arrow", s->hitTestComplexControl(QStyle::CC_ScrollBar, &opt, sub.center(), &sb) == QStyle::SC_ScrollBarSubLine);
+    check("hit test: middle of the elevator", s->hitTestComplexControl(QStyle::CC_ScrollBar, &opt, elev.center(), &sb) == QStyle::SC_ScrollBarSlider);
+
+    click(&sb, sub.center());
+    check("up arrow scrolls one line up", sb.value() == 490);
+    click(&sb, add.center());
+    check("down arrow scrolls one line down", sb.value() == 500);
+
+    click(&sb, rect(QStyle::SC_ScrollBarAddPage).center());
+    check("cable below scrolls one page down", sb.value() == 600);
+
+    click(&sb, rect(QStyle::SC_ScrollBarLast).center());
+    check("bottom anchor jumps to the end", sb.value() == sb.maximum());
+    click(&sb, rect(QStyle::SC_ScrollBarFirst).center());
+    check("top anchor jumps to the start", sb.value() == sb.minimum());
+
+    // Drag the elevator by its middle down to the end of the cable.
+    opt.sliderPosition = opt.sliderValue = sb.value();
+    const QPoint from = rect(QStyle::SC_ScrollBarSlider).center();
+    const QPoint to(from.x(), rect(QStyle::SC_ScrollBarGroove).bottom());
+    QMouseEvent press(QEvent::MouseButtonPress, QPointF(from), sb.mapToGlobal(QPointF(from)), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QApplication::sendEvent(&sb, &press);
+    QMouseEvent move(QEvent::MouseMove, QPointF(to), sb.mapToGlobal(QPointF(to)), Qt::NoButton, Qt::LeftButton, Qt::NoModifier);
+    QApplication::sendEvent(&sb, &move);
+    QMouseEvent release(QEvent::MouseButtonRelease, QPointF(to), sb.mapToGlobal(QPointF(to)), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+    QApplication::sendEvent(&sb, &release);
+    check("dragging the elevator reaches the end", sb.value() == sb.maximum());
+    return failures;
+}
+
+int main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
+    const QString output = argc > 1 ? QString::fromLocal8Bit(argv[1]) : QStringLiteral("gallery.png");
+
+    QStyle *style = QStyleFactory::create(QStringLiteral("FreeLook"));
+    if (!style) {
+        std::printf("ERROR: the FreeLook style was not found. Available styles: %s\n",
+                    qPrintable(QStyleFactory::keys().join(QStringLiteral(", "))));
+        return 1;
+    }
+    QApplication::setStyle(style);
+    QApplication::setPalette(style->standardPalette());
+    std::printf("style loaded: %s\n", qPrintable(QApplication::style()->name()));
+
+    std::printf("elevator checks:\n");
+    const int failures = testElevator();
+
+    QWidget window;
+    window.setWindowTitle(QStringLiteral("FreeLook"));
+    auto *root = new QVBoxLayout(&window);
+    auto *tabs = new QTabWidget;
+    root->addWidget(tabs);
+    auto *page = new QWidget;
+    tabs->addTab(page, QStringLiteral("Controls"));
+    tabs->addTab(new QWidget, QStringLiteral("Another tab"));
+    auto *grid = new QGridLayout(page);
+
+    auto *buttons = new QHBoxLayout;
+    buttons->addWidget(new QPushButton(QStringLiteral("Load...")));
+    auto *defaultButton = new QPushButton(QStringLiteral("Save..."));
+    defaultButton->setDefault(true);
+    buttons->addWidget(defaultButton);
+    auto *menuButton = new QPushButton(QStringLiteral("Print"));
+    menuButton->setMenu(new QMenu(menuButton));
+    buttons->addWidget(menuButton);
+    auto *disabled = new QPushButton(QStringLiteral("Disabled"));
+    disabled->setEnabled(false);
+    buttons->addWidget(disabled);
+    grid->addLayout(buttons, 0, 0, 1, 2);
+
+    auto *options = new QGroupBox(QStringLiteral("Options"));
+    auto *vo = new QVBoxLayout(options);
+    auto *c1 = new QCheckBox(QStringLiteral("Beep during countdown"));
+    c1->setChecked(true);
+    vo->addWidget(c1);
+    vo->addWidget(new QCheckBox(QStringLiteral("Hide window")));
+    auto *c3 = new QCheckBox(QStringLiteral("Partial"));
+    c3->setTristate(true);
+    c3->setCheckState(Qt::PartiallyChecked);
+    vo->addWidget(c3);
+    auto *r1 = new QRadioButton(QStringLiteral("Window"));
+    r1->setChecked(true);
+    vo->addWidget(r1);
+    vo->addWidget(new QRadioButton(QStringLiteral("Region")));
+    grid->addWidget(options, 1, 0);
+
+    auto *fields = new QVBoxLayout;
+    auto *fileRow = new QHBoxLayout;
+    fileRow->addWidget(new QLabel(QStringLiteral("Mail file:")));
+    fileRow->addWidget(new QLineEdit(QStringLiteral("~/mail/inbox")));
+    fields->addLayout(fileRow);
+    auto *focused = new QLineEdit(QStringLiteral("has focus"));
+    fields->addWidget(focused);
+    auto *editable = new QComboBox;
+    editable->setEditable(true);
+    editable->addItem(QStringLiteral("editable combo"));
+    fields->addWidget(editable);
+    auto *combo = new QComboBox;
+    combo->addItems({QStringLiteral("Combo"), QStringLiteral("Two")});
+    fields->addWidget(combo);
+    auto *spin = new QSpinBox;
+    spin->setValue(42);
+    fields->addWidget(spin);
+    auto *slider = new QSlider(Qt::Horizontal);
+    slider->setValue(40);
+    fields->addWidget(slider);
+    auto *progress = new QProgressBar;
+    progress->setValue(65);
+    fields->addWidget(progress);
+    grid->addLayout(fields, 1, 1);
+
+    auto *list = new QListWidget;
+    for (int i = 1; i <= 40; ++i) list->addItem(QStringLiteral("List item %1").arg(i));
+    list->setCurrentRow(1);
+    grid->addWidget(list, 2, 0);
+    auto *text = new QTextEdit;
+    text->setLineWrapMode(QTextEdit::NoWrap);
+    QString lines;
+    for (int i = 0; i < 60; ++i) lines += QStringLiteral("A line of text long enough to scroll sideways %1\n").arg(i);
+    text->setPlainText(lines);
+    grid->addWidget(text, 2, 1);
+
+    root->addWidget(new States);
+    window.resize(620, 580);
+    window.show();
+    focused->setFocus();
+
+    QTimer::singleShot(300, [&]() {
+        window.grab().save(output);
+        std::printf("screenshot saved: %s\n", qPrintable(output));
+        app.exit(failures == 0 ? 0 : 2);
+    });
+    return app.exec();
+}

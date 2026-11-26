@@ -1,0 +1,16 @@
+# Keep this list in sync with clean.sh.
+# Rules start with "/" so they only match at the repository root; plain
+# "preview*.png" would also hide the global theme preview in plasma/.
+
+# Build output of the application style
+/style/build/
+/style/build.log
+
+# Images written by the test tools
+/tools/qml-test/preview_decoration.png
+/gallery.png
+/preview*.png
+
+# Python
+__pycache__/
+*.pyc

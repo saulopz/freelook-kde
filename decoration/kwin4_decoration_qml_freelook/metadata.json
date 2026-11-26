@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "KWin/Decoration",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "saulo.popov.zambiasi@ufsc.br",
+                "Name": "Saulo Popov Zambiasi"
+            }
+        ],
+        "Description": "Window decoration inspired by OPEN LOOK (Sun OpenWindows), with L-shaped resize corners",
+        "Description[pt_BR]": "Decoração de janela inspirada no OPEN LOOK (Sun OpenWindows), com cantos de redimensionamento em L",
+        "Id": "kwin4_decoration_qml_freelook",
+        "License": "GPL-3.0-or-later",
+        "Name": "FreeLook",
+        "Version": "0.7",
+        "Website": ""
+    }
+}

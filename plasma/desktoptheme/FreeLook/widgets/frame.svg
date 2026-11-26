@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="90" height="60" viewBox="0 0 90 60">
+ <style type="text/css" id="current-color-scheme">
+  .ColorScheme-Background { color:#cccccc; stop-color:#cccccc; }
+  .ColorScheme-Text { color:#000000; stop-color:#000000; }
+ </style>
+ <g id="plain-topleft">
+  <rect x="0" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="0" y="0" width="2" height="1" fill="#808080"/>
+  <rect x="0" y="0" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="plain-top">
+  <rect x="2" y="0" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="2" y="0" width="20" height="1" fill="#808080"/>
+ </g>
+ <g id="plain-topright">
+  <rect x="22" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="22" y="0" width="2" height="1" fill="#808080"/>
+  <rect x="23" y="0" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="plain-left">
+  <rect x="0" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="0" y="2" width="1" height="20" fill="#808080"/>
+ </g>
+ <g id="plain-center">
+  <rect x="2" y="2" width="20" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="plain-right">
+  <rect x="22" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="23" y="2" width="1" height="20" fill="#808080"/>
+ </g>
+ <g id="plain-bottomleft">
+  <rect x="0" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="0" y="22" width="1" height="2" fill="#808080"/>
+  <rect x="0" y="23" width="2" height="1" fill="#808080"/>
+ </g>
+ <g id="plain-bottom">
+  <rect x="2" y="22" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="2" y="23" width="20" height="1" fill="#808080"/>
+ </g>
+ <g id="plain-bottomright">
+  <rect x="22" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="22" y="23" width="2" height="1" fill="#808080"/>
+  <rect x="23" y="22" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="raised-topleft">
+  <rect x="30" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="0" width="2" height="1" fill="#ffffff"/>
+  <rect x="30" y="0" width="1" height="2" fill="#ffffff"/>
+ </g>
+ <g id="raised-top">
+  <rect x="32" y="0" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="32" y="0" width="20" height="1" fill="#ffffff"/>
+ </g>
+ <g id="raised-topright">
+  <rect x="52" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="52" y="0" width="2" height="1" fill="#ffffff"/>
+  <rect x="53" y="0" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="raised-left">
+  <rect x="30" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="2" width="1" height="20" fill="#ffffff"/>
+ </g>
+ <g id="raised-center">
+  <rect x="32" y="2" width="20" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="raised-right">
+  <rect x="52" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="53" y="2" width="1" height="20" fill="#808080"/>
+ </g>
+ <g id="raised-bottomleft">
+  <rect x="30" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="22" width="1" height="2" fill="#ffffff"/>
+  <rect x="30" y="23" width="2" height="1" fill="#808080"/>
+ </g>
+ <g id="raised-bottom">
+  <rect x="32" y="22" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="32" y="23" width="20" height="1" fill="#808080"/>
+ </g>
+ <g id="raised-bottomright">
+  <rect x="52" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="52" y="23" width="2" height="1" fill="#808080"/>
+  <rect x="53" y="22" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="sunken-topleft">
+  <rect x="60" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="0" width="2" height="1" fill="#808080"/>
+  <rect x="60" y="0" width="1" height="2" fill="#808080"/>
+ </g>
+ <g id="sunken-top">
+  <rect x="62" y="0" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="62" y="0" width="20" height="1" fill="#808080"/>
+ </g>
+ <g id="sunken-topright">
+  <rect x="82" y="0" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="82" y="0" width="2" height="1" fill="#808080"/>
+  <rect x="83" y="0" width="1" height="2" fill="#ffffff"/>
+ </g>
+ <g id="sunken-left">
+  <rect x="60" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="2" width="1" height="20" fill="#808080"/>
+ </g>
+ <g id="sunken-center">
+  <rect x="62" y="2" width="20" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="sunken-right">
+  <rect x="82" y="2" width="2" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="83" y="2" width="1" height="20" fill="#ffffff"/>
+ </g>
+ <g id="sunken-bottomleft">
+  <rect x="60" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="22" width="1" height="2" fill="#808080"/>
+  <rect x="60" y="23" width="2" height="1" fill="#ffffff"/>
+ </g>
+ <g id="sunken-bottom">
+  <rect x="62" y="22" width="20" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="62" y="23" width="20" height="1" fill="#ffffff"/>
+ </g>
+ <g id="sunken-bottomright">
+  <rect x="82" y="22" width="2" height="2" fill="#000000" fill-opacity="0"/>
+  <rect x="82" y="23" width="2" height="1" fill="#ffffff"/>
+  <rect x="83" y="22" width="1" height="2" fill="#ffffff"/>
+ </g>
+  <rect id="plain-hint-top-margin" x="0" y="30" width="1" height="2" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="plain-hint-bottom-margin" x="2" y="30" width="1" height="2" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="plain-hint-left-margin" x="0" y="50" width="2" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="plain-hint-right-margin" x="0" y="52" width="2" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="raised-hint-top-margin" x="30" y="30" width="1" height="2" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="raised-hint-bottom-margin" x="32" y="30" width="1" height="2" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="raised-hint-left-margin" x="30" y="50" width="2" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="raised-hint-right-margin" x="30" y="52" width="2" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="sunken-hint-top-margin" x="60" y="30" width="1" height="2" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="sunken-hint-bottom-margin" x="62" y="30" width="1" height="2" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="sunken-hint-left-margin" x="60" y="50" width="2" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="sunken-hint-right-margin" x="60" y="52" width="2" height="1" fill="#ff00ff" fill-opacity="0"/>
+</svg>
