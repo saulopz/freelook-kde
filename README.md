@@ -7,7 +7,7 @@ OpenWindows desktop. A retro-future for the free desktop: the gray 3D
 widgets, oblong buttons, pushpins and elevator scroll bars of 1991, running
 on a modern Plasma.
 
-![FreeLook desktop](docs/screenshots/desktop.png)
+![FreeLook desktop: KCalc, Konsole in Go Mono and System Settings](docs/screenshots/desktop.png)
 
 ## Components
 
@@ -24,9 +24,12 @@ on a modern Plasma.
 
 ![Window decoration](docs/screenshots/decoration.png)
 
-![Application style](docs/screenshots/application-style.png)
+![Kate and Dolphin with the application style](docs/screenshots/application-style.png)
 
-![GTK 3 theme](docs/screenshots/gtk3.png)
+![GIMP 3 with the GTK 3 theme (GIMP's "System" theme)](docs/screenshots/gtk3.png)
+
+GIMP 3 brings its own dark theme; choose *Edit > Preferences > Interface >
+Theme > System* to let it use FreeLook.
 
 ### The elevator scroll bar
 

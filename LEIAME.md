@@ -36,6 +36,15 @@ A caixinha com o triângulo, à esquerda do título, funciona como no olwm:
 quer dizer virar ícone, então minimiza) e **clique direito** abre o menu da
 janela. O pushpin à direita mantém a janela acima das outras.
 
+![A decoração das janelas](docs/screenshots/decoration.png)
+
+![Kate e Dolphin com o estilo dos aplicativos](docs/screenshots/application-style.png)
+
+![GIMP 3 com o tema GTK 3 (tema "System" do GIMP)](docs/screenshots/gtk3.png)
+
+O GIMP 3 vem com um tema escuro próprio; escolha *Editar → Preferências →
+Interface → Tema → System* para ele usar o FreeLook.
+
 ## Requisitos
 
 - KDE Plasma 6 (desenvolvido no Plasma 6.8 com Qt 6.11; o estilo compila com Qt 6.4 ou mais novo)
