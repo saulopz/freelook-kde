@@ -200,6 +200,17 @@ static int testElevator()
         const QColor fill = img.pixelColor(up.left() + 3, up.bottom() - 3);
         check("spin buttons stay gray with a white palette", fill.lightness() < 245);
     }
+    // List rows with a small icon have some air (Dolphin's places panel).
+    {
+        QStyleOptionViewItem o;
+        o.features = QStyleOptionViewItem::HasDisplay | QStyleOptionViewItem::HasDecoration;
+        o.text = QStringLiteral("Downloads");
+        o.decorationSize = QSize(16, 16);
+        o.fontMetrics = QApplication::fontMetrics();
+        o.font = QApplication::font();
+        const int h = QApplication::style()->sizeFromContents(QStyle::CT_ItemViewItem, &o, QSize(), nullptr).height();
+        check("list rows have room around a small icon", h >= 24);
+    }
     // Menus handed Plasma's white palette stay gray.
     {
         QImage img(40, 20, QImage::Format_ARGB32);

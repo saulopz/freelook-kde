@@ -1061,6 +1061,11 @@ QSize FreeLookStyle::sizeFromContents(ContentsType type, const QStyleOption *opt
         s.setHeight(std::max(s.height(), 26));
         s.setWidth(s.width() + s.height() / 2);
     }
+    if (type == CT_ItemViewItem) {
+        // Rows of lists and trees (Dolphin's places, file dialogs, settings
+        // lists) get some air: Fusion's rows are tight, with icons touching.
+        s.setHeight(s.height() + 6);
+    }
     if (type == CT_MenuBarItem) {
         // Each entry is a small menu button: round ends and a triangle.
         if (const auto *mi = qstyleoption_cast<const QStyleOptionMenuItem *>(option)) {

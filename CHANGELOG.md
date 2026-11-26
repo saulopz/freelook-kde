@@ -31,6 +31,8 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   in a loop, with plasmashell at 200% CPU.)
 - `install.sh --no-style` no longer drops the Qt plugin path from the
   session file when the style was installed before.
+- Application style: rows of lists and trees have some air (Dolphin's places
+  panel was cramped, icons touching each other).
 - Application style: Plasma's own menus (desktop context menu, panel menus)
   are gray too; Plasma hands them a palette with a white window color.
 - GIMP 3 (with its "System" theme): the icon tabs of the docks get room
