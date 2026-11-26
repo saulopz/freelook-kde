@@ -133,9 +133,12 @@ void FreeLookStyle::triangle(QPainter *p, const QRectF &r, Qt::ArrowType directi
 
 QPainterPath FreeLookStyle::oblong(const QRectF &r)
 {
-    // OPEN LOOK button: a rectangle with half-circle ends.
+    // OPEN LOOK button: a rectangle with half-circle ends. A button about as
+    // wide as it is tall (an icon-only button) would turn into a circle, so
+    // it becomes a box with slightly rounded corners instead.
     QPainterPath path;
-    const qreal radius = r.height() / 2.0;
+    const qreal radius = r.width() < r.height() * 1.4 ? std::min<qreal>(4.0, r.height() / 4.0)
+                                                       : r.height() / 2.0;
     path.addRoundedRect(r, radius, radius);
     return path;
 }
@@ -157,15 +160,23 @@ void FreeLookStyle::drawButton(const QStyleOptionButton *opt, QPainter *p) const
     p->setBrush(sunken ? c.pressed : c.base);
     p->drawPath(oblong(r));
 
-    // Relief: top half light, bottom half dark (swapped when pressed).
+    // Relief: top half light, bottom half dark (swapped when pressed). On an
+    // icon-only box: light on the top and left, dark on the bottom and right.
     const QPainterPath inner = oblong(r.adjusted(1, 1, -1, -1));
-    const QRectF topHalf(r.left(), r.top(), r.width(), r.height() / 2.0);
-    const QRectF bottomHalf(r.left(), r.center().y(), r.width(), r.height() / 2.0 + 1);
+    QPainterPath lit, shaded;
+    if (r.width() < r.height() * 1.4) {
+        const QRectF b = r.adjusted(-1, -1, 1, 1);
+        lit.addPolygon(QPolygonF({b.topLeft(), b.topRight(), b.bottomLeft()}));
+        shaded.addPolygon(QPolygonF({b.topRight(), b.bottomRight(), b.bottomLeft()}));
+    } else {
+        lit.addRect(QRectF(r.left(), r.top(), r.width(), r.height() / 2.0));
+        shaded.addRect(QRectF(r.left(), r.center().y(), r.width(), r.height() / 2.0 + 1));
+    }
     p->setBrush(Qt::NoBrush);
-    p->setClipRect(topHalf);
+    p->setClipPath(lit);
     p->setPen(QPen(sunken ? c.softShadow : c.light, 1.0));
     p->drawPath(inner);
-    p->setClipRect(bottomHalf);
+    p->setClipPath(shaded);
     p->setPen(QPen(sunken ? c.light : c.softShadow, 1.0));
     p->drawPath(inner);
     p->setClipping(false);

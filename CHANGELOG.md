@@ -9,6 +9,8 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   two black lines, each with a light line on the inside, as in OpenWindows;
   other windows keep the title loose. The title bar is 2 px taller to give
   the buttons some air inside that band.
+- Application style: icon-only (square) buttons are boxes with slightly
+  rounded corners, lit on the top and left, instead of circles.
 
 ## 0.9 (2026-11-26)
 

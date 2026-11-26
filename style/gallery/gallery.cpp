@@ -200,6 +200,19 @@ static int testElevator()
         const QColor fill = img.pixelColor(up.left() + 3, up.bottom() - 3);
         check("spin buttons stay gray with a white palette", fill.lightness() < 245);
     }
+    // An icon-only (square) button is a box, not a circle.
+    {
+        QImage img(32, 32, QImage::Format_ARGB32);
+        img.fill(Qt::transparent);
+        QPainter p(&img);
+        QStyleOptionButton o;
+        o.palette = QApplication::palette();
+        o.state = QStyle::State_Enabled | QStyle::State_Raised;
+        o.rect = img.rect();
+        QApplication::style()->drawControl(QStyle::CE_PushButtonBevel, &o, &p, nullptr);
+        p.end();
+        check("square buttons are boxes, not circles", img.pixelColor(4, 4).alpha() == 255);
+    }
     // List rows with a small icon have some air (Dolphin's places panel).
     {
         QStyleOptionViewItem o;
