@@ -15,6 +15,7 @@ on a modern Plasma.
 |---|---|---|
 | **Window decoration** | Thin black-outlined border, raised L-shaped resize corners, window menu button with a hollow triangle, centered title with an etched separator, pushpin | KWin Aurorae, QML |
 | **Application style** | Oblong buttons with a default ring, hollow arrows, check marks that overflow their box, rectangular exclusive settings, tabs drawn as exclusive settings, underlined text fields, numeric fields with [▲][▼] boxes, combo boxes as menu buttons, sliders with a drag box, menus where the chosen item sinks in, menu bar entries as menu buttons, and the OPEN LOOK **elevator** scroll bar | Qt 6 `QStyle` plugin, C++ |
+| **GTK 3 theme** | The same look for GTK 3 programs (Firefox, GIMP, Inkscape, LibreOffice and others): oblong buttons, underlined fields, the ✓ that overflows, exclusive settings, tabs, menus, sliders and an elevator-like scroll bar | GTK 3 CSS |
 | **Plasma style** | Panel, menus, tooltips and widgets with the OPEN LOOK pop-up window frame, oblong buttons, sunken selection | Plasma SVG theme |
 | **Color scheme** | The OpenWindows 3 palette: `#cccccc`, `#b7b7b7`, `#a0a0a0` and white | KDE color scheme |
 | **Global theme** | Applies all of the above in one click, including the title bar button layout | Plasma look-and-feel package |
@@ -23,6 +24,8 @@ on a modern Plasma.
 ![Window decoration](docs/screenshots/decoration.png)
 
 ![Application style](docs/screenshots/application-style.png)
+
+![GTK 3 theme](docs/screenshots/gtk3.png)
 
 ### The elevator scroll bar
 
@@ -65,8 +68,9 @@ cd freelook
 
 `install.sh` copies the theme files, builds the application style, **runs its
 checks and only installs it if they pass**, and with `--apply` switches to
-the FreeLook global theme and wallpaper. Without `--apply`, choose
-*System Settings > Colors & Themes > Global Theme > FreeLook*.
+the FreeLook global theme, wallpaper and GTK theme. Without `--apply`, choose
+*System Settings > Colors & Themes > Global Theme > FreeLook*, and FreeLook in
+*Application Style > Configure GNOME/GTK Application Style*.
 
 The first time, log out and back in so every application finds the style
 (it lives in `~/.local/lib/qt6/plugins`, announced through
@@ -84,7 +88,8 @@ Suggested extra: a bold sans-serif window title font, around 10 pt
 ```
 
 If any FreeLook component is in use, it first switches back to the Breeze
-global theme and the default wallpaper, then removes every installed file.
+global theme, the default wallpaper and the Breeze GTK theme, then removes
+every installed file.
 Use `--yes` to skip the confirmation.
 
 To just go back to the default look without removing anything, choose the
@@ -99,6 +104,7 @@ freelook/
 ├── decoration/          KWin decoration (QML)
 ├── style/               Qt application style (C++) and the test gallery
 ├── plasma/              Plasma style (generated), global theme, wallpaper
+├── gtk/                 GTK 3 theme (CSS; pictures generated)
 ├── tools/               generators, previews and the QML test harness
 ├── extras/              the first decoration, as an SVG Aurorae theme
 └── docs/screenshots/
@@ -136,6 +142,16 @@ python3 tools/preview_plasma_theme.py plasma/desktoptheme/FreeLook preview.png  
 
 Colors and metrics sit at the top of each generator.
 
+**GTK theme.** `gtk/FreeLook/gtk-3.0/gtk.css` is written by hand; the small
+pictures in `assets/` are generated. The gallery prints every CSS error and
+saves two screenshots (the window, and the window with a menu open):
+
+```sh
+python3 tools/generate_gtk_assets.py
+ln -s "$PWD/gtk/FreeLook" ~/.local/share/themes/FreeLook   # once, or run ./install.sh
+GTK_THEME=FreeLook GTK_OVERLAY_SCROLLING=0 python3 tools/gtk-test/gallery3.py gtk.png
+```
+
 **Cleaning up.** `./clean.sh` lists the build output and the images written by
 the test tools, asks for confirmation and removes them. It never touches
 files that are part of the project.
@@ -146,7 +162,12 @@ files that are part of the project.
   cannot sit inside the elevator. Applications get the full elevator.
 - Lists inside Kirigami (QML) popups, such as the list of a combo box in System Settings, keep Kirigami's own highlight.
 - Switches, calendars and a few other Plasma widgets still come from Breeze.
-- GTK applications need a separate GTK theme.
+- GTK 4 and libadwaita programs (most of the newer GNOME apps) keep their own
+  look: libadwaita does not accept themes.
+- In GTK 3 the ▲ and ▼ on the elevator are only marks: drag the elevator or
+  click the cable. GTK cannot put working arrows inside the slider.
+- The FreeLook session file turns GTK 3 overlay scroll bars off
+  (`GTK_OVERLAY_SCROLLING=0`), so the elevator is always visible.
 
 ## Authorship and AI assistance
 

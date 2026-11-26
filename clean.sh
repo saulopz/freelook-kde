@@ -24,7 +24,7 @@ done
 
 # Everything that may be generated, relative to the repository root.
 list_generated() {
-    for path in style/build style/build.log tools/qml-test/preview_decoration.png gallery.png; do
+    for path in style/build style/build.log tools/qml-test/preview_decoration.png gallery.png gtk.png gtk-menu.png; do
         [ -e "$path" ] && echo "$path"
     done
     for path in preview*.png; do

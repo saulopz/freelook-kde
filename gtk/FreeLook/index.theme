@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=FreeLook
+Comment=Inspired by the OPEN LOOK look and feel
+Comment[pt_BR]=Inspirado no visual OPEN LOOK
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=FreeLook
+IconTheme=breeze
+CursorTheme=breeze_cursors

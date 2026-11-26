@@ -63,6 +63,32 @@ if [ -n "$in_use" ]; then
     fi
 fi
 
+# GTK theme: if GTK programs use FreeLook, go back to Breeze.
+GTK_SETTINGS="$CONFIG/gtk-3.0/settings.ini"
+if [ -f "$GTK_SETTINGS" ] && grep -q '^gtk-theme-name *= *FreeLook *$' "$GTK_SETTINGS"; then
+    done_gtk=0
+    for q in qdbus6 qdbus; do
+        if command -v "$q" >/dev/null 2>&1 \
+            && "$q" org.kde.kded6 /modules/gtkconfig org.kde.GtkConfig.setGtkTheme Breeze >/dev/null 2>&1; then
+            done_gtk=1
+            break
+        fi
+    done
+    if [ "$done_gtk" = 0 ]; then
+        for tool in kwriteconfig6 kwriteconfig5; do
+            if command -v "$tool" >/dev/null 2>&1; then
+                "$tool" --file "$GTK_SETTINGS" --group Settings --key gtk-theme-name Breeze
+                break
+            fi
+        done
+        if command -v gsettings >/dev/null 2>&1; then
+            gsettings set org.gnome.desktop.interface gtk-theme Breeze 2>/dev/null || true
+        fi
+        sed -i 's/^gtk-theme-name *= *FreeLook *$/gtk-theme-name=Breeze/' "$GTK_SETTINGS"
+    fi
+    echo "==> GTK theme set back to Breeze"
+fi
+
 # Wallpaper: if the desktop shows the FreeLook wallpaper, go back to the default one.
 APPLETS="$CONFIG/plasma-org.kde.plasma.desktop-appletsrc"
 if [ -f "$APPLETS" ] && grep -q "wallpapers/FreeLook" "$APPLETS" 2>/dev/null; then
@@ -83,6 +109,7 @@ for path in \
     "$DATA/plasma/desktoptheme/FreeLook" \
     "$DATA/plasma/look-and-feel/$LNF_ID" \
     "$DATA/wallpapers/FreeLook" \
+    "$DATA/themes/FreeLook" \
     "$HOME/.local/lib/qt6/plugins/styles/libfreelook.so" \
     "$CONFIG/plasma-workspace/env/freelook.sh"
 do

@@ -15,6 +15,7 @@ de 1991, rodando num Plasma moderno.
 |---|---|---|
 | **Decoração de janela** | Borda fina com contorno preto, cantos de redimensionamento em L em relevo, botão de menu com triângulo vazado, título centralizado com separador entalhado, pushpin | Aurorae do KWin, QML |
 | **Estilo dos programas** | Botões oblongos com anel no botão padrão, setas vazadas, ✓ que transborda da caixinha, opções exclusivas retangulares, abas desenhadas como opções exclusivas, campos de texto sublinhados, campos numéricos com as caixinhas [▲][▼], combos como botões de menu, sliders com o bloquinho de arrastar, menus em que o item escolhido afunda, a barra de menus com botões de menu e a barra de rolagem **elevador** do OPEN LOOK | Plugin `QStyle` do Qt 6, C++ |
+| **Tema GTK 3** | O mesmo visual nos programas em GTK 3 (Firefox, GIMP, Inkscape, LibreOffice e outros): botões oblongos, campos sublinhados, o ✓ que transborda, opções exclusivas, abas, menus, sliders e uma barra de rolagem parecida com o elevador | CSS do GTK 3 |
 | **Estilo do Plasma** | Painel, menus, dicas e plasmoides com a moldura das janelas pop-up do OPEN LOOK, botões oblongos, seleção afundada | Tema SVG do Plasma |
 | **Esquema de cores** | A paleta do OpenWindows 3: `#cccccc`, `#b7b7b7`, `#a0a0a0` e branco | Esquema de cores do KDE |
 | **Tema global** | Aplica tudo isso de uma vez, inclusive a ordem dos botões da barra de título | Pacote de tema global do Plasma |
@@ -61,8 +62,9 @@ cd freelook
 
 O `install.sh` copia os arquivos do tema, compila o estilo dos programas,
 **roda os testes dele e só instala se todos passarem**, e com `--apply` ativa
-o tema global FreeLook e o papel de parede. Sem o `--apply`, escolha em
-*Configurações do Sistema → Cores e Temas → Tema global → FreeLook*.
+o tema global FreeLook, o papel de parede e o tema GTK. Sem o `--apply`, escolha em
+*Configurações do Sistema → Cores e Temas → Tema global → FreeLook*, e o FreeLook em
+*Estilo dos aplicativos → Configurar estilo dos aplicativos GNOME/GTK*.
 
 Na primeira vez, saia e entre de novo na sessão, para todos os programas
 acharem o estilo (ele fica em `~/.local/lib/qt6/plugins`, anunciado pelo
@@ -80,7 +82,8 @@ janelas (*Configurações do Sistema → Texto e Fontes → Título da janela*).
 ```
 
 Se alguma peça do FreeLook estiver em uso, ele primeiro volta para o tema
-global Breeze e o papel de parede padrão, e depois remove todos os arquivos.
+global Breeze, o papel de parede padrão e o tema GTK Breeze, e depois remove
+todos os arquivos.
 Use `--yes` para pular a confirmação. Ele também limpa o que as versões
 antigas do FreeLook (em português) instalaram.
 
@@ -97,7 +100,7 @@ Para limpar o que a compilação e os testes geram, use `./clean.sh`: ele mostra
 o que vai apagar, pede confirmação e nunca mexe nos arquivos do projeto.
 
 Os detalhes de como testar cada peça (a galeria do estilo C++, o ambiente de
-teste da decoração QML e os geradores do estilo do Plasma) estão no
+teste da decoração QML, os geradores do estilo do Plasma e a galeria do tema GTK) estão no
 [README.md](README.md#development).
 
 ## Limitações conhecidas
@@ -106,7 +109,12 @@ teste da decoração QML e os geradores do estilo do Plasma) estão no
   ali as setas não ficam dentro do elevador. Nos programas, o elevador é completo.
 - As listas dentro de janelinhas do Kirigami (QML), como a lista de um combo nas Configurações do Sistema, mantêm o destaque do próprio Kirigami.
 - Interruptores, calendário e alguns outros widgets do Plasma ainda vêm do Breeze.
-- Programas em GTK precisam de um tema GTK separado.
+- Programas em GTK 4 e libadwaita (a maioria dos aplicativos novos do GNOME)
+  mantêm o visual deles: a libadwaita não aceita temas.
+- No GTK 3, o ▲ e o ▼ do elevador são só marcas: arraste o elevador ou clique
+  no cabo. O GTK não permite setas que funcionem dentro do controle.
+- O arquivo de sessão do FreeLook desliga as barras de rolagem sobrepostas do
+  GTK 3 (`GTK_OVERLAY_SCROLLING=0`), para o elevador ficar sempre visível.
 
 ## Autoria e auxílio de IA
 

@@ -14,3 +14,5 @@
 # Python
 __pycache__/
 *.pyc
+/gtk.png
+/gtk-menu.png

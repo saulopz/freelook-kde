@@ -3,6 +3,20 @@
 FreeLook was built in a single long session on 2026-11-25, in small
 versions, each one tested on a real Plasma 6.8 session before the next.
 
+## 0.9 (in progress)
+
+- GTK 3 theme with the same look as the Qt style: oblong buttons with the
+  default ring, underlined text fields, numeric fields with raised boxes,
+  combo boxes as menu buttons, the overflowing check mark, rectangular
+  exclusive settings, tabs as exclusive settings, sliders with a drag box,
+  menus where the chosen item sinks in, menu bar entries as menu buttons, and
+  a scroll bar elevator marked with ▲ and ▼.
+- `install.sh --apply` also switches GTK programs to FreeLook;
+  `uninstall.sh` switches them back to Breeze.
+- The session file turns GTK 3 overlay scroll bars off.
+- GIMP 3 (with its "System" theme): the icon tabs of the docks get room
+  again.
+
 ## 0.8 (2026-11-26)
 
 - Tabs drawn as an OPEN LOOK exclusive setting: raised rectangles side by

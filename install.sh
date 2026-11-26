@@ -3,6 +3,7 @@
 #
 #   ./install.sh             install all components
 #   ./install.sh --apply     install and switch to the FreeLook global theme
+#                            (and the FreeLook GTK theme)
 #   ./install.sh --no-style  skip building the C++ application style
 #
 # SPDX-FileCopyrightText: 2026 Saulo Popov Zambiasi <saulo.popov.zambiasi@ufsc.br>
@@ -22,7 +23,7 @@ for arg in "$@"; do
     case "$arg" in
         --apply) APPLY=1 ;;
         --no-style) BUILD_STYLE=0 ;;
-        -h|--help) sed -n '2,7p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+        -h|--help) sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
         *) echo "Unknown option: $arg (see --help)" >&2; exit 2 ;;
     esac
 done
@@ -43,6 +44,28 @@ copy_dir "$SRC/decoration/kwin4_decoration_qml_freelook" "$DATA/kwin/decorations
 copy_dir "$SRC/plasma/desktoptheme/FreeLook" "$DATA/plasma/desktoptheme/FreeLook"
 copy_dir "$SRC/plasma/look-and-feel/$LNF_ID" "$DATA/plasma/look-and-feel/$LNF_ID"
 copy_dir "$SRC/plasma/wallpapers/FreeLook" "$DATA/wallpapers/FreeLook"
+copy_dir "$SRC/gtk/FreeLook" "$DATA/themes/FreeLook"
+
+# Sets the GTK theme the way System Settings does (through the KDE GTK
+# configuration service), or writes the settings directly as a fallback.
+set_gtk_theme() {   # set_gtk_theme <name>
+    for q in qdbus6 qdbus; do
+        if command -v "$q" >/dev/null 2>&1 \
+            && "$q" org.kde.kded6 /modules/gtkconfig org.kde.GtkConfig.setGtkTheme "$1" >/dev/null 2>&1; then
+            return 0
+        fi
+    done
+    for tool in kwriteconfig6 kwriteconfig5; do
+        if command -v "$tool" >/dev/null 2>&1; then
+            mkdir -p "$CONFIG/gtk-3.0"
+            "$tool" --file "$CONFIG/gtk-3.0/settings.ini" --group Settings --key gtk-theme-name "$1"
+            break
+        fi
+    done
+    if command -v gsettings >/dev/null 2>&1; then
+        gsettings set org.gnome.desktop.interface gtk-theme "$1" 2>/dev/null || true
+    fi
+}
 
 STYLE_OK=0
 if [ "$BUILD_STYLE" = 1 ]; then
@@ -80,16 +103,20 @@ if [ "$BUILD_STYLE" = 1 ]; then
     fi
 fi
 
+# Plasma sources the scripts in this folder at login.
+mkdir -p "$(dirname "$ENV_FILE")"
+cat > "$ENV_FILE" <<'EOF'
+# FreeLook: GTK 3 programs show the scroll bar elevator instead of overlay bars
+export GTK_OVERLAY_SCROLLING=0
+EOF
 if [ "$STYLE_OK" = 1 ]; then
-    # Plasma sources the scripts in this folder at login, so every Qt
-    # application finds the style installed in the home folder.
-    mkdir -p "$(dirname "$ENV_FILE")"
-    cat > "$ENV_FILE" <<'EOF'
+    # Every Qt application finds the style installed in the home folder.
+    cat >> "$ENV_FILE" <<'EOF'
 # FreeLook: Qt plugins installed in the home folder
 export QT_PLUGIN_PATH="$HOME/.local/lib/qt6/plugins${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
 EOF
-    echo "    $ENV_FILE"
 fi
+echo "    $ENV_FILE"
 
 if [ "$APPLY" = 1 ]; then
     step "Applying the FreeLook global theme"
@@ -102,11 +129,15 @@ if [ "$APPLY" = 1 ]; then
     if command -v plasma-apply-wallpaperimage >/dev/null 2>&1; then
         plasma-apply-wallpaperimage "$DATA/wallpapers/FreeLook" >/dev/null 2>&1 || true
     fi
+    step "Applying the FreeLook GTK theme"
+    set_gtk_theme FreeLook
+    echo "    GTK programs pick it up when they start again."
 fi
 
 step "Done"
 if [ "$APPLY" = 0 ]; then
     echo "    Choose FreeLook in System Settings > Colors & Themes > Global Theme,"
+    echo "    and in Application Style > Configure GNOME/GTK Application Style,"
     echo "    or run ./install.sh --apply"
 fi
 if [ "$STYLE_OK" = 1 ]; then
