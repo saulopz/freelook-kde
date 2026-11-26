@@ -9,6 +9,20 @@ de 1991, rodando num Plasma moderno.
 
 ![Área de trabalho com o FreeLook](docs/screenshots/desktop.png)
 
+## Por que FreeLook
+
+Em janeiro e fevereiro de 1997, fiz duas disciplinas no IMPA, no Rio de
+Janeiro, como aluno especial: computação gráfica e matemática. Os laboratórios
+tinham estações da Sun com o OpenWindows. Nelas eu navegava, lia meus e-mails
+e conversava no IRC por um terminal de texto. Eu vinha do DOS, do Windows e de
+um pouco de Minix para programar em C, e achei aquele ambiente muito bonito.
+De volta para casa, quis ter aquilo de verdade, e instalei o Linux.
+
+O FreeLook é um caminho de volta àquele desktop, sobre o sistema livre ao qual
+ele me levou.
+
+*Saulo Popov Zambiasi*
+
 ## O que vem no pacote
 
 | Peça | O que faz | Tecnologia |

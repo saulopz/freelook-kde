@@ -9,6 +9,19 @@ on a modern Plasma.
 
 ![FreeLook desktop: KCalc, Konsole in Go Mono and System Settings](docs/screenshots/desktop.png)
 
+## Why FreeLook
+
+In January and February 1997 I took two courses at IMPA, in Rio de Janeiro,
+as a special student: computer graphics and mathematics. The labs had Sun
+workstations running OpenWindows. I browsed the web, read my mail and chatted
+on IRC from a text terminal on those machines. I came from DOS, Windows and a
+bit of Minix for programming in C, and I found that desktop beautiful. Back
+home, I wanted the real thing, so I installed Linux.
+
+FreeLook is a way back to that desktop, on the free system it led me to.
+
+*Saulo Popov Zambiasi*
+
 ## Components
 
 | Component | What it does | Technology |
