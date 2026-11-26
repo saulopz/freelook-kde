@@ -11,6 +11,7 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QScrollBar>
+#include <QSlider>
 #include <QTabBar>
 #include <QStyleFactory>
 #include <QStyleOption>
@@ -530,6 +531,129 @@ void FreeLookStyle::drawComboBox(const QStyleOptionComboBox *opt, QPainter *p) c
     triangle(p, tri, Qt::DownArrow, enabled ? c.ink : c.softShadow, arrowPressed ? c.pressed : c.base);
 }
 
+// ---------------------------------------------------------------------------- slider
+
+namespace
+{
+constexpr int kDragBoxLength = 11;      // along the slider
+constexpr int kDragBoxThickness = 17;   // across the slider
+constexpr int kChannel = 5;             // the recessed bar
+constexpr int kTick = 4;                // tick mark length (plus a 1 px gap)
+}
+
+QRect FreeLookStyle::sliderRect(const QStyleOptionSlider *opt, SubControl sc) const
+{
+    const QRect r = opt->rect;
+    const bool horizontal = opt->orientation == Qt::Horizontal;
+    const int along = horizontal ? r.width() : r.height();
+    const int across = horizontal ? r.height() : r.width();
+    const int length = std::min(kDragBoxLength, along);
+    const int thickness = std::min(kDragBoxThickness, across);
+
+    // Ticks above (left) push the bar down (right), and the other way round.
+    int center = across / 2;
+    const bool before = opt->tickPosition & QSlider::TicksAbove;
+    const bool after = opt->tickPosition & QSlider::TicksBelow;
+    if (before && !after) {
+        center += (kTick + 1) / 2 + 1;
+    } else if (after && !before) {
+        center -= (kTick + 1) / 2 + 1;
+    }
+    center = std::clamp(center, thickness / 2, across - (thickness + 1) / 2);
+    const int crossStart = center - thickness / 2;
+
+    const int pos = sliderPositionFromValue(opt->minimum, opt->maximum, opt->sliderPosition,
+                                            along - length, opt->upsideDown);
+    auto make = [&](int a, int n, int c, int m) {
+        return horizontal ? QRect(r.x() + a, r.y() + c, n, m) : QRect(r.x() + c, r.y() + a, m, n);
+    };
+    switch (sc) {
+    case SC_SliderHandle:    return make(pos, length, crossStart, thickness);
+    case SC_SliderGroove:    return make(0, along, crossStart, thickness);
+    case SC_SliderTickmarks: return r;
+    default:                 return QRect();
+    }
+}
+
+void FreeLookStyle::drawSlider(const QStyleOptionSlider *opt, QPainter *p) const
+{
+    const bool horizontal = opt->orientation == Qt::Horizontal;
+    const bool enabled = opt->state & State_Enabled;
+    const Colors c = colors(controlPalette(opt->palette), enabled);
+    const QRect groove = sliderRect(opt, SC_SliderGroove);
+    const QRect handle = sliderRect(opt, SC_SliderHandle);
+
+    // Tick marks: thin lines on the chosen sides.
+    if ((opt->subControls & SC_SliderTickmarks) && opt->tickPosition != QSlider::NoTicks
+        && opt->maximum > opt->minimum) {
+        const int along = horizontal ? opt->rect.width() : opt->rect.height();
+        const int span = along - handle.width() * horizontal - handle.height() * !horizontal;
+        auto position = [&](int v) {
+            return sliderPositionFromValue(opt->minimum, opt->maximum, v, span, opt->upsideDown);
+        };
+        int interval = opt->tickInterval;
+        if (interval <= 0) {
+            interval = opt->singleStep > 0 ? opt->singleStep : 1;
+            if (std::abs(position(opt->minimum + interval) - position(opt->minimum)) < 4) {
+                interval = opt->pageStep > 0 ? opt->pageStep : interval;
+            }
+        }
+        const int half = (horizontal ? handle.width() : handle.height()) / 2;
+        const QColor ink = enabled ? c.dark : c.softShadow;
+        for (qint64 v = opt->minimum; v <= opt->maximum; v += interval) {
+            const int a = position(int(v)) + half;
+            if (horizontal) {
+                const int x = opt->rect.x() + a;
+                if (opt->tickPosition & QSlider::TicksAbove) {
+                    p->fillRect(QRect(x, groove.top() - kTick - 1, 1, kTick), ink);
+                }
+                if (opt->tickPosition & QSlider::TicksBelow) {
+                    p->fillRect(QRect(x, groove.bottom() + 2, 1, kTick), ink);
+                }
+            } else {
+                const int y = opt->rect.y() + a;
+                if (opt->tickPosition & QSlider::TicksLeft) {
+                    p->fillRect(QRect(groove.left() - kTick - 1, y, kTick, 1), ink);
+                }
+                if (opt->tickPosition & QSlider::TicksRight) {
+                    p->fillRect(QRect(groove.right() + 2, y, kTick, 1), ink);
+                }
+            }
+        }
+    }
+
+    // The bar: a recessed channel, filled from the minimum end to the drag box.
+    if (opt->subControls & SC_SliderGroove) {
+        const QRect bar = horizontal
+            ? QRect(groove.left(), groove.center().y() - kChannel / 2, groove.width(), kChannel)
+            : QRect(groove.center().x() - kChannel / 2, groove.top(), kChannel, groove.height());
+        p->fillRect(bar, c.base);
+        bevel(p, bar, c.dark, c.light);
+        const QPoint mid = handle.center();
+        QRect filled;
+        if (horizontal) {
+            filled = opt->upsideDown ? QRect(QPoint(mid.x(), bar.top()), bar.bottomRight())
+                                     : QRect(bar.topLeft(), QPoint(mid.x(), bar.bottom()));
+        } else {
+            filled = opt->upsideDown ? QRect(QPoint(bar.left(), mid.y()), bar.bottomRight())
+                                     : QRect(bar.topLeft(), QPoint(bar.right(), mid.y()));
+        }
+        p->fillRect(filled.adjusted(1, 1, -1, -1), enabled ? c.dark : c.softShadow);
+    }
+
+    // The drag box: a raised block that sinks while it is dragged.
+    if (opt->subControls & SC_SliderHandle) {
+        const bool pressed = (opt->state & State_Sunken) && (opt->activeSubControls & SC_SliderHandle);
+        const QRect box = handle.adjusted(1, 1, -1, -1);
+        box3D(p, box, c, pressed);
+        p->save();
+        p->setPen((opt->state & State_HasFocus) && enabled ? c.ink : c.dark);
+        p->setBrush(Qt::NoBrush);
+        p->drawRect(handle.adjusted(0, 0, -1, -1));
+        p->restore();
+    }
+}
+
 // ---------------------------------------------------------------------------- QStyle
 
 void FreeLookStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *option,
@@ -727,6 +851,12 @@ void FreeLookStyle::drawComplexControl(ComplexControl control, const QStyleOptio
             return;
         }
     }
+    if (control == CC_Slider) {
+        if (const auto *s = qstyleoption_cast<const QStyleOptionSlider *>(option)) {
+            drawSlider(s, painter);
+            return;
+        }
+    }
     if (control == CC_SpinBox) {
         if (const auto *s = qstyleoption_cast<const QStyleOptionSpinBox *>(option)) {
             drawSpinBox(s, painter);
@@ -748,6 +878,11 @@ QRect FreeLookStyle::subControlRect(ComplexControl control, const QStyleOptionCo
     if (control == CC_ScrollBar) {
         if (const auto *s = qstyleoption_cast<const QStyleOptionSlider *>(option)) {
             return scrollBarRect(s, subControl);
+        }
+    }
+    if (control == CC_Slider) {
+        if (const auto *s = qstyleoption_cast<const QStyleOptionSlider *>(option)) {
+            return sliderRect(s, subControl);
         }
     }
     if (control == CC_SpinBox) {
@@ -838,6 +973,13 @@ int FreeLookStyle::pixelMetric(PixelMetric metric, const QStyleOption *option, c
         return 0;   // all tabs on the same line, like exclusive settings
     case PM_TabBarBaseOverlap:
         return 0;
+    case PM_SliderThickness:
+    case PM_SliderControlThickness:
+        return kDragBoxThickness;
+    case PM_SliderLength:
+        return kDragBoxLength;
+    case PM_SliderTickmarkOffset:
+        return kTick + 1;
     case PM_ButtonShiftHorizontal:
     case PM_ButtonShiftVertical:
         return 1;

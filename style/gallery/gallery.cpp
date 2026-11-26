@@ -197,6 +197,36 @@ static int testElevator()
         const QColor fill = img.pixelColor(up.left() + 3, up.bottom() - 3);
         check("spin buttons stay gray with a white palette", fill.lightness() < 245);
     }
+    // Slider: grab the drag box and pull it to the far end.
+    {
+        QSlider sl(Qt::Horizontal);
+        sl.setRange(0, 100);
+        sl.setTickPosition(QSlider::TicksBelow);
+        sl.resize(200, sl.sizeHint().height());
+        sl.show();
+        sl.setValue(50);
+        QStyleOptionSlider o;
+        o.initFrom(&sl);
+        o.orientation = Qt::Horizontal;
+        o.minimum = 0; o.maximum = 100;
+        o.sliderPosition = o.sliderValue = 50;
+        o.tickPosition = QSlider::TicksBelow;
+        o.upsideDown = false;
+        o.subControls = QStyle::SC_All;
+        QStyle *st = sl.style();
+        const QRect handle = st->subControlRect(QStyle::CC_Slider, &o, QStyle::SC_SliderHandle, &sl);
+        check("slider: drag box sits in the middle", std::abs(handle.center().x() - 100) <= 2);
+        check("slider: hit test on the drag box",
+              st->hitTestComplexControl(QStyle::CC_Slider, &o, handle.center(), &sl) == QStyle::SC_SliderHandle);
+        const QPoint from = handle.center(), to(sl.width() - 1, from.y());
+        QMouseEvent press(QEvent::MouseButtonPress, QPointF(from), sl.mapToGlobal(QPointF(from)), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+        QApplication::sendEvent(&sl, &press);
+        QMouseEvent move(QEvent::MouseMove, QPointF(to), sl.mapToGlobal(QPointF(to)), Qt::NoButton, Qt::LeftButton, Qt::NoModifier);
+        QApplication::sendEvent(&sl, &move);
+        QMouseEvent release(QEvent::MouseButtonRelease, QPointF(to), sl.mapToGlobal(QPointF(to)), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+        QApplication::sendEvent(&sl, &release);
+        check("slider: dragging reaches the maximum", sl.value() == 100);
+    }
     return failures;
 }
 
@@ -287,7 +317,18 @@ int main(int argc, char **argv)
     fields->addLayout(spins);
     auto *slider = new QSlider(Qt::Horizontal);
     slider->setValue(40);
+    slider->setTickPosition(QSlider::TicksBelow);
+    slider->setTickInterval(10);
     fields->addWidget(slider);
+    auto *plainSliders = new QHBoxLayout;
+    auto *plain = new QSlider(Qt::Horizontal);
+    plain->setValue(70);
+    plainSliders->addWidget(plain);
+    auto *disabledSlider = new QSlider(Qt::Horizontal);
+    disabledSlider->setValue(30);
+    disabledSlider->setEnabled(false);
+    plainSliders->addWidget(disabledSlider);
+    fields->addLayout(plainSliders);
     auto *progress = new QProgressBar;
     progress->setValue(65);
     fields->addWidget(progress);

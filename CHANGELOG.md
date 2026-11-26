@@ -18,6 +18,8 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   boxes: underlined text with an abbreviated menu button, like "Mail File: [▽]".
 - Every text field, inside spin boxes and combo boxes too, now sits on the
   window gray instead of a white box.
+- Sliders: a recessed bar filled in dark gray from the minimum to a raised
+  drag box, which sinks while it is dragged; thin tick marks.
 
 ## 0.7
 
