@@ -11,6 +11,13 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   property windows used a "Category" menu button.)
 - Tab close button: a thin black "x" without color, which gets a raised box
   under the mouse and sinks while pressed.
+- Numeric fields (spin boxes): the number on an underline and two raised
+  boxes side by side, [▲][▼]; the arrow at a limit is grayed out. The
+  "+ −" variant is supported too.
+- Combo boxes: an oblong menu button with a hollow triangle. Editable combo
+  boxes: underlined text with an abbreviated menu button, like "Mail File: [▽]".
+- Every text field, inside spin boxes and combo boxes too, now sits on the
+  window gray instead of a white box.
 
 ## 0.7
 

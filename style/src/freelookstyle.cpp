@@ -362,6 +362,174 @@ void FreeLookStyle::drawScrollBar(const QStyleOptionSlider *opt, QPainter *p) co
           isPressed(SC_ScrollBarAddLine));
 }
 
+// ---------------------------------------------------------------------------- spin box and combo box
+//
+// Numeric field: the number on an underline, like any text field, and two
+// raised boxes side by side on the right, [▲][▼]. An arrow is grayed out at
+// its limit, like the elevator arrows.
+// Combo box: an oblong menu button with a hollow triangle ("Print ▽").
+// Editable combo box: underlined text with an abbreviated menu button (a box
+// holding just the triangle), like "Mail File: [▽]" in OPEN LOOK's Mail Tool.
+
+namespace
+{
+int spinButtonSide(const QRect &r)
+{
+    return std::max(12, r.height() - 6);
+}
+
+// Kirigami (QML) hands spin boxes and editable combo boxes the "View" palette,
+// where Button is white. Raised boxes must keep the window gray, so in that
+// case take the application palette, as the scroll bar elevator does.
+QPalette controlPalette(const QPalette &palette)
+{
+    if (palette.color(QPalette::Button).lightness() > 245
+        && QApplication::palette().color(QPalette::Button).lightness() <= 245) {
+        return QApplication::palette();
+    }
+    return palette;
+}
+}
+
+QRect FreeLookStyle::spinBoxRect(const QStyleOptionSpinBox *opt, SubControl sc) const
+{
+    const QRect r = opt->rect;
+    const bool buttons = opt->buttonSymbols != QAbstractSpinBox::NoButtons;
+    const int side = buttons ? spinButtonSide(r) : 0;
+    const int top = r.top() + (r.height() - side) / 2;
+    const int downLeft = r.right() - side + 1;
+    const int upLeft = downLeft - side - 1;
+    QRect result;
+    switch (sc) {
+    case SC_SpinBoxFrame:     result = r; break;
+    case SC_SpinBoxUp:        result = buttons ? QRect(upLeft, top, side, side) : QRect(); break;
+    case SC_SpinBoxDown:      result = buttons ? QRect(downLeft, top, side, side) : QRect(); break;
+    case SC_SpinBoxEditField: {
+        const int right = buttons ? upLeft - 4 : r.right();
+        result = QRect(r.left() + 2, r.top() + 1, right - r.left() - 1, r.height() - 3);
+        break;
+    }
+    default: return QRect();
+    }
+    return visualRect(opt->direction, r, result);
+}
+
+void FreeLookStyle::drawSpinBox(const QStyleOptionSpinBox *opt, QPainter *p) const
+{
+    const bool enabled = opt->state & State_Enabled;
+    const Colors c = colors(controlPalette(opt->palette), enabled);
+
+    // Underline below the number, thicker while the field has focus.
+    if (opt->frame) {
+        const QRect field = spinBoxRect(opt, SC_SpinBoxEditField);
+        const int width = (opt->state & State_HasFocus) ? 2 : 1;
+        p->fillRect(QRect(field.left(), opt->rect.bottom() - width + 1, field.width(), width),
+                    enabled ? c.ink : c.softShadow);
+    }
+    if (opt->buttonSymbols == QAbstractSpinBox::NoButtons) {
+        return;
+    }
+
+    auto button = [&](SubControl sc, QAbstractSpinBox::StepEnabledFlag flag, bool up) {
+        const QRect r = spinBoxRect(opt, sc);
+        const bool pressed = (opt->state & State_Sunken) && (opt->activeSubControls & sc);
+        const bool active = enabled && (opt->stepEnabled & flag);
+        box3D(p, r, c, pressed);
+        p->save();
+        p->setPen(c.dark);
+        p->setBrush(Qt::NoBrush);
+        p->drawRect(r.adjusted(0, 0, -1, -1));
+        p->restore();
+        const QColor ink = active ? c.ink : c.softShadow;
+        const QPointF shift = pressed ? QPointF(1, 1) : QPointF(0, 0);
+        if (opt->buttonSymbols == QAbstractSpinBox::PlusMinus) {
+            const QRectF g = QRectF(r).adjusted(r.width() * 0.28, r.height() * 0.28,
+                                                -r.width() * 0.28, -r.height() * 0.28).translated(shift);
+            const int cy = int(g.center().y()), cx = int(g.center().x());
+            p->fillRect(QRect(int(g.left()), cy, int(g.width()), 1), ink);
+            if (up) {
+                p->fillRect(QRect(cx, int(g.top()), 1, int(g.height())), ink);
+            }
+        } else {
+            const int side = std::max(5, r.width() / 2 + 1);
+            QRectF tri(0, 0, side, std::ceil(side * 0.6));
+            tri.moveCenter(QRectF(r).center() + shift);
+            triangle(p, tri, up ? Qt::UpArrow : Qt::DownArrow, ink, pressed ? c.pressed : c.base);
+        }
+    };
+    button(SC_SpinBoxUp, QAbstractSpinBox::StepUpEnabled, true);
+    button(SC_SpinBoxDown, QAbstractSpinBox::StepDownEnabled, false);
+}
+
+QRect FreeLookStyle::comboBoxRect(const QStyleOptionComboBox *opt, SubControl sc) const
+{
+    const QRect r = opt->rect;
+    QRect result;
+    if (opt->editable) {
+        // Abbreviated menu button on the right, the text field on the left.
+        const int side = spinButtonSide(r);
+        const QRect arrow(r.right() - side + 1, r.top() + (r.height() - side) / 2, side, side);
+        switch (sc) {
+        case SC_ComboBoxFrame:     result = r; break;
+        case SC_ComboBoxArrow:     result = arrow; break;
+        case SC_ComboBoxEditField: result = QRect(r.left() + 2, r.top() + 1, arrow.left() - 4 - r.left() - 1, r.height() - 3); break;
+        case SC_ComboBoxListBoxPopup: result = r; break;
+        default: return QRect();
+        }
+    } else {
+        // Oblong button: room for the round ends and the triangle.
+        const int radius = r.height() / 2;
+        const int triangleWidth = std::max(7, r.height() / 3);
+        const int arrowLeft = r.right() - radius - triangleWidth + 2;
+        switch (sc) {
+        case SC_ComboBoxFrame:     result = r; break;
+        case SC_ComboBoxArrow:     result = QRect(arrowLeft - 2, r.top(), r.right() - arrowLeft + 3, r.height()); break;
+        case SC_ComboBoxEditField: result = QRect(r.left() + radius, r.top() + 2, arrowLeft - 4 - r.left() - radius, r.height() - 4); break;
+        case SC_ComboBoxListBoxPopup: result = r; break;
+        default: return QRect();
+        }
+    }
+    return visualRect(opt->direction, r, result);
+}
+
+void FreeLookStyle::drawComboBox(const QStyleOptionComboBox *opt, QPainter *p) const
+{
+    const bool enabled = opt->state & State_Enabled;
+    const Colors c = colors(controlPalette(opt->palette), enabled);
+    const bool pressed = (opt->state & State_Sunken) || (opt->state & State_On);
+
+    if (!opt->editable) {
+        QStyleOptionButton b;
+        b.QStyleOption::operator=(*opt);
+        b.features = QStyleOptionButton::HasMenu;
+        b.state &= ~State_On;
+        if (pressed) {
+            b.state |= State_Sunken;
+        }
+        drawButton(&b, p);
+        return;
+    }
+
+    if (opt->frame) {
+        const QRect field = comboBoxRect(opt, SC_ComboBoxEditField);
+        const int width = (opt->state & State_HasFocus) ? 2 : 1;
+        p->fillRect(QRect(field.left(), opt->rect.bottom() - width + 1, field.width(), width),
+                    enabled ? c.ink : c.softShadow);
+    }
+    const QRect arrow = comboBoxRect(opt, SC_ComboBoxArrow);
+    const bool arrowPressed = pressed && (opt->activeSubControls & SC_ComboBoxArrow);
+    box3D(p, arrow, c, arrowPressed);
+    p->save();
+    p->setPen(c.dark);
+    p->setBrush(Qt::NoBrush);
+    p->drawRect(arrow.adjusted(0, 0, -1, -1));
+    p->restore();
+    const int side = std::max(5, arrow.width() / 2 + 1);
+    QRectF tri(0, 0, side, std::ceil(side * 0.6));
+    tri.moveCenter(QRectF(arrow).center() + (arrowPressed ? QPointF(1, 1) : QPointF(0, 0)));
+    triangle(p, tri, Qt::DownArrow, enabled ? c.ink : c.softShadow, arrowPressed ? c.pressed : c.base);
+}
+
 // ---------------------------------------------------------------------------- QStyle
 
 void FreeLookStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *option,
@@ -400,13 +568,16 @@ void FreeLookStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *
 
     case PE_PanelLineEdit: {
         // OPEN LOOK text field: no box, just the text on an underline.
-        // Inner fields of spin boxes and combo boxes (frameless) stay with Fusion.
+        // Inner fields of spin boxes and combo boxes sit on the window gray.
         const auto *f = qstyleoption_cast<const QStyleOptionFrame *>(option);
         const QWidget *parent = widget ? widget->parentWidget() : nullptr;
         const bool inner = parent && (qobject_cast<const QAbstractSpinBox *>(parent)
                                       || qobject_cast<const QComboBox *>(parent));
-        if (!f || f->lineWidth <= 0 || inner) {
-            break;
+        if (inner) {
+            return;   // the spin box or combo box draws the underline; no white fill
+        }
+        if (!f || f->lineWidth <= 0) {
+            break;    // frameless editors (e.g. in item views) keep Fusion's fill
         }
         const bool enabled = option->state & State_Enabled;
         const Colors c = colors(option->palette, enabled);
@@ -556,6 +727,18 @@ void FreeLookStyle::drawComplexControl(ComplexControl control, const QStyleOptio
             return;
         }
     }
+    if (control == CC_SpinBox) {
+        if (const auto *s = qstyleoption_cast<const QStyleOptionSpinBox *>(option)) {
+            drawSpinBox(s, painter);
+            return;
+        }
+    }
+    if (control == CC_ComboBox) {
+        if (const auto *cb = qstyleoption_cast<const QStyleOptionComboBox *>(option)) {
+            drawComboBox(cb, painter);
+            return;
+        }
+    }
     QProxyStyle::drawComplexControl(control, option, painter, widget);
 }
 
@@ -565,6 +748,16 @@ QRect FreeLookStyle::subControlRect(ComplexControl control, const QStyleOptionCo
     if (control == CC_ScrollBar) {
         if (const auto *s = qstyleoption_cast<const QStyleOptionSlider *>(option)) {
             return scrollBarRect(s, subControl);
+        }
+    }
+    if (control == CC_SpinBox) {
+        if (const auto *s = qstyleoption_cast<const QStyleOptionSpinBox *>(option)) {
+            return spinBoxRect(s, subControl);
+        }
+    }
+    if (control == CC_ComboBox) {
+        if (const auto *cb = qstyleoption_cast<const QStyleOptionComboBox *>(option)) {
+            return comboBoxRect(cb, subControl);
         }
     }
     return QProxyStyle::subControlRect(control, option, subControl, widget);
@@ -603,6 +796,15 @@ QSize FreeLookStyle::sizeFromContents(ContentsType type, const QStyleOption *opt
                 s.setHeight(std::max(s.height(), 24));
             }
         }
+    }
+    if (type == CT_SpinBox) {
+        // Two square buttons instead of Fusion's narrow stacked pair.
+        s.setHeight(std::max(s.height(), 26));
+        s.setWidth(s.width() + spinButtonSide(QRect(0, 0, s.width(), s.height())) + 4);
+    }
+    if (type == CT_ComboBox) {
+        s.setHeight(std::max(s.height(), 26));
+        s.setWidth(s.width() + s.height() / 2);
     }
     if (type == CT_PushButton) {
         // Room for the half-circle ends.

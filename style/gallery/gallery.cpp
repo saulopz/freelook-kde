@@ -20,6 +20,7 @@
 #include <QListWidget>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QImage>
 #include <QPainter>
 #include <QProgressBar>
 #include <QPushButton>
@@ -27,6 +28,7 @@
 #include <QScrollBar>
 #include <QSlider>
 #include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QStyle>
 #include <QStyleFactory>
 #include <QStyleOption>
@@ -42,7 +44,7 @@
 class States : public QWidget
 {
 public:
-    States() { setFixedSize(640, 64); }
+    States() { setFixedSize(720, 64); }
 
 protected:
     void paintEvent(QPaintEvent *) override
@@ -88,14 +90,26 @@ protected:
             s->drawPrimitive(QStyle::PE_IndicatorTabClose, &o, &p, this);
             x += 22;
         };
+        {
+            QStyleOptionSpinBox o;
+            o.initFrom(this);
+            o.rect = QRect(x, 2, 70, 26);
+            o.frame = true;
+            o.subControls = QStyle::SC_All;
+            o.activeSubControls = QStyle::SC_SpinBoxUp;
+            o.state |= QStyle::State_Sunken;
+            o.stepEnabled = QAbstractSpinBox::StepUpEnabled | QAbstractSpinBox::StepDownEnabled;
+            s->drawComplexControl(QStyle::CC_SpinBox, &o, &p, this);
+            x += 76;
+        }
         tabClose(QStyle::State_None);
         tabClose(QStyle::State_MouseOver);
         tabClose(QStyle::State_Sunken);
         bar(QStyle::SC_ScrollBarSubLine, 40);
         bar(QStyle::SC_ScrollBarSlider, 0);
         bar(QStyle::SC_None, 60, true);
-        p.drawText(QRect(4, 36, 632, 24), Qt::AlignLeft | Qt::AlignVCenter,
-                   QStringLiteral("states: pressed · menu · tab close (normal, hover, pressed) · ◀ pressed · elevator at start · white palette"));
+        p.drawText(QRect(4, 36, 712, 24), Qt::AlignLeft | Qt::AlignVCenter,
+                   QStringLiteral("states: pressed · menu · spin ▲ pressed · tab close (normal, hover, pressed) · ◀ pressed · elevator at start · white palette"));
     }
 };
 
@@ -163,6 +177,26 @@ static int testElevator()
     QMouseEvent release(QEvent::MouseButtonRelease, QPointF(to), sb.mapToGlobal(QPointF(to)), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
     QApplication::sendEvent(&sb, &release);
     check("dragging the elevator reaches the end", sb.value() == sb.maximum());
+    // Spin box buttons with Kirigami's all-white palette must stay gray.
+    {
+        QImage img(80, 30, QImage::Format_ARGB32);
+        img.fill(Qt::transparent);
+        QPainter p(&img);
+        QStyleOptionSpinBox o;
+        o.palette = QApplication::palette();
+        o.palette.setColor(QPalette::Button, Qt::white);
+        o.palette.setColor(QPalette::Base, Qt::white);
+        o.state = QStyle::State_Enabled;
+        o.rect = QRect(0, 2, 80, 26);
+        o.frame = true;
+        o.subControls = QStyle::SC_All;
+        o.stepEnabled = QAbstractSpinBox::StepUpEnabled | QAbstractSpinBox::StepDownEnabled;
+        QApplication::style()->drawComplexControl(QStyle::CC_SpinBox, &o, &p, nullptr);
+        p.end();
+        const QRect up = QApplication::style()->subControlRect(QStyle::CC_SpinBox, &o, QStyle::SC_SpinBoxUp, nullptr);
+        const QColor fill = img.pixelColor(up.left() + 3, up.bottom() - 3);
+        check("spin buttons stay gray with a white palette", fill.lightness() < 245);
+    }
     return failures;
 }
 
@@ -238,9 +272,19 @@ int main(int argc, char **argv)
     auto *combo = new QComboBox;
     combo->addItems({QStringLiteral("Combo"), QStringLiteral("Two")});
     fields->addWidget(combo);
+    auto *spins = new QHBoxLayout;
     auto *spin = new QSpinBox;
     spin->setValue(42);
-    fields->addWidget(spin);
+    spins->addWidget(spin);
+    auto *atMax = new QSpinBox;
+    atMax->setRange(0, 10);
+    atMax->setValue(10);
+    spins->addWidget(atMax);
+    auto *plusMinus = new QDoubleSpinBox;
+    plusMinus->setButtonSymbols(QAbstractSpinBox::PlusMinus);
+    plusMinus->setValue(1.5);
+    spins->addWidget(plusMinus);
+    fields->addLayout(spins);
     auto *slider = new QSlider(Qt::Horizontal);
     slider->setValue(40);
     fields->addWidget(slider);
@@ -272,7 +316,7 @@ int main(int argc, char **argv)
     root->insertWidget(0, documentTabs);
 
     root->addWidget(new States);
-    window.resize(620, 620);
+    window.resize(720, 640);
     window.show();
     focused->setFocus();
 

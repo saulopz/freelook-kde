@@ -15,6 +15,8 @@ class QPainterPath;
 class QStyleOptionButton;
 class QStyleOptionSlider;
 class QStyleOptionTab;
+class QStyleOptionSpinBox;
+class QStyleOptionComboBox;
 
 class FreeLookStyle : public QProxyStyle
 {
@@ -64,4 +66,8 @@ private:
     void drawTab(const QStyleOptionTab *opt, QPainter *p) const;
     void drawScrollBar(const QStyleOptionSlider *opt, QPainter *p) const;
     QRect scrollBarRect(const QStyleOptionSlider *opt, SubControl sc) const;
+    void drawSpinBox(const QStyleOptionSpinBox *opt, QPainter *p) const;
+    QRect spinBoxRect(const QStyleOptionSpinBox *opt, SubControl sc) const;
+    void drawComboBox(const QStyleOptionComboBox *opt, QPainter *p) const;
+    QRect comboBoxRect(const QStyleOptionComboBox *opt, SubControl sc) const;
 };
