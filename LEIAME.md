@@ -34,6 +34,7 @@ ele me levou.
 | **Fontes** | A família Go, da Bigelow & Holmes, os desenhistas da Lucida (a fonte do OpenWindows): Go na interface, Go Bold no título das janelas, Go Mono na largura fixa | TrueType, BSD 3-Clause |
 | **Estilo do Plasma** | Painel, menus, dicas e plasmoides com a moldura das janelas pop-up do OPEN LOOK, botões oblongos, seleção afundada | Tema SVG do Plasma |
 | **Esquema de cores** | A paleta do OpenWindows 3: `#cccccc`, `#b7b7b7`, `#a0a0a0` e branco | Esquema de cores do KDE |
+| **FreeLook Noturno** | Uma variante noturna em âmbar, como um terminal antigo à noite (base `#423b33`, texto creme): esquema de cores, estilo do Plasma, tema global e papel de parede noturno. Escolha FreeLook e FreeLook Noturno como temas claro e escuro para alternar entre eles, à mão ou automaticamente | Esquema de cores, estilo do Plasma e tema global do KDE |
 | **Tema global** | Aplica tudo isso de uma vez, inclusive a ordem dos botões da barra de título | Pacote de tema global do Plasma |
 | **Papel de parede** | O azul do OpenWindows, `#40a0c0` | Pacote de papel de parede |
 
@@ -137,7 +138,13 @@ teste da decoração QML, os geradores do estilo do Plasma e a galeria do tema G
 - A barra de rolagem dos pop-ups do Plasma é feita de peças SVG fixas, então
   ali as setas não ficam dentro do elevador. Nos programas, o elevador é completo.
 - As listas dentro de janelinhas do Kirigami (QML), como a lista de um combo nas Configurações do Sistema, mantêm o destaque do próprio Kirigami.
-- Interruptores, calendário e alguns outros widgets do Plasma ainda vêm do Breeze.
+- O calendário e alguns outros widgets do Plasma ainda vêm do Breeze.
+- Depois de atualizar a decoração das janelas, saia e entre na sessão: o KWin
+  mantém a decoração que carregou no login.
+- FreeLook Noturno: trocar entre dia e noite com programas abertos pode deixar
+  partes com as cores antigas (a barra de menus de alguns programas, o título
+  de algumas janelas); reabrir o programa resolve. O tema GTK ainda não tem
+  versão noturna, e a imagem do botão "Workspace" fica cinza à noite.
 - Programas em GTK 4 e libadwaita (a maioria dos aplicativos novos do GNOME)
   mantêm o visual deles: a libadwaita não aceita temas.
 - No GTK 3, o ▲ e o ▼ do elevador são só marcas: arraste o elevador ou clique

@@ -33,6 +33,7 @@ FreeLook is a way back to that desktop, on the free system it led me to.
 | **Fonts** | The Go family by Bigelow & Holmes, the designers of Lucida (the OpenWindows typeface): Go for the interface, Go Bold for window titles, Go Mono for fixed width | TrueType, BSD 3-Clause |
 | **Plasma style** | Panel, menus, tooltips and widgets with the OPEN LOOK pop-up window frame, oblong buttons, sunken selection | Plasma SVG theme |
 | **Color scheme** | The OpenWindows 3 palette: `#cccccc`, `#b7b7b7`, `#a0a0a0` and white | KDE color scheme |
+| **FreeLook Night** | An amber night variant, like an old terminal at night (base `#423b33`, cream text): color scheme, Plasma style, global theme and a night wallpaper. Choose FreeLook and FreeLook Night as the light and dark themes to switch between them, by hand or automatically | KDE color scheme, Plasma style, global theme |
 | **Global theme** | Applies all of the above in one click, including the title bar button layout | Plasma look-and-feel package |
 | **Wallpaper** | The OpenWindows blue, `#40a0c0` | Plasma wallpaper package |
 
@@ -156,7 +157,7 @@ the QML has an error: `journalctl --user -b | grep -i -E 'qml|aurorae'`.
 **Plasma style.** The SVGs are generated; do not edit them by hand:
 
 ```sh
-python3 tools/generate_plasma_theme.py plasma/desktoptheme/FreeLook
+python3 tools/generate_plasma_theme.py   
 python3 tools/preview_plasma_theme.py plasma/desktoptheme/FreeLook preview.png   # needs PyQt5
 ```
 
@@ -186,7 +187,13 @@ files that are part of the project.
 - Plasma pop-up scroll bars are built from fixed SVG pieces, so their arrows
   cannot sit inside the elevator. Applications get the full elevator.
 - Lists inside Kirigami (QML) popups, such as the list of a combo box in System Settings, keep Kirigami's own highlight.
-- Switches, calendars and a few other Plasma widgets still come from Breeze.
+- Calendars and a few other Plasma widgets still come from Breeze.
+- After updating the window decoration, log out and in again: KWin keeps the
+  decoration it loaded at login.
+- FreeLook Night: switching between day and night with programs open can
+  leave parts with the old colors (the menu bar of some programs, the title
+  bar of some windows); reopening the program fixes it. The GTK theme has no
+  night version yet, and the "Workspace" button picture stays gray at night.
 - GTK 4 and libadwaita programs (most of the newer GNOME apps) keep their own
   look: libadwaita does not accept themes.
 - In GTK 3 the ▲ and ▼ on the elevator are only marks: drag the elevator or

@@ -25,6 +25,37 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   arrows for resizing, a four-way arrow for moving). SVG cursors for Plasma 6
   plus Xcursor files for X11 programs, installed in `~/.icons` (where
   Plasma's pointer settings look); the global theme sets them.
+- FreeLook Night, first part: an amber color scheme ("retro terminal at
+  night", base #423b33 with cream text), the application style and the
+  window decoration now derive their light relief from the base color on dark
+  palettes, and the wallpaper has a night variant (a deep teal gradient) that
+  Plasma picks when the color scheme is dark.
+- FreeLook Night, second part: a night Plasma style (the same drawings with a
+  soft amber relief and black outlines, instead of white relief and cream
+  outlines), and the FreeLook Night global theme. In *Global Theme >
+  Configure* (or the brightness and color applet), choose FreeLook as the
+  light theme and FreeLook Night as the dark one to switch between them. The
+  "Workspace" button picture follows the color scheme where Plasma recolors
+  it. The GTK theme comes next.
+- Window decoration: the buttons redraw when the colors change, so switching
+  between FreeLook and FreeLook Night keeps them right on open windows.
+- Experimental panels: `top-windows-kickoff`, the same top bar with Kickoff,
+  whose "Workspace" text label follows the color scheme.
+
+Known issues (to investigate):
+
+- Switching between FreeLook and FreeLook Night with programs open: with the
+  FreeLook application style, the menu bar of Konsole (and parts of Dolphin
+  and System Settings) keeps the old colors, while the rest of the program
+  switches; with Breeze it switches. KCalc switches with both styles. The
+  title bars of some windows also keep the old colors, with Breeze too.
+  Reopening the program fixes it.
+- The "Workspace" button picture is not recolored by Plasma, so it stays
+  gray at night.
+
+Next for FreeLook Night: a GTK night theme, a stronger elevator and check box
+outlines on dark palettes, an amber Konsole color scheme, and a real
+screenshot for the global theme preview.
 
 ## 0.9 (2026-11-26)
 
