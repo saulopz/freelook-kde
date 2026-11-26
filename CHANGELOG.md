@@ -14,6 +14,10 @@ versions, each one tested on a real Plasma 6.8 session before the next.
 - Plasma style: the dialog background declares (zero) insets, as Breeze
   does; without them the header of pop-ups such as the volume applet made
   Plasma log a binding loop.
+- Plasma style: radio buttons of Plasma widgets (the output device in the
+  volume pop-up, for instance) are OPEN LOOK exclusive settings, a raised
+  rectangle that sinks with a black mark when chosen, instead of Breeze's
+  round ones.
 
 ## 0.9 (2026-11-26)
 

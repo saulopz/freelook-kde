@@ -269,6 +269,46 @@ def menubaritem_file():
     return document(90, 60, body)
 
 
+def radiobutton_file():
+    """Plasma radio buttons as OPEN LOOK exclusive settings: a raised
+    rectangle, wider than tall; the chosen one is sunken, with a black
+    outline and a black mark. All elements share one size so they overlay."""
+    W, H = 18, 14
+    body = ""
+
+    def element(name, ox, content):
+        return f' <g id="{name}">\n' + rect(ox, 0, W, H, NONE) + content + ' </g>\n'
+
+    def relief(x, y, w, h, light, shadow):
+        return "".join(rect(*r) for r in bevel(x, y, w, h, light, shadow))
+
+    def outline(ox, color):
+        return (rect(ox, 0, W, 1, color) + rect(ox, H - 1, W, 1, color)
+                + rect(ox, 0, 1, H, color) + rect(ox + W - 1, 0, 1, H, color))
+
+    normal = (rect(1, 1, W - 2, H - 2, BG) + outline(0, DARK)
+              + relief(1, 1, W - 2, H - 2, LIGHT, DARK))
+    body += element("normal", 0, normal)
+    ox = W + 4
+    checked = (rect(ox + 1, 1, W - 2, H - 2, PRESSED) + outline(ox, TEXT)
+               + relief(ox + 1, 1, W - 2, H - 2, DARK, LIGHT)
+               + rect(ox + 5, 5, W - 10, H - 10, TEXT))
+    body += element("checked", ox, checked)
+    ox = 2 * (W + 4)
+    body += element("shadow", ox, "")
+    ox = 3 * (W + 4)
+    dots = "".join(rect(ox + x, 2, 1, 1, TEXT) + rect(ox + x, H - 3, 1, 1, TEXT)
+                   for x in range(2, W - 2, 2))
+    dots += "".join(rect(ox + 2, y, 1, 1, TEXT) + rect(ox + W - 3, y, 1, 1, TEXT)
+                    for y in range(4, H - 3, 2))
+    body += element("focus", ox, dots)
+    ox = 4 * (W + 4)
+    body += element("hover", ox, "")
+    ox = 5 * (W + 4)
+    body += f'  <rect id="hint-size" x="{ox}" y="0" width="{W}" height="{H}" {fill(NONE)}/>\n'
+    return document(6 * (W + 4), H, body)
+
+
 def viewitem_file():
     body = frame("normal", 0, 0, (2, 2, 2, 2), empty)
     body += frame("hover", 30, 0, (2, 2, 2, 2), raised)
@@ -363,6 +403,7 @@ FILES = {
     "widgets/panel-background.svg": panel_file,
     "widgets/button.svg": button_file,
     "widgets/menubaritem.svg": menubaritem_file,
+    "widgets/radiobutton.svg": radiobutton_file,
     "widgets/viewitem.svg": viewitem_file,
     "widgets/tasks.svg": tasks_file,
     "widgets/lineedit.svg": lineedit_file,
