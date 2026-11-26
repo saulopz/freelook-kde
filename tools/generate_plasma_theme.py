@@ -219,9 +219,23 @@ def focus_ring(prefix, ox, oy, C=24, M=4):
 
 # ------------------------------------------------------------------ files
 
-def window_file(margin):
+def zero_insets(ox, oy):
+    """Inset hints of (practically) zero size, as Breeze has. Without them,
+    PlasmoidHeading (the header of pop-ups such as the volume applet) falls
+    back to a path where its margins depend on its own borders, and Plasma
+    logs a binding loop for leftInset."""
+    tiny = "1e-08"
+    return (f'  <rect id="hint-top-inset" x="{ox}" y="{oy}" width="4" height="{tiny}" fill="#00ff00" fill-opacity="0"/>\n'
+            f'  <rect id="hint-bottom-inset" x="{ox + 6}" y="{oy}" width="4" height="{tiny}" fill="#00ff00" fill-opacity="0"/>\n'
+            f'  <rect id="hint-left-inset" x="{ox}" y="{oy + 6}" width="{tiny}" height="4" fill="#00ff00" fill-opacity="0"/>\n'
+            f'  <rect id="hint-right-inset" x="{ox + 6}" y="{oy + 6}" width="{tiny}" height="4" fill="#00ff00" fill-opacity="0"/>\n')
+
+
+def window_file(margin, insets=False):
     body = frame("", 0, 0, (3, 3, 3, 3), openlook_window)
     body += hints("", 40, 0, (margin, margin, margin, margin))
+    if insets:
+        body += zero_insets(48, 20)
     return document(60, 30, body)
 
 
@@ -343,7 +357,7 @@ METADATA = {
 }
 
 FILES = {
-    "dialogs/background.svg": lambda: window_file(6),
+    "dialogs/background.svg": lambda: window_file(6, insets=True),
     "widgets/background.svg": lambda: window_file(8),
     "widgets/tooltip.svg": lambda: window_file(6),
     "widgets/panel-background.svg": panel_file,

@@ -11,6 +11,9 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   the buttons some air inside that band.
 - Application style: icon-only (square) buttons are boxes with slightly
   rounded corners, lit on the top and left, instead of circles.
+- Plasma style: the dialog background declares (zero) insets, as Breeze
+  does; without them the header of pop-ups such as the volume applet made
+  Plasma log a binding loop.
 
 ## 0.9 (2026-11-26)
 
