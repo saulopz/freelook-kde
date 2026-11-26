@@ -531,6 +531,75 @@ void FreeLookStyle::drawComboBox(const QStyleOptionComboBox *opt, QPainter *p) c
     triangle(p, tri, Qt::DownArrow, enabled ? c.ink : c.softShadow, arrowPressed ? c.pressed : c.base);
 }
 
+// ---------------------------------------------------------------------------- menus
+//
+// OPEN LOOK menus: a raised gray panel; the item under the pointer looks
+// pressed in (sunken), submenus carry a hollow ▷, separators are etched lines.
+// Menu bar entries are OPEN LOOK menu buttons: "File ▽" as an oblong button,
+// sunken while its menu is open.
+
+void FreeLookStyle::drawMenuItem(const QStyleOptionMenuItem *opt, QPainter *p, const QWidget *w) const
+{
+    const bool enabled = opt->state & State_Enabled;
+    const Colors c = colors(controlPalette(opt->palette), enabled, QPalette::Window);
+
+    if (opt->menuItemType == QStyleOptionMenuItem::Separator && opt->text.isEmpty()) {
+        const int y = opt->rect.center().y();
+        const int left = opt->rect.left() + 4, width = opt->rect.width() - 8;
+        p->fillRect(QRect(left, y, width, 1), c.softShadow);
+        p->fillRect(QRect(left, y + 1, width, 1), c.light);
+        return;
+    }
+
+    const bool selected = (opt->state & State_Selected) && enabled
+        && opt->menuItemType != QStyleOptionMenuItem::Separator;
+    QStyleOptionMenuItem copy(*opt);
+    if (selected) {
+        box3D(p, opt->rect.adjusted(2, 0, -2, 0), c, true);
+        copy.state &= ~State_Selected;
+        // Hollow arrows and indicators take their fill from Button.
+        copy.palette.setColor(QPalette::Button, c.pressed);
+    }
+    QProxyStyle::drawControl(CE_MenuItem, &copy, p, w);
+}
+
+void FreeLookStyle::drawMenuBarItem(const QStyleOptionMenuItem *opt, QPainter *p, const QWidget *w) const
+{
+    const bool enabled = opt->state & State_Enabled;
+    const Colors c = colors(controlPalette(opt->palette), enabled, QPalette::Window);
+    p->fillRect(opt->rect, opt->palette.color(QPalette::Window));
+    if (opt->text.isEmpty() && opt->icon.isNull()) {
+        return;
+    }
+    const bool open = (opt->state & State_Sunken) && (opt->state & State_Selected);
+
+    QStyleOptionButton b;
+    b.QStyleOption::operator=(*opt);
+    b.palette = controlPalette(opt->palette);
+    b.rect = opt->rect.adjusted(0, 2, 0, -2);
+    b.features = QStyleOptionButton::HasMenu;
+    b.state &= ~(State_Sunken | State_On | State_HasFocus);
+    if (open) {
+        b.state |= State_Sunken;
+    }
+    drawButton(&b, p);
+
+    const int radius = b.rect.height() / 2;
+    const int side = std::max(7, b.rect.height() / 3);
+    QRect text = b.rect.adjusted(radius / 2 + 2, 0, -(radius + side + 1), 0);
+    if (open) {
+        text.translate(1, 1);
+    }
+    int flags = Qt::AlignCenter | Qt::TextShowMnemonic | Qt::TextDontClip | Qt::TextSingleLine;
+    if (!proxy()->styleHint(SH_UnderlineShortcut, opt, w)) {
+        flags |= Qt::TextHideMnemonic;
+    }
+    p->save();
+    p->setPen(c.ink);
+    p->drawText(text, flags, opt->text);
+    p->restore();
+}
+
 // ---------------------------------------------------------------------------- slider
 
 namespace
@@ -668,6 +737,27 @@ void FreeLookStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *
             copy.QStyleOption::operator=(*option);
             drawButton(&copy, painter);
         }
+        return;
+
+    case PE_PanelMenu:
+        painter->fillRect(option->rect, controlPalette(option->palette).color(QPalette::Window));
+        return;
+
+    case PE_FrameMenu: {
+        // A raised panel with a dark outline.
+        const Colors c = colors(controlPalette(option->palette), true, QPalette::Window);
+        const QRect r = option->rect;
+        painter->save();
+        painter->setPen(c.dark);
+        painter->setBrush(Qt::NoBrush);
+        painter->drawRect(r.adjusted(0, 0, -1, -1));
+        painter->restore();
+        bevel(painter, r.adjusted(1, 1, -1, -1), c.light, c.softShadow);
+        return;
+    }
+
+    case PE_PanelMenuBar:
+        painter->fillRect(option->rect, option->palette.color(QPalette::Window));
         return;
 
     case PE_IndicatorArrowUp:
@@ -831,6 +921,22 @@ void FreeLookStyle::drawControl(ControlElement element, const QStyleOption *opti
             return;
         }
     }
+    if (element == CE_MenuItem) {
+        if (const auto *mi = qstyleoption_cast<const QStyleOptionMenuItem *>(option)) {
+            drawMenuItem(mi, painter, widget);
+            return;
+        }
+    }
+    if (element == CE_MenuBarItem) {
+        if (const auto *mi = qstyleoption_cast<const QStyleOptionMenuItem *>(option)) {
+            drawMenuBarItem(mi, painter, widget);
+            return;
+        }
+    }
+    if (element == CE_MenuBarEmptyArea) {
+        painter->fillRect(option->rect, option->palette.color(QPalette::Window));
+        return;
+    }
     if (element == CE_PushButtonBevel) {
         if (const auto *b = qstyleoption_cast<const QStyleOptionButton *>(option)) {
             if (!(b->features & QStyleOptionButton::Flat) || (b->state & (State_Sunken | State_On))) {
@@ -941,6 +1047,23 @@ QSize FreeLookStyle::sizeFromContents(ContentsType type, const QStyleOption *opt
         s.setHeight(std::max(s.height(), 26));
         s.setWidth(s.width() + s.height() / 2);
     }
+    if (type == CT_MenuBarItem) {
+        // Each entry is a small menu button: round ends and a triangle.
+        if (const auto *mi = qstyleoption_cast<const QStyleOptionMenuItem *>(option)) {
+            if (!mi->text.isEmpty()) {
+                const int h = std::max(s.height() + 4, 28);
+                s.setHeight(h);
+                s.setWidth(s.width() + (h - 4) / 2 + std::max(7, (h - 4) / 3) + 8);
+            }
+        }
+    }
+    if (type == CT_MenuItem) {
+        if (const auto *mi = qstyleoption_cast<const QStyleOptionMenuItem *>(option)) {
+            if (mi->menuItemType != QStyleOptionMenuItem::Separator) {
+                s.setHeight(std::max(s.height(), 24));
+            }
+        }
+    }
     if (type == CT_PushButton) {
         // Room for the half-circle ends.
         s.setHeight(std::max(s.height(), 24));
@@ -972,6 +1095,20 @@ int FreeLookStyle::pixelMetric(PixelMetric metric, const QStyleOption *option, c
     case PM_TabBarTabShiftVertical:
         return 0;   // all tabs on the same line, like exclusive settings
     case PM_TabBarBaseOverlap:
+        return 0;
+    case PM_MenuPanelWidth:
+        return 2;
+    case PM_MenuHMargin:
+        return 1;
+    case PM_MenuVMargin:
+        return 3;
+    case PM_MenuBarItemSpacing:
+        return 4;
+    case PM_MenuBarHMargin:
+        return 4;
+    case PM_MenuBarVMargin:
+        return 1;
+    case PM_MenuBarPanelWidth:
         return 0;
     case PM_SliderThickness:
     case PM_SliderControlThickness:

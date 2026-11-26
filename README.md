@@ -14,7 +14,7 @@ on a modern Plasma.
 | Component | What it does | Technology |
 |---|---|---|
 | **Window decoration** | Thin black-outlined border, raised L-shaped resize corners, window menu button with a hollow triangle, centered title with an etched separator, pushpin | KWin Aurorae, QML |
-| **Application style** | Oblong buttons with a default ring, hollow arrows, check marks that overflow their box, rectangular exclusive settings, tabs drawn as exclusive settings, underlined text fields, numeric fields with [▲][▼] boxes, combo boxes as menu buttons, sliders with a drag box, and the OPEN LOOK **elevator** scroll bar | Qt 6 `QStyle` plugin, C++ |
+| **Application style** | Oblong buttons with a default ring, hollow arrows, check marks that overflow their box, rectangular exclusive settings, tabs drawn as exclusive settings, underlined text fields, numeric fields with [▲][▼] boxes, combo boxes as menu buttons, sliders with a drag box, menus where the chosen item sinks in, menu bar entries as menu buttons, and the OPEN LOOK **elevator** scroll bar | Qt 6 `QStyle` plugin, C++ |
 | **Plasma style** | Panel, menus, tooltips and widgets with the OPEN LOOK pop-up window frame, oblong buttons, sunken selection | Plasma SVG theme |
 | **Color scheme** | The OpenWindows 3 palette: `#cccccc`, `#b7b7b7`, `#a0a0a0` and white | KDE color scheme |
 | **Global theme** | Applies all of the above in one click, including the title bar button layout | Plasma look-and-feel package |
@@ -144,7 +144,7 @@ files that are part of the project.
 
 - Plasma pop-up scroll bars are built from fixed SVG pieces, so their arrows
   cannot sit inside the elevator. Applications get the full elevator.
-- Application menus still use Fusion's look.
+- Lists inside Kirigami (QML) popups, such as the list of a combo box in System Settings, keep Kirigami's own highlight.
 - Switches, calendars and a few other Plasma widgets still come from Breeze.
 - GTK applications need a separate GTK theme.
 

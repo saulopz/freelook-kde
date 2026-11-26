@@ -27,6 +27,9 @@
 #include <QRadioButton>
 #include <QScrollBar>
 #include <QSlider>
+#include <QMenu>
+#include <QMenuBar>
+#include <QKeySequence>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
 #include <QStyle>
@@ -356,6 +359,25 @@ int main(int argc, char **argv)
     documentTabs->setCurrentIndex(1);
     root->insertWidget(0, documentTabs);
 
+    // Menu bar with OPEN LOOK menu buttons, and a menu to show next to it.
+    auto *menuBar = new QMenuBar;
+    auto *fileMenu = menuBar->addMenu(QStringLiteral("&File"));
+    menuBar->addMenu(QStringLiteral("&Edit"));
+    menuBar->addMenu(QStringLiteral("&View"));
+    root->setMenuBar(menuBar);
+    fileMenu->addAction(QStringLiteral("Open..."));
+    auto *saveAction = fileMenu->addAction(QStringLiteral("Save"));
+    saveAction->setShortcut(QKeySequence(QStringLiteral("Ctrl+S")));
+    fileMenu->addAction(QStringLiteral("Save as..."))->setEnabled(false);
+    fileMenu->addSeparator();
+    auto *wrap = fileMenu->addAction(QStringLiteral("Wrap lines"));
+    wrap->setCheckable(true);
+    wrap->setChecked(true);
+    auto *recent = fileMenu->addMenu(QStringLiteral("Recent files"));
+    recent->addAction(QStringLiteral("notes.txt"));
+    fileMenu->addSeparator();
+    fileMenu->addAction(QStringLiteral("Quit"));
+
     root->addWidget(new States);
     window.resize(720, 640);
     window.show();
@@ -364,6 +386,13 @@ int main(int argc, char **argv)
     QTimer::singleShot(300, [&]() {
         window.grab().save(output);
         std::printf("screenshot saved: %s\n", qPrintable(output));
+        // The menu, with "Save" under the pointer, saved next to the screenshot.
+        fileMenu->setActiveAction(saveAction);
+        fileMenu->adjustSize();
+        QString menuOutput = output;
+        menuOutput.replace(QStringLiteral(".png"), QStringLiteral("-menu.png"));
+        fileMenu->grab().save(menuOutput);
+        std::printf("menu saved: %s\n", qPrintable(menuOutput));
         app.exit(failures == 0 ? 0 : 2);
     });
     return app.exec();

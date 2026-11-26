@@ -20,6 +20,10 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   window gray instead of a white box.
 - Sliders: a recessed bar filled in dark gray from the minimum to a raised
   drag box, which sinks while it is dragged; thin tick marks.
+- Menus: a raised gray panel with a dark outline; the item under the pointer
+  sinks in instead of turning into a colored bar; etched separators.
+- Menu bar entries drawn as OPEN LOOK menu buttons, "File ▽", sunken while
+  their menu is open.
 
 ## 0.7
 
