@@ -18,6 +18,8 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   volume pop-up, for instance) are OPEN LOOK exclusive settings, a raised
   rectangle that sinks with a black mark when chosen, instead of Breeze's
   round ones.
+- Plasma style: switches as in the GTK theme, a sunken bar that turns dark
+  when on and a raised block like the drag box of the sliders.
 
 ## 0.9 (2026-11-26)
 

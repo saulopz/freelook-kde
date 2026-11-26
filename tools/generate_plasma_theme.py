@@ -309,6 +309,44 @@ def radiobutton_file():
     return document(6 * (W + 4), H, body)
 
 
+def switch_file():
+    """OPEN LOOK had no switches. As in the GTK theme: a sunken bar, dark from
+    the left up to the handle when on, and a raised block like the drag box
+    of the sliders (black outline when the switch is on)."""
+    def bar(fill_color, outline_color):
+        def drawing(W, H):
+            return ([(0, 0, W, H, outline_color), (1, 1, W - 2, H - 2, fill_color)]
+                    + bevel(1, 1, W - 2, H - 2, SOFT_SHADOW if fill_color == PRESSED else TEXT, LIGHT))
+        return drawing
+
+    body = frame("inactive", 0, 0, (2, 2, 2, 2), bar(PRESSED, DARK))
+    body += frame("active", 30, 0, (2, 2, 2, 2), bar(DARK, TEXT))
+    body += '  <rect id="hint-stretch-borders" x="60" y="0" width="1" height="1" fill-opacity="0"/>\n'
+    body += '  <rect id="hint-bar-size" x="0" y="30" width="32" height="12" fill-opacity="0"/>\n'
+
+    HW, HH = 12, 18
+
+    def handle(name, ox, outline_color, pressed=False, overlay=False):
+        rects = [(0, 0, HW, HH, NONE)]
+        if overlay:
+            rects += [(0, 0, HW, 1, TEXT), (0, HH - 1, HW, 1, TEXT), (0, 0, 1, HH, TEXT), (HW - 1, 0, 1, HH, TEXT)]
+        elif outline_color is not None:
+            rects += [(0, 0, HW, HH, outline_color), (1, 1, HW - 2, HH - 2, PRESSED if pressed else BG)]
+            rects += bevel(1, 1, HW - 2, HH - 2, DARK if pressed else LIGHT, LIGHT if pressed else DARK)
+        out = f' <g id="{name}">\n'
+        for x, y, w, h, color in rects:
+            out += rect(ox + x, 50 + y, w, h, color)
+        return out + ' </g>\n'
+
+    body += handle("handle", 0, DARK)
+    body += handle("handle-hover", 16, DARK)
+    body += handle("handle-pressed", 32, DARK, pressed=True)
+    body += handle("handle-active", 48, TEXT)
+    body += handle("handle-focus", 64, None, overlay=True)
+    body += handle("handle-shadow", 80, None)
+    return document(100, 70, body)
+
+
 def viewitem_file():
     body = frame("normal", 0, 0, (2, 2, 2, 2), empty)
     body += frame("hover", 30, 0, (2, 2, 2, 2), raised)
@@ -404,6 +442,7 @@ FILES = {
     "widgets/button.svg": button_file,
     "widgets/menubaritem.svg": menubaritem_file,
     "widgets/radiobutton.svg": radiobutton_file,
+    "widgets/switch.svg": switch_file,
     "widgets/viewitem.svg": viewitem_file,
     "widgets/tasks.svg": tasks_file,
     "widgets/lineedit.svg": lineedit_file,
