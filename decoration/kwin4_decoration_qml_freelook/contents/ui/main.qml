@@ -27,9 +27,11 @@ Decoration {
     property int armLength: borderSize * 2 + 2
     // The title bar follows the title font, and the buttons follow the title bar.
     // For bigger or smaller buttons, change the padding (px) above and below the text.
-    property int titlePadding: 4
-    property int titleHeight: Math.max(22, Math.ceil(caption.implicitHeight) + 2 * titlePadding)
-    property int buttonSize: titleHeight - 2
+    property int titlePadding: 5
+    property int titleHeight: Math.max(24, Math.ceil(caption.implicitHeight) + 2 * titlePadding)
+    // 2 px of air above and below the buttons, inside the band that frames the
+    // title of the window with the focus.
+    property int buttonSize: titleHeight - 4
     property int separatorHeight: 2                    // etched line under the title
     readonly property bool maximized: decoration.client.maximized
     readonly property bool active: decoration.client.active
@@ -153,20 +155,38 @@ Decoration {
         Component.onCompleted: decoration.installTitleItem(titleBar)
     }
 
-    // Etched line under the title (dark + light); on inactive windows just the soft one.
+    // The window with the focus has its title framed, as in OpenWindows: a black
+    // line above and below the title, each with a light line on the inside, so
+    // the title sits in a band. Other windows keep a soft etched line under it.
+    Rectangle {
+        visible: root.active
+        x: titleBar.x
+        y: titleBar.y
+        width: titleBar.width
+        height: 1
+        color: root.outline
+    }
+    Rectangle {
+        visible: root.active
+        x: titleBar.x
+        y: titleBar.y + 1
+        width: titleBar.width
+        height: 1
+        color: root.light
+    }
     Rectangle {
         x: titleBar.x
         y: titleBar.y + titleBar.height
         width: titleBar.width
         height: 1
-        color: root.active ? root.dark : root.softShadow
+        color: root.active ? root.light : root.softShadow
     }
     Rectangle {
         x: titleBar.x
         y: titleBar.y + titleBar.height + 1
         width: titleBar.width
         height: 1
-        color: root.active ? root.light : root.base
+        color: root.active ? root.outline : root.base
     }
 
     // ---------------------------------------------------------------- L-shaped corners

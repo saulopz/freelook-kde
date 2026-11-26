@@ -3,6 +3,13 @@
 FreeLook was built in a single long session on 2026-11-25, in small
 versions, each one tested on a real Plasma 6.8 session before the next.
 
+## 0.10 (in progress)
+
+- Window decoration: the window with the focus has its title framed between
+  two black lines, each with a light line on the inside, as in OpenWindows;
+  other windows keep the title loose. The title bar is 2 px taller to give
+  the buttons some air inside that band.
+
 ## 0.9 (2026-11-26)
 
 - GTK 3 theme with the same look as the Qt style: oblong buttons with the
