@@ -105,7 +105,7 @@ freelook/
 ├── style/               Qt application style (C++) and the test gallery
 ├── plasma/              Plasma style (generated), global theme, wallpaper
 ├── gtk/                 GTK 3 theme (CSS; pictures generated)
-├── tools/               generators, previews and the QML test harness
+├── tools/               generators, previews, test harnesses, try-panel.sh
 ├── extras/              the first decoration, as an SVG Aurorae theme
 └── docs/screenshots/
 ```
@@ -151,6 +151,11 @@ python3 tools/generate_gtk_assets.py
 ln -s "$PWD/gtk/FreeLook" ~/.local/share/themes/FreeLook   # once, or run ./install.sh
 GTK_THEME=FreeLook GTK_OVERLAY_SCROLLING=0 python3 tools/gtk-test/gallery3.py gtk.png
 ```
+
+**Experimental panels.** `plasma/panels/*.js` are Plasma scripts that build
+test panel layouts. `tools/try-panel.sh <layout>` backs up the current panels
+and switches; `tools/try-panel.sh --restore` puts your own panels back. They
+are not installed by `install.sh`.
 
 **Cleaning up.** `./clean.sh` lists the build output and the images written by
 the test tools, asks for confirmation and removes them. It never touches

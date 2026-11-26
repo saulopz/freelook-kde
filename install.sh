@@ -49,7 +49,7 @@ copy_dir "$SRC/gtk/FreeLook" "$DATA/themes/FreeLook"
 # Sets the GTK theme the way System Settings does (through the KDE GTK
 # configuration service), or writes the settings directly as a fallback.
 set_gtk_theme() {   # set_gtk_theme <name>
-    for q in qdbus6 qdbus; do
+    for q in qdbus6 qdbus-qt6 qdbus; do
         if command -v "$q" >/dev/null 2>&1 \
             && "$q" org.kde.kded6 /modules/gtkconfig org.kde.GtkConfig.setGtkTheme "$1" >/dev/null 2>&1; then
             return 0
@@ -109,7 +109,8 @@ cat > "$ENV_FILE" <<'EOF'
 # FreeLook: GTK 3 programs show the scroll bar elevator instead of overlay bars
 export GTK_OVERLAY_SCROLLING=0
 EOF
-if [ "$STYLE_OK" = 1 ]; then
+# With --no-style, a style installed earlier stays in use, so keep announcing it.
+if [ "$STYLE_OK" = 1 ] || [ -f "$PLUGINS/styles/libfreelook.so" ]; then
     # Every Qt application finds the style installed in the home folder.
     cat >> "$ENV_FILE" <<'EOF'
 # FreeLook: Qt plugins installed in the home folder

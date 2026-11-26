@@ -67,7 +67,7 @@ fi
 GTK_SETTINGS="$CONFIG/gtk-3.0/settings.ini"
 if [ -f "$GTK_SETTINGS" ] && grep -q '^gtk-theme-name *= *FreeLook *$' "$GTK_SETTINGS"; then
     done_gtk=0
-    for q in qdbus6 qdbus; do
+    for q in qdbus6 qdbus-qt6 qdbus; do
         if command -v "$q" >/dev/null 2>&1 \
             && "$q" org.kde.kded6 /modules/gtkconfig org.kde.GtkConfig.setGtkTheme Breeze >/dev/null 2>&1; then
             done_gtk=1

@@ -99,6 +99,10 @@ nas Configurações do Sistema têm tradução para o português.
 Para limpar o que a compilação e os testes geram, use `./clean.sh`: ele mostra
 o que vai apagar, pede confirmação e nunca mexe nos arquivos do projeto.
 
+Os painéis experimentais (barra em cima, na direita ou nos dois lugares) estão
+em `plasma/panels/`. Para testar: `tools/try-panel.sh top-windows` (ou outra
+variante); para voltar aos seus painéis: `tools/try-panel.sh --restore`.
+
 Os detalhes de como testar cada peça (a galeria do estilo C++, o ambiente de
 teste da decoração QML, os geradores do estilo do Plasma e a galeria do tema GTK) estão no
 [README.md](README.md#development).

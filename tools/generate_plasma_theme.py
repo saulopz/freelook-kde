@@ -243,6 +243,17 @@ def button_file():
     return document(4 * (width + 10), 120, body)
 
 
+def menubaritem_file():
+    """Menu bar entries (global menu, window list): OPEN LOOK menu buttons,
+    always outlined, sunken while their menu is open."""
+    body = ""
+    width = 2 * R + 24
+    for i, (prefix, pressed) in enumerate([("normal", False), ("hover", False), ("pressed", True)]):
+        body += button(prefix, i * (width + 10), 0, pressed)
+        body += hints(prefix, i * (width + 10), 40, (4, 12, 4, 12))
+    return document(3 * (width + 10), 80, body)
+
+
 def viewitem_file():
     body = frame("normal", 0, 0, (2, 2, 2, 2), empty)
     body += frame("hover", 30, 0, (2, 2, 2, 2), raised)
@@ -336,6 +347,7 @@ FILES = {
     "widgets/tooltip.svg": lambda: window_file(6),
     "widgets/panel-background.svg": panel_file,
     "widgets/button.svg": button_file,
+    "widgets/menubaritem.svg": menubaritem_file,
     "widgets/viewitem.svg": viewitem_file,
     "widgets/tasks.svg": tasks_file,
     "widgets/lineedit.svg": lineedit_file,
