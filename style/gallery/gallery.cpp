@@ -30,6 +30,7 @@
 #include <QStyle>
 #include <QStyleFactory>
 #include <QStyleOption>
+#include <QTabBar>
 #include <QTabWidget>
 #include <QTextEdit>
 #include <QTimer>
@@ -41,7 +42,7 @@
 class States : public QWidget
 {
 public:
-    States() { setFixedSize(600, 64); }
+    States() { setFixedSize(640, 64); }
 
 protected:
     void paintEvent(QPaintEvent *) override
@@ -68,7 +69,7 @@ protected:
             o.orientation = Qt::Horizontal;
             o.minimum = 0; o.maximum = 100; o.pageStep = 30; o.singleStep = 1;
             o.sliderPosition = o.sliderValue = value;
-            o.rect = QRect(x, 6, 110, 16);
+            o.rect = QRect(x, 6, 100, 16);
             o.subControls = QStyle::SC_All;
             o.activeSubControls = active;
             if (whitePalette) {   // mimics Kirigami QML lists
@@ -77,13 +78,24 @@ protected:
             }
             if (active != QStyle::SC_None) o.state |= QStyle::State_Sunken;
             s->drawComplexControl(QStyle::CC_ScrollBar, &o, &p, this);
-            x += 118;
+            x += 106;
         };
+        auto tabClose = [&](QStyle::State extra) {
+            QStyleOption o;
+            o.initFrom(this);
+            o.state |= extra;
+            o.rect = QRect(x, 6, 16, 16);
+            s->drawPrimitive(QStyle::PE_IndicatorTabClose, &o, &p, this);
+            x += 22;
+        };
+        tabClose(QStyle::State_None);
+        tabClose(QStyle::State_MouseOver);
+        tabClose(QStyle::State_Sunken);
         bar(QStyle::SC_ScrollBarSubLine, 40);
         bar(QStyle::SC_ScrollBarSlider, 0);
         bar(QStyle::SC_None, 60, true);
-        p.drawText(QRect(4, 36, 592, 24), Qt::AlignLeft | Qt::AlignVCenter,
-                   QStringLiteral("states: pressed · menu · ◀ pressed · elevator pressed at start · white palette (QML)"));
+        p.drawText(QRect(4, 36, 632, 24), Qt::AlignLeft | Qt::AlignVCenter,
+                   QStringLiteral("states: pressed · menu · tab close (normal, hover, pressed) · ◀ pressed · elevator at start · white palette"));
     }
 };
 
@@ -180,6 +192,7 @@ int main(int argc, char **argv)
     auto *page = new QWidget;
     tabs->addTab(page, QStringLiteral("Controls"));
     tabs->addTab(new QWidget, QStringLiteral("Another tab"));
+    tabs->addTab(new QWidget, QStringLiteral("Third"));
     auto *grid = new QGridLayout(page);
 
     auto *buttons = new QHBoxLayout;
@@ -247,8 +260,19 @@ int main(int argc, char **argv)
     text->setPlainText(lines);
     grid->addWidget(text, 2, 1);
 
+    // Document-mode tab bar with close buttons, as in Dolphin and Konsole.
+    auto *documentTabs = new QTabBar;
+    documentTabs->setDocumentMode(true);
+    documentTabs->setTabsClosable(true);
+    documentTabs->setExpanding(false);
+    for (const char *name : {"~/Projects", "~/Documents", "~/mail"}) {
+        documentTabs->addTab(QString::fromLatin1(name));
+    }
+    documentTabs->setCurrentIndex(1);
+    root->insertWidget(0, documentTabs);
+
     root->addWidget(new States);
-    window.resize(620, 580);
+    window.resize(620, 620);
     window.show();
     focused->setFocus();
 

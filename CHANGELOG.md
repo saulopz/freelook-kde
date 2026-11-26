@@ -3,6 +3,15 @@
 FreeLook was built in a single long session on 2026-11-25, in small
 versions, each one tested on a real Plasma 6.8 session before the next.
 
+## 0.8 (in progress)
+
+- Tabs drawn as an OPEN LOOK exclusive setting: raised rectangles side by
+  side sharing a single line, the current one sunken with a black outline,
+  and the page in a plain frame just below. (OPEN LOOK itself had no tabs;
+  property windows used a "Category" menu button.)
+- Tab close button: a thin black "x" without color, which gets a raised box
+  under the mouse and sinks while pressed.
+
 ## 0.7
 
 - Global theme (`org.freelook.desktop`): applies the color scheme, the

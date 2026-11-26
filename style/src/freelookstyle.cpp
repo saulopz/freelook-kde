@@ -11,6 +11,7 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QScrollBar>
+#include <QTabBar>
 #include <QStyleFactory>
 #include <QStyleOption>
 
@@ -25,6 +26,13 @@ constexpr int kAnchor = 6;             // length of the anchors at both ends
 constexpr int kAnchorGap = 2;          // gap between an anchor and the cable
 constexpr int kIndicator = 16;         // check box area (the check mark overflows inside it)
 constexpr int kCheckBox = 12;          // the check box itself
+constexpr int kTabGap = 3;             // gap between the tabs and the page below them
+
+bool isVerticalTab(QTabBar::Shape shape)
+{
+    return shape == QTabBar::RoundedWest || shape == QTabBar::RoundedEast
+        || shape == QTabBar::TriangularWest || shape == QTabBar::TriangularEast;
+}
 }
 
 FreeLookStyle::FreeLookStyle()
@@ -182,6 +190,44 @@ void FreeLookStyle::drawButton(const QStyleOptionButton *opt, QPainter *p) const
                    side, side * 0.6);
         triangle(p, tri, Qt::DownArrow, c.ink, sunken ? c.pressed : c.base);
     }
+}
+
+// ---------------------------------------------------------------------------- tabs
+//
+// OPEN LOOK had no tabs: property windows switched pages with a "Category"
+// menu button. FreeLook draws tabs as an OPEN LOOK exclusive setting, like
+// "Snap Type: [Window][Region][Screen]": raised rectangles side by side,
+// sharing a single line, and the current one sunken with a black outline.
+// The page sits in a plain frame a few pixels below, not attached to the tab.
+
+void FreeLookStyle::drawTab(const QStyleOptionTab *opt, QPainter *p) const
+{
+    const bool enabled = opt->state & State_Enabled;
+    const Colors c = colors(opt->palette, enabled);
+    const bool selected = opt->state & State_Selected;
+    const bool vertical = isVerticalTab(opt->shape);
+    QRect r = opt->rect;
+
+    // Every tab but the first steps 1 px over the previous one, so neighbors
+    // share a single line. The current tab is painted last, on top.
+    const bool first = opt->position == QStyleOptionTab::Beginning
+                    || opt->position == QStyleOptionTab::OnlyOneTab;
+    if (!first) {
+        if (vertical) {
+            r.adjust(0, -1, 0, 0);
+        } else if (opt->direction == Qt::RightToLeft) {
+            r.adjust(0, 0, 1, 0);
+        } else {
+            r.adjust(-1, 0, 0, 0);
+        }
+    }
+
+    box3D(p, r.adjusted(1, 1, -1, -1), c, selected);
+    p->save();
+    p->setPen(selected && enabled ? c.ink : (enabled ? c.dark : c.softShadow));
+    p->setBrush(Qt::NoBrush);
+    p->drawRect(r.adjusted(0, 0, -1, -1));
+    p->restore();
 }
 
 // ---------------------------------------------------------------------------- elevator scroll bar
@@ -371,6 +417,60 @@ void FreeLookStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *
         return;
     }
 
+    case PE_FrameTabWidget: {
+        // The page under the tabs: a plain raised frame.
+        const bool enabled = option->state & State_Enabled;
+        const Colors c = colors(option->palette, enabled);
+        const QRect r = option->rect;
+        painter->save();
+        painter->setPen(enabled ? c.dark : c.softShadow);
+        painter->setBrush(Qt::NoBrush);
+        painter->drawRect(r.adjusted(0, 0, -1, -1));
+        painter->restore();
+        bevel(painter, r.adjusted(1, 1, -1, -1), c.light, c.softShadow);
+        return;
+    }
+
+    case PE_FrameTabBarBase: {
+        // Document-mode tab bars (Dolphin, Konsole): an etched line between
+        // the tabs and the content.
+        const auto *base = qstyleoption_cast<const QStyleOptionTabBarBase *>(option);
+        const Colors c = colors(option->palette);
+        const QRect r = option->rect;
+        if (base && !isVerticalTab(base->shape)) {
+            const bool south = base->shape == QTabBar::RoundedSouth || base->shape == QTabBar::TriangularSouth;
+            const int y = south ? r.top() : r.bottom() - 1;
+            painter->fillRect(QRect(r.left(), y, r.width(), 1), c.dark);
+            painter->fillRect(QRect(r.left(), y + 1, r.width(), 1), c.light);
+        }
+        return;
+    }
+
+    case PE_IndicatorTabClose: {
+        // A thin black "x", without color. It gets the raised 3D box only
+        // under the mouse, and sinks while pressed, like the title bar buttons.
+        const bool enabled = option->state & State_Enabled;
+        const Colors c = colors(option->palette, enabled);
+        const QRect r = option->rect;
+        const int side = std::min(r.width(), r.height());
+        QRect box(0, 0, side, side);
+        box.moveCenter(r.center());
+        const bool pressed = option->state & State_Sunken;
+        if (enabled && (pressed || (option->state & State_MouseOver))) {
+            box3D(painter, box, c, pressed);
+        }
+        const qreal inset = std::max(3.5, side * 0.3);
+        const QRectF x = QRectF(box).adjusted(inset, inset, -inset, -inset)
+                             .translated(pressed ? 1 : 0, pressed ? 1 : 0);
+        painter->save();
+        painter->setRenderHint(QPainter::Antialiasing, true);
+        painter->setPen(QPen(enabled ? c.ink : c.softShadow, 1.4));
+        painter->drawLine(x.topLeft(), x.bottomRight());
+        painter->drawLine(x.topRight(), x.bottomLeft());
+        painter->restore();
+        return;
+    }
+
     case PE_IndicatorCheckBox: {
         // Raised little box; the check mark overflows up and to the right.
         const bool enabled = option->state & State_Enabled;
@@ -430,6 +530,12 @@ void FreeLookStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *
 void FreeLookStyle::drawControl(ControlElement element, const QStyleOption *option,
                                 QPainter *painter, const QWidget *widget) const
 {
+    if (element == CE_TabBarTabShape) {
+        if (const auto *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
+            drawTab(tab, painter);
+            return;
+        }
+    }
     if (element == CE_PushButtonBevel) {
         if (const auto *b = qstyleoption_cast<const QStyleOptionButton *>(option)) {
             if (!(b->features & QStyleOptionButton::Flat) || (b->state & (State_Sunken | State_On))) {
@@ -464,10 +570,40 @@ QRect FreeLookStyle::subControlRect(ComplexControl control, const QStyleOptionCo
     return QProxyStyle::subControlRect(control, option, subControl, widget);
 }
 
+QRect FreeLookStyle::subElementRect(SubElement element, const QStyleOption *option,
+                                    const QWidget *widget) const
+{
+    QRect r = QProxyStyle::subElementRect(element, option, widget);
+    if (element == SE_TabWidgetTabPane) {
+        // Leave a small gap between the row of tabs and the page.
+        if (const auto *tw = qstyleoption_cast<const QStyleOptionTabWidgetFrame *>(option)) {
+            switch (tw->shape) {
+            case QTabBar::RoundedNorth: case QTabBar::TriangularNorth: r.adjust(0, kTabGap, 0, 0); break;
+            case QTabBar::RoundedSouth: case QTabBar::TriangularSouth: r.adjust(0, 0, 0, -kTabGap); break;
+            case QTabBar::RoundedWest:  case QTabBar::TriangularWest:  r.adjust(kTabGap, 0, 0, 0); break;
+            case QTabBar::RoundedEast:  case QTabBar::TriangularEast:  r.adjust(0, 0, -kTabGap, 0); break;
+            }
+        }
+    }
+    return r;
+}
+
 QSize FreeLookStyle::sizeFromContents(ContentsType type, const QStyleOption *option,
                                       const QSize &size, const QWidget *widget) const
 {
     QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
+    if (type == CT_TabBarTab) {
+        // A little more air around the label, like the exclusive settings.
+        if (const auto *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
+            if (isVerticalTab(tab->shape)) {
+                s.setHeight(s.height() + 8);
+                s.setWidth(std::max(s.width(), 24));
+            } else {
+                s.setWidth(s.width() + 8);
+                s.setHeight(std::max(s.height(), 24));
+            }
+        }
+    }
     if (type == CT_PushButton) {
         // Room for the half-circle ends.
         s.setHeight(std::max(s.height(), 24));
@@ -495,6 +631,11 @@ int FreeLookStyle::pixelMetric(PixelMetric metric, const QStyleOption *option, c
         return 18;
     case PM_ExclusiveIndicatorHeight:
         return 16;
+    case PM_TabBarTabShiftHorizontal:
+    case PM_TabBarTabShiftVertical:
+        return 0;   // all tabs on the same line, like exclusive settings
+    case PM_TabBarBaseOverlap:
+        return 0;
     case PM_ButtonShiftHorizontal:
     case PM_ButtonShiftVertical:
         return 1;

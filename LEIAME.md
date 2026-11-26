@@ -14,7 +14,7 @@ de 1991, rodando num Plasma moderno.
 | Peça | O que faz | Tecnologia |
 |---|---|---|
 | **Decoração de janela** | Borda fina com contorno preto, cantos de redimensionamento em L em relevo, botão de menu com triângulo vazado, título centralizado com separador entalhado, pushpin | Aurorae do KWin, QML |
-| **Estilo dos programas** | Botões oblongos com anel no botão padrão, setas vazadas, ✓ que transborda da caixinha, opções exclusivas retangulares, campos de texto sublinhados e a barra de rolagem **elevador** do OPEN LOOK | Plugin `QStyle` do Qt 6, C++ |
+| **Estilo dos programas** | Botões oblongos com anel no botão padrão, setas vazadas, ✓ que transborda da caixinha, opções exclusivas retangulares, abas desenhadas como opções exclusivas, campos de texto sublinhados e a barra de rolagem **elevador** do OPEN LOOK | Plugin `QStyle` do Qt 6, C++ |
 | **Estilo do Plasma** | Painel, menus, dicas e plasmoides com a moldura das janelas pop-up do OPEN LOOK, botões oblongos, seleção afundada | Tema SVG do Plasma |
 | **Esquema de cores** | A paleta do OpenWindows 3: `#cccccc`, `#b7b7b7`, `#a0a0a0` e branco | Esquema de cores do KDE |
 | **Tema global** | Aplica tudo isso de uma vez, inclusive a ordem dos botões da barra de título | Pacote de tema global do Plasma |
@@ -104,7 +104,7 @@ teste da decoração QML e os geradores do estilo do Plasma) estão no
 
 - A barra de rolagem dos pop-ups do Plasma é feita de peças SVG fixas, então
   ali as setas não ficam dentro do elevador. Nos programas, o elevador é completo.
-- Abas, spinbox, slider e os menus dos programas ainda usam o visual do Fusion.
+- Spinbox, slider e os menus dos programas ainda usam o visual do Fusion.
 - Interruptores, calendário e alguns outros widgets do Plasma ainda vêm do Breeze.
 - Programas em GTK precisam de um tema GTK separado.
 

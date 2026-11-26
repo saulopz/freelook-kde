@@ -14,6 +14,7 @@ class QPainter;
 class QPainterPath;
 class QStyleOptionButton;
 class QStyleOptionSlider;
+class QStyleOptionTab;
 
 class FreeLookStyle : public QProxyStyle
 {
@@ -33,6 +34,8 @@ public:
 
     QRect subControlRect(ComplexControl control, const QStyleOptionComplex *option,
                          SubControl subControl, const QWidget *widget = nullptr) const override;
+    QRect subElementRect(SubElement element, const QStyleOption *option,
+                         const QWidget *widget = nullptr) const override;
     QSize sizeFromContents(ContentsType type, const QStyleOption *option,
                            const QSize &size, const QWidget *widget = nullptr) const override;
     int pixelMetric(PixelMetric metric, const QStyleOption *option = nullptr,
@@ -58,6 +61,7 @@ private:
     static QPainterPath oblong(const QRectF &r);
 
     void drawButton(const QStyleOptionButton *opt, QPainter *p) const;
+    void drawTab(const QStyleOptionTab *opt, QPainter *p) const;
     void drawScrollBar(const QStyleOptionSlider *opt, QPainter *p) const;
     QRect scrollBarRect(const QStyleOptionSlider *opt, SubControl sc) const;
 };
