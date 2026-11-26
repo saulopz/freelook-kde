@@ -3,7 +3,7 @@
 FreeLook was built in a single long session on 2026-11-25, in small
 versions, each one tested on a real Plasma 6.8 session before the next.
 
-## 0.9 (in progress)
+## 0.9 (2026-11-26)
 
 - GTK 3 theme with the same look as the Qt style: oblong buttons with the
   default ring, underlined text fields, numeric fields with raised boxes,
