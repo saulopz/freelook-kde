@@ -46,6 +46,10 @@ copy_dir "$SRC/plasma/look-and-feel/$LNF_ID" "$DATA/plasma/look-and-feel/$LNF_ID
 copy_dir "$SRC/plasma/wallpapers/FreeLook" "$DATA/wallpapers/FreeLook"
 copy_dir "$SRC/gtk/FreeLook" "$DATA/themes/FreeLook"
 copy_dir "$SRC/fonts/Go" "$DATA/fonts/FreeLook"
+# Cursor themes: Plasma's pointer settings look in ~/.icons (not in
+# ~/.local/share/icons, unless XCURSOR_PATH says so).
+copy_dir "$SRC/cursors/FreeLook" "$HOME/.icons/FreeLook"
+rm -rf "$DATA/icons/FreeLook"   # left there by FreeLook 0.10 development versions
 if command -v fc-cache >/dev/null 2>&1; then
     fc-cache -f "$DATA/fonts/FreeLook" >/dev/null 2>&1 || true
 fi

@@ -20,6 +20,11 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   round ones.
 - Plasma style: switches as in the GTK theme, a sunken bar that turns dark
   when on and a raised block like the drag box of the sliders.
+- Cursor theme: original pointers in the OPEN LOOK spirit, black shapes with a
+  white outline (a slim arrow, an I-beam, a stopwatch while busy, two-headed
+  arrows for resizing, a four-way arrow for moving). SVG cursors for Plasma 6
+  plus Xcursor files for X11 programs, installed in `~/.icons` (where
+  Plasma's pointer settings look); the global theme sets them.
 
 ## 0.9 (2026-11-26)
 

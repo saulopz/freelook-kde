@@ -104,6 +104,21 @@ if [ "$(read_setting kdeglobals General font | cut -d, -f1)" = "Go" ]; then
     done
 fi
 
+# Cursors: if the session uses the FreeLook cursors, go back to Breeze's.
+if [ "$(read_setting kcminputrc Mouse cursorTheme)" = "FreeLook" ]; then
+    if command -v plasma-apply-cursortheme >/dev/null 2>&1; then
+        plasma-apply-cursortheme breeze_cursors >/dev/null 2>&1 || true
+    else
+        for tool in kwriteconfig6 kwriteconfig5; do
+            if command -v "$tool" >/dev/null 2>&1; then
+                "$tool" --file kcminputrc --group Mouse --key cursorTheme --delete
+                break
+            fi
+        done
+    fi
+    echo "==> Cursors set back to Breeze"
+fi
+
 # Wallpaper: if the desktop shows the FreeLook wallpaper, go back to the default one.
 APPLETS="$CONFIG/plasma-org.kde.plasma.desktop-appletsrc"
 if [ -f "$APPLETS" ] && grep -q "wallpapers/FreeLook" "$APPLETS" 2>/dev/null; then
@@ -126,6 +141,8 @@ for path in \
     "$DATA/wallpapers/FreeLook" \
     "$DATA/themes/FreeLook" \
     "$DATA/fonts/FreeLook" \
+    "$DATA/icons/FreeLook" \
+    "$HOME/.icons/FreeLook" \
     "$HOME/.local/lib/qt6/plugins/styles/libfreelook.so" \
     "$CONFIG/plasma-workspace/env/freelook.sh"
 do
