@@ -3,7 +3,7 @@
 FreeLook was built in a single long session on 2026-11-25, in small
 versions, each one tested on a real Plasma 6.8 session before the next.
 
-## 0.8 (in progress)
+## 0.8 (2026-11-26)
 
 - Tabs drawn as an OPEN LOOK exclusive setting: raised rectangles side by
   side sharing a single line, the current one sunken with a black outline,
