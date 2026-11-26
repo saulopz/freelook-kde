@@ -382,6 +382,18 @@ int spinButtonSide(const QRect &r)
 // Kirigami (QML) hands spin boxes and editable combo boxes the "View" palette,
 // where Button is white. Raised boxes must keep the window gray, so in that
 // case take the application palette, as the scroll bar elevator does.
+// Plasma hands its own menus (desktop context menu, panel menus) a palette
+// whose Window is white. Menus are raised gray panels, so in that case take
+// the application palette too.
+QPalette menuPalette(const QPalette &palette)
+{
+    if (palette.color(QPalette::Window).lightness() > 245
+        && QApplication::palette().color(QPalette::Window).lightness() <= 245) {
+        return QApplication::palette();
+    }
+    return palette;
+}
+
 QPalette controlPalette(const QPalette &palette)
 {
     if (palette.color(QPalette::Button).lightness() > 245
@@ -541,7 +553,8 @@ void FreeLookStyle::drawComboBox(const QStyleOptionComboBox *opt, QPainter *p) c
 void FreeLookStyle::drawMenuItem(const QStyleOptionMenuItem *opt, QPainter *p, const QWidget *w) const
 {
     const bool enabled = opt->state & State_Enabled;
-    const Colors c = colors(controlPalette(opt->palette), enabled, QPalette::Window);
+    const QPalette palette = menuPalette(controlPalette(opt->palette));
+    const Colors c = colors(palette, enabled, QPalette::Window);
 
     if (opt->menuItemType == QStyleOptionMenuItem::Separator && opt->text.isEmpty()) {
         const int y = opt->rect.center().y();
@@ -554,6 +567,7 @@ void FreeLookStyle::drawMenuItem(const QStyleOptionMenuItem *opt, QPainter *p, c
     const bool selected = (opt->state & State_Selected) && enabled
         && opt->menuItemType != QStyleOptionMenuItem::Separator;
     QStyleOptionMenuItem copy(*opt);
+    copy.palette = palette;
     if (selected) {
         box3D(p, opt->rect.adjusted(2, 0, -2, 0), c, true);
         copy.state &= ~State_Selected;
@@ -740,12 +754,12 @@ void FreeLookStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *
         return;
 
     case PE_PanelMenu:
-        painter->fillRect(option->rect, controlPalette(option->palette).color(QPalette::Window));
+        painter->fillRect(option->rect, menuPalette(controlPalette(option->palette)).color(QPalette::Window));
         return;
 
     case PE_FrameMenu: {
         // A raised panel with a dark outline.
-        const Colors c = colors(controlPalette(option->palette), true, QPalette::Window);
+        const Colors c = colors(menuPalette(controlPalette(option->palette)), true, QPalette::Window);
         const QRect r = option->rect;
         painter->save();
         painter->setPen(c.dark);

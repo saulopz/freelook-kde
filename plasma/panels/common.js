@@ -1,6 +1,25 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // FreeLook experimental panels: shared helpers (prepended to each layout by
 // tools/try-panel.sh before it is sent to Plasma's scripting console).
+//
+// tools/try-panel.sh also prepends `var savedWidgets = {...}`: the settings of
+// the clock and weather widgets of your own panels, so they come back as they were.
+if (typeof savedWidgets === "undefined") {
+    var savedWidgets = {};
+}
+
+// Adds a widget and, if it was on your own panels, its settings.
+function addSaved(panel, plugin) {
+    var w = panel.addWidget(plugin);
+    var groups = savedWidgets[plugin] || {};
+    for (var group in groups) {
+        w.currentConfigGroup = group.split("/");
+        for (var key in groups[group]) {
+            w.writeConfig(key, groups[group][key]);
+        }
+    }
+    return w;
+}
 
 // Removes every panel; the desktop and its widgets stay.
 function removePanels() {
@@ -48,5 +67,8 @@ function addRightSide(panel, withPager) {
         panel.addWidget("org.kde.plasma.pager");
     }
     panel.addWidget("org.kde.plasma.systemtray");
-    panel.addWidget("org.kde.plasma.digitalclock");
+    addSaved(panel, "org.kde.plasma.digitalclock");
+    if (savedWidgets["org.kde.plasma.weather"]) {
+        addSaved(panel, "org.kde.plasma.weather");
+    }
 }

@@ -122,7 +122,13 @@ if [ ! -d "$BACKUPS/original" ]; then
 fi
 
 echo "==> Switching to the '$1' layout"
-script=$(cat "$LAYOUTS/common.js" "$LAYOUT")
+# The clock and weather settings come from your own (original) panels.
+saved=""
+if command -v python3 >/dev/null 2>&1 && [ -f "$BACKUPS/original/plasma-org.kde.plasma.desktop-appletsrc" ]; then
+    saved=$(python3 "$SRC/tools/panel_saved_widgets.py" \
+        "$BACKUPS/original/plasma-org.kde.plasma.desktop-appletsrc" 2>/dev/null || true)
+fi
+script=$(printf '%s\n' "$saved"; cat "$LAYOUTS/common.js" "$LAYOUT")
 evaluate_script "$script"
 
 echo "    To go back: tools/try-panel.sh --restore"

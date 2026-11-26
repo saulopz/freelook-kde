@@ -200,6 +200,19 @@ static int testElevator()
         const QColor fill = img.pixelColor(up.left() + 3, up.bottom() - 3);
         check("spin buttons stay gray with a white palette", fill.lightness() < 245);
     }
+    // Menus handed Plasma's white palette stay gray.
+    {
+        QImage img(40, 20, QImage::Format_ARGB32);
+        img.fill(Qt::transparent);
+        QPainter p(&img);
+        QStyleOption o;
+        o.palette = QApplication::palette();
+        o.palette.setColor(QPalette::Window, Qt::white);
+        o.rect = img.rect();
+        QApplication::style()->drawPrimitive(QStyle::PE_PanelMenu, &o, &p, nullptr);
+        p.end();
+        check("menus stay gray with a white palette", img.pixelColor(20, 10).lightness() < 245);
+    }
     // Slider: grab the drag box and pull it to the far end.
     {
         QSlider sl(Qt::Horizontal);

@@ -18,10 +18,13 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   `tools/try-panel.sh`): a "Workspace ▽" menu (Kicker, opening on the
   favorites), a "Janelas ▽" window menu or task buttons, at the top, on the
   right, or both. Backs up the current panels and restores them.
+  The clock and weather widgets keep the settings of your own panels.
 - Plasma style: menu bar entries (global menu, window list) drawn as OPEN
   LOOK menu buttons instead of Breeze's highlight, which came out black.
 - `install.sh --no-style` no longer drops the Qt plugin path from the
   session file when the style was installed before.
+- Application style: Plasma's own menus (desktop context menu, panel menus)
+  are gray too; Plasma hands them a palette with a white window color.
 - GIMP 3 (with its "System" theme): the icon tabs of the docks get room
   again.
 
