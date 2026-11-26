@@ -128,7 +128,12 @@ if command -v python3 >/dev/null 2>&1 && [ -f "$BACKUPS/original/plasma-org.kde.
     saved=$(python3 "$SRC/tools/panel_saved_widgets.py" \
         "$BACKUPS/original/plasma-org.kde.plasma.desktop-appletsrc" 2>/dev/null || true)
 fi
-script=$(printf '%s\n' "$saved"; cat "$LAYOUTS/common.js" "$LAYOUT")
+# The picture for the "Workspace ▽" button.
+DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/freelook"
+mkdir -p "$DATA_DIR"
+cp "$LAYOUTS/workspace-button.svg" "$DATA_DIR/workspace-button.svg"
+button="var workspaceButton = \"$DATA_DIR/workspace-button.svg\";"
+script=$(printf '%s\n%s\n' "$saved" "$button"; cat "$LAYOUTS/common.js" "$LAYOUT")
 evaluate_script "$script"
 
 echo "    To go back: tools/try-panel.sh --restore"

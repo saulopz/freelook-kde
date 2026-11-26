@@ -37,14 +37,17 @@ function makePanel(location, thickness) {
 }
 
 // The "Workspace ▽" menu: Kicker (the cascading application menu), which
-// opens on the favorites, labelled like the OPEN LOOK Workspace menu.
+// opens on the favorites. Kicker in Plasma 6.8 has no text label, so the
+// button is a picture of an OPEN LOOK menu button (workspace-button.svg,
+// copied by tools/try-panel.sh, which sets `workspaceButton` to its path).
 function addWorkspaceMenu(panel, withLabel) {
     var w = panel.addWidget("org.kde.plasma.kicker");
     w.currentConfigGroup = ["General"];
     w.writeConfig("showRecentApps", false);
     w.writeConfig("showRecentDocs", false);
-    if (withLabel) {
-        w.writeConfig("menuLabel", "Workspace");
+    if (withLabel && typeof workspaceButton !== "undefined") {
+        w.writeConfig("useCustomButtonImage", true);
+        w.writeConfig("customButtonImage", workspaceButton);
     }
     return w;
 }

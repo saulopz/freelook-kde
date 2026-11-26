@@ -19,6 +19,8 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   favorites), a "Janelas ▽" window menu or task buttons, at the top, on the
   right, or both. Backs up the current panels and restores them.
   The clock and weather widgets keep the settings of your own panels.
+  Kicker in Plasma 6.8 has no text label, so its button is a picture of an
+  OPEN LOOK "Workspace ▽" menu button.
 - Plasma style: menu bar entries (global menu, window list) drawn as OPEN
   LOOK menu buttons instead of Breeze's highlight, which came out black.
 - `install.sh --no-style` no longer drops the Qt plugin path from the

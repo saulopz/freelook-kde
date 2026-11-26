@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later
+     FreeLook "Workspace ▽" menu button, used as the Kicker button image in the
+     experimental panels (Kicker in Plasma 6.8 has no text label yet).
+     Same drawing as an OPEN LOOK menu button: oblong, light upper half,
+     soft shadow lower half, hollow triangle. Kicker scales the picture to the
+     icon height, so the text fills most of it. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="110" height="20" viewBox="0 0 110 20">
+  <rect x="0.5" y="0.5" width="109" height="19" rx="9.5" ry="9.5" fill="#cccccc" stroke="#7f7f7f"/>
+  <path d="M 1.5 10 A 8.5 8.5 0 0 1 10 1.5 H 100 A 8.5 8.5 0 0 1 108.5 10" fill="none" stroke="#ffffff"/>
+  <path d="M 1.5 10 A 8.5 8.5 0 0 0 10 18.5 H 100 A 8.5 8.5 0 0 0 108.5 10" fill="none" stroke="#a0a0a0"/>
+  <text x="9" y="14.5" font-family="sans-serif" font-size="13.5" fill="#000000">Workspace</text>
+  <polygon points="89.5,8 98.5,8 94,13" fill="#cccccc" stroke="#000000" stroke-linejoin="miter"/>
+</svg>
