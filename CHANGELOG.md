@@ -64,12 +64,17 @@ versions, each one tested on a real Plasma 6.8 session before the next.
 
 Known issues (to investigate):
 
-- Switching between FreeLook and FreeLook Night with programs open: with the
-  FreeLook application style, the menu bar of Konsole (and parts of Dolphin
-  and System Settings) keeps the old colors, while the rest of the program
-  switches; with Breeze it switches. KCalc switches with both styles. The
-  title bars of some windows also keep the old colors, with Breeze too.
-  Reopening the program fixes it.
+- Switching between FreeLook and FreeLook Night with windows open, the title
+  bar of some windows keeps the old colors. It is erratic: the same program
+  switches one time and not the next, and every window follows the system
+  colors (`kdeglobals`). It looks like a race in Aurorae, which rereads the
+  title bar colors from a cached copy of `kdeglobals` when a window's palette
+  changes, instead of using the new palette; with the Breeze decoration
+  everything switches. Choosing another window decoration and then FreeLook
+  again fixes it, and so does reopening the window.
+- An earlier report of Konsole's menu bar keeping the old colors with the
+  FreeLook application style could not be reproduced after rebuilding the
+  style.
 
 ## 0.9 (2026-11-26)
 
