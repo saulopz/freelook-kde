@@ -119,6 +119,19 @@ if [ "$(read_setting kcminputrc Mouse cursorTheme)" = "FreeLook" ]; then
     echo "==> Cursors set back to Breeze"
 fi
 
+# Splash screen: if it is FreeLook's, go back to Breeze's.
+case "$(read_setting ksplashrc KSplash Theme)" in
+    "$LNF_ID"|org.freelook.night.desktop)
+        for tool in kwriteconfig6 kwriteconfig5; do
+            if command -v "$tool" >/dev/null 2>&1; then
+                "$tool" --file ksplashrc --group KSplash --key Theme org.kde.breeze.desktop
+                break
+            fi
+        done
+        echo "==> Splash screen set back to Breeze"
+        ;;
+esac
+
 # Wallpaper: if the desktop shows the FreeLook wallpaper, go back to the default one.
 APPLETS="$CONFIG/plasma-org.kde.plasma.desktop-appletsrc"
 if [ -f "$APPLETS" ] && grep -q "wallpapers/FreeLook" "$APPLETS" 2>/dev/null; then

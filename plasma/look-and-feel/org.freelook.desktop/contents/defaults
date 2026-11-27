@@ -27,3 +27,6 @@ theme=kwin4_decoration_qml_freelook
 ButtonsOnLeft=I
 ButtonsOnRight=FX
 BorderSize=Normal
+
+[ksplashrc][KSplash]
+Theme=org.freelook.desktop

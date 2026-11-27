@@ -51,6 +51,12 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   takes `--night` to show the style with the FreeLook Night palette.
 - FreeLook Night global theme: the preview is a real screenshot of the night
   desktop (Dolphin, KCalc and Konsole with FreeLook Amber).
+- Splash screen: an OPEN LOOK notice window over the wallpaper, titled
+  FreeLook, with a stopwatch (the OPEN LOOK "please wait" sign) whose long
+  hand turns while the short one marks the stage, the name of the current
+  stage (in English or Portuguese) and a progress bar. One `Splash.qml`
+  follows the color scheme, so it serves FreeLook and FreeLook Night;
+  `uninstall.sh` sets the Breeze splash back.
 - Konsole: the FreeLook Amber color scheme, in the spirit of the amber
   phosphor terminals. To stay retro without becoming flat, its colors are
   all amber, from deep orange to cream, and tell things apart by brightness,

@@ -38,6 +38,7 @@ ele me levou.
 | **FreeLook Âmbar** | Um esquema de cores para o Konsole como um terminal de fósforo âmbar: os detalhes se distinguem pelo brilho, do laranja forte ao creme. Escolha no Konsole em *Configurações > Editar o perfil atual > Aparência* | Esquema de cores do Konsole |
 | **Tema global** | Aplica tudo isso de uma vez, inclusive a ordem dos botões da barra de título | Pacote de tema global do Plasma |
 | **Papel de parede** | O azul do OpenWindows, `#40a0c0` | Pacote de papel de parede |
+| **Tela de abertura** | Enquanto a sessão inicia: uma janela de aviso do FreeLook sobre o papel de parede, com um cronômetro de ponteiro girando, a etapa atual e uma barra de progresso. Acompanha o dia e a noite | Parte dos temas globais |
 
 ### A barra de rolagem elevador
 

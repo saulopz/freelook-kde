@@ -37,6 +37,7 @@ FreeLook is a way back to that desktop, on the free system it led me to.
 | **FreeLook Amber** | A Konsole color scheme like an amber phosphor terminal: the details differ by brightness, from deep orange to cream. Choose it in Konsole under *Settings > Edit Current Profile > Appearance* | Konsole color scheme |
 | **Global theme** | Applies all of the above in one click, including the title bar button layout | Plasma look-and-feel package |
 | **Wallpaper** | The OpenWindows blue, `#40a0c0` | Plasma wallpaper package |
+| **Splash screen** | While the session starts: a FreeLook notice window over the wallpaper, with a stopwatch whose hand turns, the current stage and a progress bar. Follows the day and the night | Part of the global themes |
 
 ![Window decoration](docs/screenshots/decoration.png)
 
@@ -149,6 +150,14 @@ QT_PLUGIN_PATH=style/build/stage/lib/qt6/plugins QT_QPA_PLATFORM=offscreen \
 ```
 
 Add `--night` to see the style with the FreeLook Night palette.
+
+**Splash screen.** One `Splash.qml`, in the FreeLook global theme, for the
+day and the night (`install.sh` copies it into FreeLook Night). To see it
+without logging out, after `./install.sh`:
+
+```sh
+ksplashqml --test --window ~/.local/share/plasma/look-and-feel/org.freelook.desktop
+```
 
 **Window decoration.** `tools/qml-test` mimics the C++ side of Aurorae
 (using Aurorae's own QML files) so the decoration runs outside KWin:

@@ -52,6 +52,10 @@ done
 for lnf in "$LNF_ID" org.freelook.night.desktop; do
     copy_dir "$SRC/plasma/look-and-feel/$lnf" "$DATA/plasma/look-and-feel/$lnf"
 done
+# One splash screen for day and night (it follows the color scheme): the
+# night global theme gets a copy of the day one.
+cp -r "$SRC/plasma/look-and-feel/$LNF_ID/contents/splash" \
+    "$DATA/plasma/look-and-feel/org.freelook.night.desktop/contents/splash"
 copy_dir "$SRC/plasma/wallpapers/FreeLook" "$DATA/wallpapers/FreeLook"
 copy_dir "$SRC/gtk/FreeLook" "$DATA/themes/FreeLook"
 copy_dir "$SRC/fonts/Go" "$DATA/fonts/FreeLook"
