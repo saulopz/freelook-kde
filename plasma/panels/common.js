@@ -52,6 +52,16 @@ function addWorkspaceMenu(panel, withLabel) {
     return w;
 }
 
+// The same menu with Kickoff, the default launcher: it opens on the favorites
+// as a list (no cascading submenus), but its text label exists in Plasma 6.8
+// and follows the color scheme, by day and by night.
+function addWorkspaceKickoff(panel) {
+    var w = panel.addWidget("org.kde.plasma.kickoff");
+    w.currentConfigGroup = ["General"];
+    w.writeConfig("menuLabel", "Workspace");
+    return w;
+}
+
 // "Janelas ▽": one button with a menu of the open windows.
 function addWindowMenu(panel) {
     return panel.addWidget("org.kde.plasma.windowlist");
