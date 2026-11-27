@@ -45,6 +45,8 @@ FreeLook is a way back to that desktop, on the free system it led me to.
 
 ![GIMP 3 with the GTK 3 theme (GIMP's "System" theme)](docs/screenshots/gtk3.png)
 
+![FreeLook Night: Dolphin, KCalc and Konsole with FreeLook Amber](docs/screenshots/night.png)
+
 GIMP 3 brings its own dark theme; choose *Edit > Preferences > Interface >
 Theme > System* to let it use FreeLook.
 

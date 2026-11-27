@@ -60,6 +60,8 @@ janela. O pushpin à direita mantém a janela acima das outras.
 
 ![GIMP 3 com o tema GTK 3 (tema "System" do GIMP)](docs/screenshots/gtk3.png)
 
+![FreeLook Noturno: Dolphin, KCalc e Konsole com o FreeLook Âmbar](docs/screenshots/night.png)
+
 O GIMP 3 vem com um tema escuro próprio; escolha *Editar → Preferências →
 Interface → Tema → System* para ele usar o FreeLook.
 
