@@ -215,7 +215,7 @@ files that are part of the project.
   title bar of some windows may keep the old colors (it seems to be a timing
   problem in KWin's QML decoration engine). Choosing another window
   decoration and then FreeLook again fixes it, and so does reopening the
-  window. GTK programs, except
+  window. See [issue #1](https://github.com/saulopz/freelook-kde/issues/1); hints are welcome. GTK programs, except
   Firefox, only switch when reopened, since GTK 3 reads the dark preference
   when it starts.
 - GTK 4 and libadwaita programs (most of the newer GNOME apps) keep their own

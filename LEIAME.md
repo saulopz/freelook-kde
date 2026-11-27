@@ -152,7 +152,7 @@ teste da decoração QML, os geradores do estilo do Plasma e a galeria do tema G
   de título de algumas janelas pode ficar com as cores antigas (parece um
   problema de tempo no motor de decorações QML do KWin). Escolher outra
   decoração de janela e depois o FreeLook de novo resolve, e reabrir a janela
-  também. Os programas em GTK, menos
+  também. Veja a [issue #1](https://github.com/saulopz/freelook-kde/issues/1); dicas são bem-vindas. Os programas em GTK, menos
   o Firefox, só trocam quando reabertos, porque o GTK 3 lê a preferência pelo
   escuro ao iniciar.
 - Programas em GTK 4 e libadwaita (a maioria dos aplicativos novos do GNOME)

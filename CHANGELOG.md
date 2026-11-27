@@ -77,7 +77,8 @@ Known issues (to investigate):
   title bar colors from a cached copy of `kdeglobals` when a window's palette
   changes, instead of using the new palette; with the Breeze decoration
   everything switches. Choosing another window decoration and then FreeLook
-  again fixes it, and so does reopening the window.
+  again fixes it, and so does reopening the window. Tracked in
+  [issue #1](https://github.com/saulopz/freelook-kde/issues/1).
 - An earlier report of Konsole's menu bar keeping the old colors with the
   FreeLook application style could not be reproduced after rebuilding the
   style.
