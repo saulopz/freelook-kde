@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="140" height="40" viewBox="0 0 140 40">
+ <style type="text/css" id="current-color-scheme">
+  .ColorScheme-Background { color:#423b33; stop-color:#423b33; }
+  .ColorScheme-Text { color:#eee0c8; stop-color:#eee0c8; }
+ </style>
+ <g id="background-vertical-topleft">
+  <rect x="0" y="0" width="1" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-vertical-top">
+  <rect x="1" y="0" width="14" height="1" fill="#000000" fill-opacity="0"/>
+  <rect x="7" y="0" width="3" height="1" fill="#29251f"/>
+ </g>
+ <g id="background-vertical-topright">
+  <rect x="15" y="0" width="1" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-vertical-left">
+  <rect x="0" y="1" width="1" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-vertical-center">
+  <rect x="1" y="1" width="14" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="7" y="1" width="3" height="20" fill="#29251f"/>
+ </g>
+ <g id="background-vertical-right">
+  <rect x="15" y="1" width="1" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-vertical-bottomleft">
+  <rect x="0" y="21" width="1" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-vertical-bottom">
+  <rect x="1" y="21" width="14" height="1" fill="#000000" fill-opacity="0"/>
+  <rect x="7" y="21" width="3" height="1" fill="#29251f"/>
+ </g>
+ <g id="background-vertical-bottomright">
+  <rect x="15" y="21" width="1" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-horizontal-topleft">
+  <rect x="30" y="0" width="1" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-horizontal-top">
+  <rect x="31" y="0" width="20" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-horizontal-topright">
+  <rect x="51" y="0" width="1" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-horizontal-left">
+  <rect x="30" y="1" width="1" height="14" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="7" width="1" height="3" fill="#29251f"/>
+ </g>
+ <g id="background-horizontal-center">
+  <rect x="31" y="1" width="20" height="14" fill="#000000" fill-opacity="0"/>
+  <rect x="31" y="7" width="20" height="3" fill="#29251f"/>
+ </g>
+ <g id="background-horizontal-right">
+  <rect x="51" y="1" width="1" height="14" fill="#000000" fill-opacity="0"/>
+  <rect x="51" y="7" width="1" height="3" fill="#29251f"/>
+ </g>
+ <g id="background-horizontal-bottomleft">
+  <rect x="30" y="15" width="1" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-horizontal-bottom">
+  <rect x="31" y="15" width="20" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="background-horizontal-bottomright">
+  <rect x="51" y="15" width="1" height="1" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="slider-topleft">
+  <rect x="60" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="0" width="3" height="3" fill="#1a1814"/>
+  <rect x="61" y="1" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="61" y="1" width="2" height="1" fill="#63594d"/>
+  <rect x="61" y="1" width="1" height="2" fill="#63594d"/>
+ </g>
+ <g id="slider-top">
+  <rect x="63" y="0" width="10" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="63" y="0" width="10" height="3" fill="#1a1814"/>
+  <rect x="63" y="1" width="10" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="63" y="1" width="10" height="1" fill="#63594d"/>
+ </g>
+ <g id="slider-topright">
+  <rect x="73" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="73" y="0" width="3" height="3" fill="#1a1814"/>
+  <rect x="73" y="1" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="73" y="1" width="2" height="1" fill="#63594d"/>
+  <rect x="74" y="1" width="1" height="2" fill="#29251f"/>
+ </g>
+ <g id="slider-left">
+  <rect x="60" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="3" width="3" height="20" fill="#1a1814"/>
+  <rect x="61" y="3" width="2" height="20" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="61" y="3" width="1" height="20" fill="#63594d"/>
+ </g>
+ <g id="slider-center">
+  <rect x="63" y="3" width="10" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="63" y="3" width="10" height="20" fill="#1a1814"/>
+  <rect x="63" y="3" width="10" height="20" class="ColorScheme-Background" fill="currentColor"/>
+ </g>
+ <g id="slider-right">
+  <rect x="73" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="73" y="3" width="3" height="20" fill="#1a1814"/>
+  <rect x="73" y="3" width="2" height="20" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="74" y="3" width="1" height="20" fill="#29251f"/>
+ </g>
+ <g id="slider-bottomleft">
+  <rect x="60" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="23" width="3" height="3" fill="#1a1814"/>
+  <rect x="61" y="23" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="61" y="23" width="1" height="2" fill="#63594d"/>
+  <rect x="61" y="24" width="2" height="1" fill="#29251f"/>
+ </g>
+ <g id="slider-bottom">
+  <rect x="63" y="23" width="10" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="63" y="23" width="10" height="3" fill="#1a1814"/>
+  <rect x="63" y="23" width="10" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="63" y="24" width="10" height="1" fill="#29251f"/>
+ </g>
+ <g id="slider-bottomright">
+  <rect x="73" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="73" y="23" width="3" height="3" fill="#1a1814"/>
+  <rect x="73" y="23" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="73" y="24" width="2" height="1" fill="#29251f"/>
+  <rect x="74" y="23" width="1" height="2" fill="#29251f"/>
+ </g>
+ <g id="mouseover-slider-topleft">
+  <rect x="90" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="0" width="3" height="3" fill="#1a1814"/>
+  <rect x="91" y="1" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="91" y="1" width="2" height="1" fill="#63594d"/>
+  <rect x="91" y="1" width="1" height="2" fill="#63594d"/>
+ </g>
+ <g id="mouseover-slider-top">
+  <rect x="93" y="0" width="10" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="93" y="0" width="10" height="3" fill="#1a1814"/>
+  <rect x="93" y="1" width="10" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="93" y="1" width="10" height="1" fill="#63594d"/>
+ </g>
+ <g id="mouseover-slider-topright">
+  <rect x="103" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="103" y="0" width="3" height="3" fill="#1a1814"/>
+  <rect x="103" y="1" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="103" y="1" width="2" height="1" fill="#63594d"/>
+  <rect x="104" y="1" width="1" height="2" fill="#29251f"/>
+ </g>
+ <g id="mouseover-slider-left">
+  <rect x="90" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="3" width="3" height="20" fill="#1a1814"/>
+  <rect x="91" y="3" width="2" height="20" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="91" y="3" width="1" height="20" fill="#63594d"/>
+ </g>
+ <g id="mouseover-slider-center">
+  <rect x="93" y="3" width="10" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="93" y="3" width="10" height="20" fill="#1a1814"/>
+  <rect x="93" y="3" width="10" height="20" class="ColorScheme-Background" fill="currentColor"/>
+ </g>
+ <g id="mouseover-slider-right">
+  <rect x="103" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="103" y="3" width="3" height="20" fill="#1a1814"/>
+  <rect x="103" y="3" width="2" height="20" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="104" y="3" width="1" height="20" fill="#29251f"/>
+ </g>
+ <g id="mouseover-slider-bottomleft">
+  <rect x="90" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="23" width="3" height="3" fill="#1a1814"/>
+  <rect x="91" y="23" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="91" y="23" width="1" height="2" fill="#63594d"/>
+  <rect x="91" y="24" width="2" height="1" fill="#29251f"/>
+ </g>
+ <g id="mouseover-slider-bottom">
+  <rect x="93" y="23" width="10" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="93" y="23" width="10" height="3" fill="#1a1814"/>
+  <rect x="93" y="23" width="10" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="93" y="24" width="10" height="1" fill="#29251f"/>
+ </g>
+ <g id="mouseover-slider-bottomright">
+  <rect x="103" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="103" y="23" width="3" height="3" fill="#1a1814"/>
+  <rect x="103" y="23" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="103" y="24" width="2" height="1" fill="#29251f"/>
+  <rect x="104" y="23" width="1" height="2" fill="#29251f"/>
+ </g>
+  <rect id="hint-scrollbar-size" x="120" y="0" width="16" height="16" fill-opacity="0"/>
+</svg>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="132" height="14" viewBox="0 0 132 14">
+ <style type="text/css" id="current-color-scheme">
+  .ColorScheme-Background { color:#423b33; stop-color:#423b33; }
+  .ColorScheme-Text { color:#eee0c8; stop-color:#eee0c8; }
+ </style>
+ <g id="normal">
+  <rect x="0" y="0" width="18" height="14" fill="#000000" fill-opacity="0"/>
+  <rect x="1" y="1" width="16" height="12" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="0" y="0" width="18" height="1" fill="#1a1814"/>
+  <rect x="0" y="13" width="18" height="1" fill="#1a1814"/>
+  <rect x="0" y="0" width="1" height="14" fill="#1a1814"/>
+  <rect x="17" y="0" width="1" height="14" fill="#1a1814"/>
+  <rect x="1" y="1" width="16" height="1" fill="#63594d"/>
+  <rect x="1" y="1" width="1" height="12" fill="#63594d"/>
+  <rect x="1" y="12" width="16" height="1" fill="#1a1814"/>
+  <rect x="16" y="1" width="1" height="12" fill="#1a1814"/>
+ </g>
+ <g id="checked">
+  <rect x="22" y="0" width="18" height="14" fill="#000000" fill-opacity="0"/>
+  <rect x="23" y="1" width="16" height="12" fill="#36302a"/>
+  <rect x="22" y="0" width="18" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="22" y="13" width="18" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="22" y="0" width="1" height="14" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="39" y="0" width="1" height="14" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="23" y="1" width="16" height="1" fill="#1a1814"/>
+  <rect x="23" y="1" width="1" height="12" fill="#1a1814"/>
+  <rect x="23" y="12" width="16" height="1" fill="#63594d"/>
+  <rect x="38" y="1" width="1" height="12" fill="#63594d"/>
+  <rect x="27" y="5" width="8" height="4" class="ColorScheme-Text" fill="currentColor"/>
+ </g>
+ <g id="shadow">
+  <rect x="44" y="0" width="18" height="14" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="focus">
+  <rect x="66" y="0" width="18" height="14" fill="#000000" fill-opacity="0"/>
+  <rect x="68" y="2" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="68" y="11" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="70" y="2" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="70" y="11" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="72" y="2" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="72" y="11" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="74" y="2" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="74" y="11" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="76" y="2" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="76" y="11" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="78" y="2" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="78" y="11" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="80" y="2" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="80" y="11" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="68" y="4" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="81" y="4" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="68" y="6" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="81" y="6" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="68" y="8" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="81" y="8" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="68" y="10" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="81" y="10" width="1" height="1" class="ColorScheme-Text" fill="currentColor"/>
+ </g>
+ <g id="hover">
+  <rect x="88" y="0" width="18" height="14" fill="#000000" fill-opacity="0"/>
+ </g>
+  <rect id="hint-size" x="110" y="0" width="18" height="14" fill="#000000" fill-opacity="0"/>
+</svg>

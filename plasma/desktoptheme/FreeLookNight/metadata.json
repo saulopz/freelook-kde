@@ -1,0 +1,22 @@
+{
+    "KPackageStructure": "Plasma/Theme",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "saulo.popov.zambiasi@ufsc.br",
+                "Name": "Saulo Popov Zambiasi"
+            }
+        ],
+        "Category": "",
+        "Description": "Night variant of the FreeLook Plasma style (amber)",
+        "Description[pt_BR]": "Variante noturna do estilo do Plasma FreeLook (âmbar)",
+        "EnabledByDefault": true,
+        "Id": "FreeLookNight",
+        "License": "GPL-3.0-or-later",
+        "Name": "FreeLook Night",
+        "Version": "0.7",
+        "Website": "",
+        "Name[pt_BR]": "FreeLook Noturno"
+    },
+    "X-Plasma-API": "5.0"
+}

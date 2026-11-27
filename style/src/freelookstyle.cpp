@@ -51,7 +51,9 @@ FreeLookStyle::Colors FreeLookStyle::colors(const QPalette &pal, bool enabled, Q
     c.pressed = c.base.darker(111);             // #b7b7b7
     c.softShadow = c.base.darker(127);          // #a0a0a0
     c.dark = c.base.darker(160);                // #7f7f7f
-    c.light = QColor(255, 255, 255);
+    // White relief on the light palette; on a dark one (FreeLook Night) a
+    // lighter shade of the base, so the relief stays visible without glaring.
+    c.light = c.base.lightness() < 128 ? c.base.lighter(150) : QColor(255, 255, 255);
     c.ink = enabled ? pal.color(QPalette::ButtonText)
                     : pal.color(QPalette::Disabled, QPalette::ButtonText);
     return c;

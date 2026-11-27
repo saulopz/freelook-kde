@@ -145,4 +145,11 @@ DecorationButton {
     onEnabledChanged: canvas.requestPaint()
     onMaximizedChanged: canvas.requestPaint()
     onSizeChanged: canvas.requestPaint()
+    // Redraw when the colors change (switching between FreeLook and FreeLook
+    // Night while windows are open).
+    onBaseChanged: canvas.requestPaint()
+    onLightChanged: canvas.requestPaint()
+    onDarkChanged: canvas.requestPaint()
+    onInkChanged: canvas.requestPaint()
+    onInkDisabledChanged: canvas.requestPaint()
 }

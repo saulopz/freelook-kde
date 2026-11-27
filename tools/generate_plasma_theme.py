@@ -23,6 +23,7 @@ SOFT_SHADOW = "#a0a0a0"
 DARK = "#808080"
 PRESSED = "#b7b7b7"
 BG, TEXT, NONE = "BG", "TEXT", "NONE"     # symbolic colors
+OUTLINE = TEXT    # outline of windows and panels: the text color (black by day)
 
 STYLE = """ <style type="text/css" id="current-color-scheme">
   .ColorScheme-Background { color:#cccccc; stop-color:#cccccc; }
@@ -107,7 +108,7 @@ def hints(prefix, ox, oy, margins):
 
 def openlook_window(W, H):
     """OPEN LOOK pop-up window: black outline and a 1 px relief."""
-    return ([(0, 0, W, H, TEXT), (1, 1, W - 2, H - 2, BG)]
+    return ([(0, 0, W, H, OUTLINE), (1, 1, W - 2, H - 2, BG)]
             + bevel(1, 1, W - 2, H - 2, LIGHT, DARK))
 
 
@@ -452,17 +453,39 @@ FILES = {
 }
 
 
-def main(target):
+# FreeLook Night: the same drawings with the relief of the amber night scheme.
+# The backgrounds already follow the color scheme (ColorScheme-Background);
+# only the relief lines are fixed colors, and white glares on a dark base.
+NIGHT = {
+    "LIGHT": "#63594d", "SOFT_SHADOW": "#29251f", "DARK": "#1a1814", "PRESSED": "#36302a",
+    "OUTLINE": "#000000",   # as in OPEN LOOK: always black, not the cream text
+    "STYLE": STYLE.replace("#cccccc", "#423b33").replace("#000000", "#eee0c8"),
+}
+
+
+def write_theme(target, metadata):
     for path, generate in FILES.items():
         destination = os.path.join(target, path)
         os.makedirs(os.path.dirname(destination), exist_ok=True)
         with open(destination, "w") as f:
             f.write(generate())
     with open(os.path.join(target, "metadata.json"), "w") as f:
-        json.dump(METADATA, f, indent=4, ensure_ascii=False)
+        json.dump(metadata, f, indent=4, ensure_ascii=False)
         f.write("\n")
     print("generated in", target)
 
 
+def main(base="plasma/desktoptheme"):
+    write_theme(os.path.join(base, "FreeLook"), METADATA)
+    globals().update(NIGHT)
+    night = json.loads(json.dumps(METADATA))
+    night["KPlugin"].update({
+        "Id": "FreeLookNight", "Name": "FreeLook Night", "Name[pt_BR]": "FreeLook Noturno",
+        "Description": "Night variant of the FreeLook Plasma style (amber)",
+        "Description[pt_BR]": "Variante noturna do estilo do Plasma FreeLook (âmbar)",
+    })
+    write_theme(os.path.join(base, "FreeLookNight"), night)
+
+
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "plasma/desktoptheme/FreeLook")
+    main(sys.argv[1] if len(sys.argv) > 1 else "plasma/desktoptheme")

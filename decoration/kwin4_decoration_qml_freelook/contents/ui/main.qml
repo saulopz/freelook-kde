@@ -17,7 +17,11 @@ Decoration {
     // ---------------------------------------------------------------- palette
     // The base color comes from the color scheme (Colors -> title bar).
     property color base: options.titleBarColor
-    property color light: "#ffffff"
+    // Light relief: white on the light palette; on a dark one (FreeLook Night)
+    // a lighter shade of the base, so the relief stays visible without glaring.
+    property color light: base.hslLightness < 0.5 ? Qt.lighter(base, 1.5) : "#ffffff"
+    // Glyphs on the buttons follow the title text color (black, or cream at night).
+    property color ink: base.hslLightness < 0.5 ? options.fontColor : "#000000"
     property color dark: Qt.darker(base, 1.6)          // #cccccc -> #7f7f7f
     property color softShadow: Qt.darker(base, 1.27)   // #cccccc -> #a0a0a0
     property color outline: "#000000"
@@ -217,14 +221,14 @@ Decoration {
         FLWindowMenuButton {
             size: root.buttonSize
             alwaysMenu: true
-            base: root.base; light: root.light; dark: root.dark
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink
         }
     }
     Component {
         id: minimizeComponent
         FLWindowMenuButton {
             size: root.buttonSize
-            base: root.base; light: root.light; dark: root.dark
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink
         }
     }
     Component {
@@ -232,7 +236,7 @@ Decoration {
         FLButton {
             buttonType: DecorationOptions.DecorationButtonMaximizeRestore
             glyph: "maximize"; size: root.buttonSize
-            base: root.base; light: root.light; dark: root.dark; inkDisabled: root.softShadow
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink; inkDisabled: root.softShadow
         }
     }
     Component {
@@ -240,7 +244,7 @@ Decoration {
         FLButton {
             buttonType: DecorationOptions.DecorationButtonClose
             glyph: "close"; size: root.buttonSize
-            base: root.base; light: root.light; dark: root.dark; inkDisabled: root.softShadow
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink; inkDisabled: root.softShadow
         }
     }
     Component {
@@ -248,7 +252,7 @@ Decoration {
         FLButton {
             buttonType: DecorationOptions.DecorationButtonKeepAbove
             glyph: "pin"; size: root.buttonSize
-            base: root.base; light: root.light; dark: root.dark; inkDisabled: root.softShadow
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink; inkDisabled: root.softShadow
         }
     }
     Component {
@@ -256,7 +260,7 @@ Decoration {
         FLButton {
             buttonType: DecorationOptions.DecorationButtonKeepBelow
             glyph: "below"; size: root.buttonSize
-            base: root.base; light: root.light; dark: root.dark; inkDisabled: root.softShadow
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink; inkDisabled: root.softShadow
         }
     }
     Component {
@@ -264,7 +268,7 @@ Decoration {
         FLButton {
             buttonType: DecorationOptions.DecorationButtonShade
             glyph: "shade"; size: root.buttonSize
-            base: root.base; light: root.light; dark: root.dark; inkDisabled: root.softShadow
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink; inkDisabled: root.softShadow
         }
     }
     Component {
@@ -272,7 +276,7 @@ Decoration {
         FLButton {
             buttonType: DecorationOptions.DecorationButtonOnAllDesktops
             glyph: "alldesktops"; size: root.buttonSize
-            base: root.base; light: root.light; dark: root.dark; inkDisabled: root.softShadow
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink; inkDisabled: root.softShadow
         }
     }
     Component {
@@ -280,7 +284,7 @@ Decoration {
         FLButton {
             buttonType: DecorationOptions.DecorationButtonQuickHelp
             glyph: "help"; size: root.buttonSize
-            base: root.base; light: root.light; dark: root.dark; inkDisabled: root.softShadow
+            base: root.base; light: root.light; dark: root.dark; ink: root.ink; inkDisabled: root.softShadow
         }
     }
 

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="180" height="60" viewBox="0 0 180 60">
+ <style type="text/css" id="current-color-scheme">
+  .ColorScheme-Background { color:#423b33; stop-color:#423b33; }
+  .ColorScheme-Text { color:#eee0c8; stop-color:#eee0c8; }
+ </style>
+ <g id="normal-topleft">
+  <rect x="0" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-top">
+  <rect x="3" y="0" width="20" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-topright">
+  <rect x="23" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-left">
+  <rect x="0" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-center">
+  <rect x="3" y="3" width="20" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-right">
+  <rect x="23" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-bottomleft">
+  <rect x="0" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-bottom">
+  <rect x="3" y="23" width="20" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="normal-bottomright">
+  <rect x="23" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+  <rect id="normal-hint-top-margin" x="0" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="normal-hint-bottom-margin" x="2" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="normal-hint-left-margin" x="0" y="50" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="normal-hint-right-margin" x="0" y="52" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+ <g id="hover-topleft">
+  <rect x="30" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="0" width="3" height="1" fill="#63594d"/>
+  <rect x="30" y="0" width="1" height="3" fill="#63594d"/>
+ </g>
+ <g id="hover-top">
+  <rect x="33" y="0" width="20" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="33" y="0" width="20" height="1" fill="#63594d"/>
+ </g>
+ <g id="hover-topright">
+  <rect x="53" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="53" y="0" width="3" height="1" fill="#63594d"/>
+  <rect x="55" y="0" width="1" height="3" fill="#1a1814"/>
+ </g>
+ <g id="hover-left">
+  <rect x="30" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="3" width="1" height="20" fill="#63594d"/>
+ </g>
+ <g id="hover-center">
+  <rect x="33" y="3" width="20" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="hover-right">
+  <rect x="53" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="55" y="3" width="1" height="20" fill="#1a1814"/>
+ </g>
+ <g id="hover-bottomleft">
+  <rect x="30" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="30" y="23" width="1" height="3" fill="#63594d"/>
+  <rect x="30" y="25" width="3" height="1" fill="#1a1814"/>
+ </g>
+ <g id="hover-bottom">
+  <rect x="33" y="23" width="20" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="33" y="25" width="20" height="1" fill="#1a1814"/>
+ </g>
+ <g id="hover-bottomright">
+  <rect x="53" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="53" y="25" width="3" height="1" fill="#1a1814"/>
+  <rect x="55" y="23" width="1" height="3" fill="#1a1814"/>
+ </g>
+  <rect id="hover-hint-top-margin" x="30" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="hover-hint-bottom-margin" x="32" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="hover-hint-left-margin" x="30" y="50" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="hover-hint-right-margin" x="30" y="52" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+ <g id="focus-topleft">
+  <rect x="60" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="0" width="3" height="3" fill="#36302a"/>
+  <rect x="60" y="0" width="3" height="1" fill="#1a1814"/>
+  <rect x="60" y="0" width="1" height="3" fill="#1a1814"/>
+ </g>
+ <g id="focus-top">
+  <rect x="63" y="0" width="20" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="63" y="0" width="20" height="3" fill="#36302a"/>
+  <rect x="63" y="0" width="20" height="1" fill="#1a1814"/>
+ </g>
+ <g id="focus-topright">
+  <rect x="83" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="83" y="0" width="3" height="3" fill="#36302a"/>
+  <rect x="83" y="0" width="3" height="1" fill="#1a1814"/>
+  <rect x="85" y="0" width="1" height="3" fill="#63594d"/>
+ </g>
+ <g id="focus-left">
+  <rect x="60" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="3" width="3" height="20" fill="#36302a"/>
+  <rect x="60" y="3" width="1" height="20" fill="#1a1814"/>
+ </g>
+ <g id="focus-center">
+  <rect x="63" y="3" width="20" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="63" y="3" width="20" height="20" fill="#36302a"/>
+ </g>
+ <g id="focus-right">
+  <rect x="83" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="83" y="3" width="3" height="20" fill="#36302a"/>
+  <rect x="85" y="3" width="1" height="20" fill="#63594d"/>
+ </g>
+ <g id="focus-bottomleft">
+  <rect x="60" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="60" y="23" width="3" height="3" fill="#36302a"/>
+  <rect x="60" y="23" width="1" height="3" fill="#1a1814"/>
+  <rect x="60" y="25" width="3" height="1" fill="#63594d"/>
+ </g>
+ <g id="focus-bottom">
+  <rect x="63" y="23" width="20" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="63" y="23" width="20" height="3" fill="#36302a"/>
+  <rect x="63" y="25" width="20" height="1" fill="#63594d"/>
+ </g>
+ <g id="focus-bottomright">
+  <rect x="83" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="83" y="23" width="3" height="3" fill="#36302a"/>
+  <rect x="83" y="25" width="3" height="1" fill="#63594d"/>
+  <rect x="85" y="23" width="1" height="3" fill="#63594d"/>
+ </g>
+  <rect id="focus-hint-top-margin" x="60" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="focus-hint-bottom-margin" x="62" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="focus-hint-left-margin" x="60" y="50" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="focus-hint-right-margin" x="60" y="52" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+ <g id="attention-topleft">
+  <rect x="90" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="0" width="3" height="3" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="91" y="1" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="91" y="1" width="2" height="1" fill="#63594d"/>
+  <rect x="91" y="1" width="1" height="2" fill="#63594d"/>
+ </g>
+ <g id="attention-top">
+  <rect x="93" y="0" width="20" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="93" y="0" width="20" height="3" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="93" y="1" width="20" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="93" y="1" width="20" height="1" fill="#63594d"/>
+ </g>
+ <g id="attention-topright">
+  <rect x="113" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="113" y="0" width="3" height="3" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="113" y="1" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="113" y="1" width="2" height="1" fill="#63594d"/>
+  <rect x="114" y="1" width="1" height="2" fill="#1a1814"/>
+ </g>
+ <g id="attention-left">
+  <rect x="90" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="3" width="3" height="20" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="91" y="3" width="2" height="20" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="91" y="3" width="1" height="20" fill="#63594d"/>
+ </g>
+ <g id="attention-center">
+  <rect x="93" y="3" width="20" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="93" y="3" width="20" height="20" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="93" y="3" width="20" height="20" class="ColorScheme-Background" fill="currentColor"/>
+ </g>
+ <g id="attention-right">
+  <rect x="113" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="113" y="3" width="3" height="20" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="113" y="3" width="2" height="20" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="114" y="3" width="1" height="20" fill="#1a1814"/>
+ </g>
+ <g id="attention-bottomleft">
+  <rect x="90" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="90" y="23" width="3" height="3" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="91" y="23" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="91" y="23" width="1" height="2" fill="#63594d"/>
+  <rect x="91" y="24" width="2" height="1" fill="#1a1814"/>
+ </g>
+ <g id="attention-bottom">
+  <rect x="93" y="23" width="20" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="93" y="23" width="20" height="3" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="93" y="23" width="20" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="93" y="24" width="20" height="1" fill="#1a1814"/>
+ </g>
+ <g id="attention-bottomright">
+  <rect x="113" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="113" y="23" width="3" height="3" class="ColorScheme-Text" fill="currentColor"/>
+  <rect x="113" y="23" width="2" height="2" class="ColorScheme-Background" fill="currentColor"/>
+  <rect x="113" y="24" width="2" height="1" fill="#1a1814"/>
+  <rect x="114" y="23" width="1" height="2" fill="#1a1814"/>
+ </g>
+  <rect id="attention-hint-top-margin" x="90" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="attention-hint-bottom-margin" x="92" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="attention-hint-left-margin" x="90" y="50" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="attention-hint-right-margin" x="90" y="52" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+ <g id="minimized-topleft">
+  <rect x="120" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="minimized-top">
+  <rect x="123" y="0" width="20" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="minimized-topright">
+  <rect x="143" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="minimized-left">
+  <rect x="120" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="minimized-center">
+  <rect x="123" y="3" width="20" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="minimized-right">
+  <rect x="143" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="minimized-bottomleft">
+  <rect x="120" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="minimized-bottom">
+  <rect x="123" y="23" width="20" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+ <g id="minimized-bottomright">
+  <rect x="143" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+ </g>
+  <rect id="minimized-hint-top-margin" x="120" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="minimized-hint-bottom-margin" x="122" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="minimized-hint-left-margin" x="120" y="50" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="minimized-hint-right-margin" x="120" y="52" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+ <g id="progress-topleft">
+  <rect x="150" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="150" y="0" width="3" height="3" fill="#36302a"/>
+  <rect x="150" y="0" width="3" height="1" fill="#1a1814"/>
+  <rect x="150" y="0" width="1" height="3" fill="#1a1814"/>
+ </g>
+ <g id="progress-top">
+  <rect x="153" y="0" width="20" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="153" y="0" width="20" height="3" fill="#36302a"/>
+  <rect x="153" y="0" width="20" height="1" fill="#1a1814"/>
+ </g>
+ <g id="progress-topright">
+  <rect x="173" y="0" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="173" y="0" width="3" height="3" fill="#36302a"/>
+  <rect x="173" y="0" width="3" height="1" fill="#1a1814"/>
+  <rect x="175" y="0" width="1" height="3" fill="#63594d"/>
+ </g>
+ <g id="progress-left">
+  <rect x="150" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="150" y="3" width="3" height="20" fill="#36302a"/>
+  <rect x="150" y="3" width="1" height="20" fill="#1a1814"/>
+ </g>
+ <g id="progress-center">
+  <rect x="153" y="3" width="20" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="153" y="3" width="20" height="20" fill="#36302a"/>
+ </g>
+ <g id="progress-right">
+  <rect x="173" y="3" width="3" height="20" fill="#000000" fill-opacity="0"/>
+  <rect x="173" y="3" width="3" height="20" fill="#36302a"/>
+  <rect x="175" y="3" width="1" height="20" fill="#63594d"/>
+ </g>
+ <g id="progress-bottomleft">
+  <rect x="150" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="150" y="23" width="3" height="3" fill="#36302a"/>
+  <rect x="150" y="23" width="1" height="3" fill="#1a1814"/>
+  <rect x="150" y="25" width="3" height="1" fill="#63594d"/>
+ </g>
+ <g id="progress-bottom">
+  <rect x="153" y="23" width="20" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="153" y="23" width="20" height="3" fill="#36302a"/>
+  <rect x="153" y="25" width="20" height="1" fill="#63594d"/>
+ </g>
+ <g id="progress-bottomright">
+  <rect x="173" y="23" width="3" height="3" fill="#000000" fill-opacity="0"/>
+  <rect x="173" y="23" width="3" height="3" fill="#36302a"/>
+  <rect x="173" y="25" width="3" height="1" fill="#63594d"/>
+  <rect x="175" y="23" width="1" height="3" fill="#63594d"/>
+ </g>
+  <rect id="progress-hint-top-margin" x="150" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="progress-hint-bottom-margin" x="152" y="30" width="1" height="4" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="progress-hint-left-margin" x="150" y="50" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+  <rect id="progress-hint-right-margin" x="150" y="52" width="4" height="1" fill="#ff00ff" fill-opacity="0"/>
+</svg>
