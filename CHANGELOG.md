@@ -49,6 +49,8 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   same as the night Plasma style and GTK theme), so buttons, check boxes and
   the elevator no longer fade into the background at night. The test gallery
   takes `--night` to show the style with the FreeLook Night palette.
+- FreeLook Night global theme: the preview is a real screenshot of the night
+  desktop (Dolphin, KCalc and Konsole with FreeLook Amber).
 - Konsole: the FreeLook Amber color scheme, in the spirit of the amber
   phosphor terminals. To stay retro without becoming flat, its colors are
   all amber, from deep orange to cream, and tell things apart by brightness,
@@ -68,8 +70,6 @@ Known issues (to investigate):
   switches; with Breeze it switches. KCalc switches with both styles. The
   title bars of some windows also keep the old colors, with Breeze too.
   Reopening the program fixes it.
-
-Next for FreeLook Night: a real screenshot for the global theme preview.
 
 ## 0.9 (2026-11-26)
 
