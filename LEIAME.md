@@ -164,6 +164,21 @@ teste da decoração QML, os geradores do estilo do Plasma e a galeria do tema G
 
 ## Autoria e auxílio de IA
 
+**Um projeto pessoal.** O FreeLook nasceu de uma vontade minha. Eu queria
+voltar àquela área de trabalho, alimentar essa saudade, e não achei nada
+que me contentasse. Também não tinha tempo para fazer tudo sozinho, então
+fiz em parceria com uma IA: eu dei a direção, as referências e as
+decisões, testei cada passo na minha máquina, e o Claude escreveu a maior
+parte do código.
+
+Sei que o uso de IA é um tema polêmico, inclusive dentro da comunidade do
+KDE, e respeito quem pensa diferente. Por isso não publiquei o FreeLook na
+KDE Store: ele fica aqui, no GitHub, para quem o encontrar. Se você quiser
+experimentar, sabendo de tudo isso, fique à vontade. E se gostar, melhor
+ainda.
+
+*Saulo Popov Zambiasi*
+
 O FreeLook foi criado por **Saulo Popov Zambiasi** com o auxílio do
 **Claude Opus 5.5**, um modelo de IA da Anthropic, usado pelo claude.ai em
 novembro de 2026.

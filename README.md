@@ -227,6 +227,21 @@ files that are part of the project.
 
 ## Authorship and AI assistance
 
+**A personal project.** FreeLook started from a wish of my own. I wanted
+to go back to that desktop, to feed that nostalgia, and I found nothing
+that satisfied me. I also did not have the time to do it all alone, so I
+made it together with an AI: I gave the direction, the references and the
+decisions, tested every step on my own machine, and Claude wrote most of
+the code.
+
+I know that the use of AI is a heated subject, in the KDE community too,
+and I respect those who think otherwise. That is why I did not publish
+FreeLook on the KDE Store: it lives here, on GitHub, for whoever finds it.
+If you want to try it, knowing all this, feel free. And if you like it,
+even better.
+
+*Saulo Popov Zambiasi*
+
 FreeLook was created by **Saulo Popov Zambiasi** with the assistance of
 **Claude Opus 5.5**, an AI model by Anthropic, used through claude.ai in
 November 2026.
