@@ -92,6 +92,11 @@ the FreeLook global theme, wallpaper and GTK theme. Without `--apply`, choose
 *System Settings > Colors & Themes > Global Theme > FreeLook*, and FreeLook in
 *Application Style > Configure GNOME/GTK Application Style*.
 
+**GIMP 3:** choose the *System* theme in *Edit > Preferences > Interface >
+Theme*, and below it the *System Colors* color scheme, so GIMP follows the day
+and the night with FreeLook. GIMP's default scheme is dark, and with it GIMP
+asks for FreeLook Night all day.
+
 The first time, log out and back in so every application finds the style
 (it lives in `~/.local/lib/qt6/plugins`, announced through
 `~/.config/plasma-workspace/env/freelook.sh`).
