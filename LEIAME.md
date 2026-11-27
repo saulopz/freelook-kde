@@ -34,7 +34,7 @@ ele me levou.
 | **Fontes** | A família Go, da Bigelow & Holmes, os desenhistas da Lucida (a fonte do OpenWindows): Go na interface, Go Bold no título das janelas, Go Mono na largura fixa | TrueType, BSD 3-Clause |
 | **Estilo do Plasma** | Painel, menus, dicas e plasmoides com a moldura das janelas pop-up do OPEN LOOK, botões oblongos, seleção afundada | Tema SVG do Plasma |
 | **Esquema de cores** | A paleta do OpenWindows 3: `#cccccc`, `#b7b7b7`, `#a0a0a0` e branco | Esquema de cores do KDE |
-| **FreeLook Noturno** | Uma variante noturna em âmbar, como um terminal antigo à noite (base `#423b33`, texto creme): esquema de cores, estilo do Plasma, tema global e papel de parede noturno. Escolha FreeLook e FreeLook Noturno como temas claro e escuro para alternar entre eles, à mão ou automaticamente | Esquema de cores, estilo do Plasma e tema global do KDE |
+| **FreeLook Noturno** | Uma variante noturna em âmbar, como um terminal antigo à noite (base `#423b33`, texto creme): esquema de cores, estilo do Plasma, tema global, tema GTK 3 noturno e papel de parede noturno. Escolha FreeLook e FreeLook Noturno como temas claro e escuro para alternar entre eles, à mão ou automaticamente | Esquema de cores, estilo do Plasma e tema global do KDE, CSS do GTK 3 |
 | **FreeLook Âmbar** | Um esquema de cores para o Konsole como um terminal de fósforo âmbar: os detalhes se distinguem pelo brilho, do laranja forte ao creme. Escolha no Konsole em *Configurações > Editar o perfil atual > Aparência* | Esquema de cores do Konsole |
 | **Tema global** | Aplica tudo isso de uma vez, inclusive a ordem dos botões da barra de título | Pacote de tema global do Plasma |
 | **Papel de parede** | O azul do OpenWindows, `#40a0c0` | Pacote de papel de parede |
@@ -144,8 +144,9 @@ teste da decoração QML, os geradores do estilo do Plasma e a galeria do tema G
   mantém a decoração que carregou no login.
 - FreeLook Noturno: trocar entre dia e noite com programas abertos pode deixar
   partes com as cores antigas (a barra de menus de alguns programas, o título
-  de algumas janelas); reabrir o programa resolve. O tema GTK ainda não tem
-  versão noturna, e a imagem do botão "Workspace" fica cinza à noite.
+  de algumas janelas); reabrir o programa resolve. Os programas em GTK, menos
+  o Firefox, só trocam quando reabertos, porque o GTK 3 lê a preferência pelo
+  escuro ao iniciar. A imagem do botão "Workspace" fica cinza à noite.
 - Programas em GTK 4 e libadwaita (a maioria dos aplicativos novos do GNOME)
   mantêm o visual deles: a libadwaita não aceita temas.
 - No GTK 3, o ▲ e o ▼ do elevador são só marcas: arraste o elevador ou clique

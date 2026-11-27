@@ -33,7 +33,7 @@ FreeLook is a way back to that desktop, on the free system it led me to.
 | **Fonts** | The Go family by Bigelow & Holmes, the designers of Lucida (the OpenWindows typeface): Go for the interface, Go Bold for window titles, Go Mono for fixed width | TrueType, BSD 3-Clause |
 | **Plasma style** | Panel, menus, tooltips and widgets with the OPEN LOOK pop-up window frame, oblong buttons, sunken selection | Plasma SVG theme |
 | **Color scheme** | The OpenWindows 3 palette: `#cccccc`, `#b7b7b7`, `#a0a0a0` and white | KDE color scheme |
-| **FreeLook Night** | An amber night variant, like an old terminal at night (base `#423b33`, cream text): color scheme, Plasma style, global theme and a night wallpaper. Choose FreeLook and FreeLook Night as the light and dark themes to switch between them, by hand or automatically | KDE color scheme, Plasma style, global theme |
+| **FreeLook Night** | An amber night variant, like an old terminal at night (base `#423b33`, cream text): color scheme, Plasma style, global theme, GTK 3 night theme and a night wallpaper. Choose FreeLook and FreeLook Night as the light and dark themes to switch between them, by hand or automatically | KDE color scheme, Plasma style, global theme, GTK 3 CSS |
 | **FreeLook Amber** | A Konsole color scheme like an amber phosphor terminal: the details differ by brightness, from deep orange to cream. Choose it in Konsole under *Settings > Edit Current Profile > Appearance* | Konsole color scheme |
 | **Global theme** | Applies all of the above in one click, including the title bar button layout | Plasma look-and-feel package |
 | **Wallpaper** | The OpenWindows blue, `#40a0c0` | Plasma wallpaper package |
@@ -164,8 +164,12 @@ python3 tools/preview_plasma_theme.py plasma/desktoptheme/FreeLook preview.png  
 
 Colors and metrics sit at the top of each generator.
 
-**GTK theme.** `gtk/FreeLook/gtk-3.0/gtk.css` is written by hand; the small
-pictures in `assets/` are generated. The gallery prints every CSS error and
+**GTK theme.** `gtk/FreeLook/gtk-3.0/gtk.css` is written by hand, with all
+its colors in one palette block at the top. The generator draws the small
+pictures (`assets/` for the day, `assets-dark/` for the night) and writes
+`gtk-dark.css`, the FreeLook Night copy of `gtk.css` with the night palette:
+edit `gtk.css`, never `gtk-dark.css`, and run the generator. Use
+`GTK_THEME=FreeLook:dark` to test the night. The gallery prints every CSS error and
 saves two screenshots (the window, and the window with a menu open):
 
 ```sh
@@ -193,8 +197,9 @@ files that are part of the project.
   decoration it loaded at login.
 - FreeLook Night: switching between day and night with programs open can
   leave parts with the old colors (the menu bar of some programs, the title
-  bar of some windows); reopening the program fixes it. The GTK theme has no
-  night version yet, and the "Workspace" button picture stays gray at night.
+  bar of some windows); reopening the program fixes it. GTK programs, except
+  Firefox, only switch when reopened, since GTK 3 reads the dark preference
+  when it starts. The "Workspace" button picture stays gray at night.
 - GTK 4 and libadwaita programs (most of the newer GNOME apps) keep their own
   look: libadwaita does not accept themes.
 - In GTK 3 the ▲ and ▼ on the elevator are only marks: drag the elevator or

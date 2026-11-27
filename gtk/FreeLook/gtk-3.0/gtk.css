@@ -6,7 +6,9 @@
  * overflows its box, rectangular exclusive settings, things that sink in when
  * pressed or chosen.
  *
- * Small pictures in assets/ come from tools/generate_gtk_assets.py.
+ * Small pictures in assets/ come from tools/generate_gtk_assets.py, which
+ * also writes gtk-dark.css (FreeLook Night) from this file: edit this one,
+ * then run the generator. All colors are in the palette block below.
  */
 
 /* ------------------------------------------------------------------ palette */
@@ -23,6 +25,13 @@
 @define-color fl_selected #a0a0a0;
 @define-color fl_tooltip #eaeaea;
 @define-color fl_link #0000cc;
+@define-color fl_dim #303030;          /* dim labels, subtitles */
+@define-color fl_info #d8d8d8;         /* info bar backgrounds */
+@define-color fl_info_warning #e0d0a0;
+@define-color fl_info_error #e0a8a8;
+@define-color fl_warning #a05000;      /* warning, error and success text */
+@define-color fl_error #b00000;
+@define-color fl_success #006000;
 
 /* Names that many GTK 3 programs look up. */
 @define-color theme_bg_color @fl_bg;
@@ -42,9 +51,9 @@
 @define-color theme_unfocused_selected_fg_color @fl_ink;
 @define-color borders @fl_dark;
 @define-color unfocused_borders @fl_dark;
-@define-color warning_color #a05000;
-@define-color error_color #b00000;
-@define-color success_color #006000;
+@define-color warning_color @fl_warning;
+@define-color error_color @fl_error;
+@define-color success_color @fl_success;
 
 /* ------------------------------------------------------------------ base */
 
@@ -103,7 +112,7 @@ list { background-color: @fl_view; }
 
 a, *:link, button:link { color: @fl_link; }
 
-.dim-label, label.separator { color: #303030; }
+.dim-label, label.separator { color: @fl_dim; }
 
 separator {
   min-width: 1px;
@@ -461,7 +470,7 @@ progressbar trough {
   background-color: @fl_view;
 }
 progressbar.vertical trough { min-width: 14px; }
-progressbar progress { background-color: @fl_soft; border: none; border-radius: 0; }
+progressbar progress { background-color: @fl_selected; border: none; border-radius: 0; }
 progressbar text { color: @fl_ink; }
 levelbar trough { border: 1px solid @fl_dark; background-color: @fl_view; padding: 1px; }
 levelbar block.filled { background-color: @fl_soft; }
@@ -572,7 +581,7 @@ headerbar, .titlebar:not(headerbar) {
   color: @fl_ink;
 }
 headerbar .title { font-weight: normal; }
-headerbar .subtitle { font-size: smaller; color: #303030; }
+headerbar .subtitle { font-size: smaller; color: @fl_dim; }
 headerbar entry { min-height: 20px; }
 
 /* Window buttons of programs that draw their own title bar: raised squares,
@@ -604,9 +613,9 @@ searchbar > revealer > box { border-bottom: 1px solid @fl_dark; }
 statusbar { padding: 2px 6px; border-top: 1px solid @fl_soft; }
 
 infobar { border: 1px solid @fl_dark; }
-infobar.info > revealer > box, infobar.question > revealer > box { background-color: #d8d8d8; }
-infobar.warning > revealer > box { background-color: #e0d0a0; }
-infobar.error > revealer > box { background-color: #e0a8a8; }
+infobar.info > revealer > box, infobar.question > revealer > box { background-color: @fl_info; }
+infobar.warning > revealer > box { background-color: @fl_info_warning; }
+infobar.error > revealer > box { background-color: @fl_info_error; }
 
 /* ------------------------------------------------------------------ panes, sidebars, lists */
 
@@ -648,7 +657,7 @@ calendar:indeterminate { color: @fl_grayed; }
 
 /* ------------------------------------------------------------------ misc */
 
-.osd { background-color: rgba(204, 204, 204, 0.95); border: 1px solid @fl_dark; color: @fl_ink; }
+.osd { background-color: alpha(@fl_bg, 0.95); border: 1px solid @fl_dark; color: @fl_ink; }
 spinner { color: @fl_ink; }
-rubberband, .rubberband { border: 1px dotted @fl_ink; background-color: rgba(0, 0, 0, 0.1); }
+rubberband, .rubberband { border: 1px dotted @fl_ink; background-color: alpha(@fl_ink, 0.1); }
 cursor-handle { background: none; }

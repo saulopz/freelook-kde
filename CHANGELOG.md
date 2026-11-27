@@ -45,6 +45,12 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   phosphor terminals. To stay retro without becoming flat, its colors are
   all amber, from deep orange to cream, and tell things apart by brightness,
   which also helps color-blind and dyslexic readers.
+- GTK 3 theme: FreeLook Night. GTK 3 loads `gtk-dark.css` when Plasma
+  prefers a dark theme; the generator writes it from `gtk.css` with the night
+  palette and night pictures, so there is one CSS to maintain. All colors of
+  `gtk.css` are now in its palette block, and the progress bar fill uses the
+  selection color (the same gray by day, visible at night). GTK programs
+  switch when reopened; Firefox follows at once.
 
 Known issues (to investigate):
 
@@ -57,9 +63,8 @@ Known issues (to investigate):
 - The "Workspace" button picture is not recolored by Plasma, so it stays
   gray at night.
 
-Next for FreeLook Night: a GTK night theme, a stronger elevator and check box
-outlines on dark palettes, an amber Konsole color scheme, and a real
-screenshot for the global theme preview.
+Next for FreeLook Night: stronger elevator and check box outlines on dark
+palettes, and a real screenshot for the global theme preview.
 
 ## 0.9 (2026-11-26)
 
