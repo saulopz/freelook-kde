@@ -270,10 +270,43 @@ static int testElevator()
     return failures;
 }
 
+// The FreeLook Night palette, from color-schemes/FreeLookNight.colors.
+static QPalette nightPalette()
+{
+    const QColor base(66, 59, 51), text(238, 224, 200), view(46, 41, 36);
+    QPalette p(base);
+    p.setColor(QPalette::Window, base);
+    p.setColor(QPalette::Button, base);
+    p.setColor(QPalette::Base, view);
+    p.setColor(QPalette::AlternateBase, QColor(52, 47, 41));
+    p.setColor(QPalette::WindowText, text);
+    p.setColor(QPalette::Text, text);
+    p.setColor(QPalette::ButtonText, text);
+    p.setColor(QPalette::Highlight, QColor(107, 93, 76));
+    p.setColor(QPalette::HighlightedText, QColor(255, 240, 214));
+    p.setColor(QPalette::ToolTipBase, QColor(87, 77, 66));
+    p.setColor(QPalette::ToolTipText, text);
+    const QColor grayedOut(138, 126, 108);
+    p.setColor(QPalette::Disabled, QPalette::WindowText, grayedOut);
+    p.setColor(QPalette::Disabled, QPalette::Text, grayedOut);
+    p.setColor(QPalette::Disabled, QPalette::ButtonText, grayedOut);
+    return p;
+}
+
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-    const QString output = argc > 1 ? QString::fromLocal8Bit(argv[1]) : QStringLiteral("gallery.png");
+    // gallery [output.png] [--night]: --night uses the FreeLook Night palette.
+    QString output = QStringLiteral("gallery.png");
+    bool night = false;
+    for (int i = 1; i < argc; ++i) {
+        const QString arg = QString::fromLocal8Bit(argv[i]);
+        if (arg == QLatin1String("--night")) {
+            night = true;
+        } else {
+            output = arg;
+        }
+    }
 
     QStyle *style = QStyleFactory::create(QStringLiteral("FreeLook"));
     if (!style) {
@@ -282,7 +315,7 @@ int main(int argc, char **argv)
         return 1;
     }
     QApplication::setStyle(style);
-    QApplication::setPalette(style->standardPalette());
+    QApplication::setPalette(night ? nightPalette() : style->standardPalette());
     std::printf("style loaded: %s\n", qPrintable(QApplication::style()->name()));
 
     std::printf("elevator checks:\n");

@@ -50,7 +50,11 @@ FreeLookStyle::Colors FreeLookStyle::colors(const QPalette &pal, bool enabled, Q
     c.base = pal.color(baseRole);               // #cccccc
     c.pressed = c.base.darker(111);             // #b7b7b7
     c.softShadow = c.base.darker(127);          // #a0a0a0
-    c.dark = c.base.darker(160);                // #7f7f7f
+    // Outlines: a mid gray on the light palette; on a dark one (FreeLook Night)
+    // nearly black, as in the night Plasma style and GTK theme, or they fade
+    // into the background.
+    c.dark = c.base.lightness() < 128 ? c.base.darker(250)    // #423b33 -> #1a1714
+                                      : c.base.darker(160);   // #cccccc -> #7f7f7f
     // White relief on the light palette; on a dark one (FreeLook Night) a
     // lighter shade of the base, so the relief stays visible without glaring.
     c.light = c.base.lightness() < 128 ? c.base.lighter(150) : QColor(255, 255, 255);

@@ -148,6 +148,8 @@ QT_PLUGIN_PATH=style/build/stage/lib/qt6/plugins QT_QPA_PLATFORM=offscreen \
     style/build/freelook-gallery gallery.png
 ```
 
+Add `--night` to see the style with the FreeLook Night palette.
+
 **Window decoration.** `tools/qml-test` mimics the C++ side of Aurorae
 (using Aurorae's own QML files) so the decoration runs outside KWin:
 

@@ -45,6 +45,10 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   teal of the night wallpaper with cream text, since Kicker does not recolor
   its picture. It stands out on the day and the night panels alike, without
   pulling the eye all the time.
+- Application style: on dark palettes the outlines are nearly black (the
+  same as the night Plasma style and GTK theme), so buttons, check boxes and
+  the elevator no longer fade into the background at night. The test gallery
+  takes `--night` to show the style with the FreeLook Night palette.
 - Konsole: the FreeLook Amber color scheme, in the spirit of the amber
   phosphor terminals. To stay retro without becoming flat, its colors are
   all amber, from deep orange to cream, and tell things apart by brightness,
@@ -65,8 +69,7 @@ Known issues (to investigate):
   title bars of some windows also keep the old colors, with Breeze too.
   Reopening the program fixes it.
 
-Next for FreeLook Night: stronger elevator and check box outlines on dark
-palettes, and a real screenshot for the global theme preview.
+Next for FreeLook Night: a real screenshot for the global theme preview.
 
 ## 0.9 (2026-11-26)
 
