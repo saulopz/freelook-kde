@@ -204,7 +204,7 @@ files that are part of the project.
   leave parts with the old colors (the menu bar of some programs, the title
   bar of some windows); reopening the program fixes it. GTK programs, except
   Firefox, only switch when reopened, since GTK 3 reads the dark preference
-  when it starts. The "Workspace" button picture stays gray at night.
+  when it starts.
 - GTK 4 and libadwaita programs (most of the newer GNOME apps) keep their own
   look: libadwaita does not accept themes.
 - In GTK 3 the ▲ and ▼ on the elevator are only marks: drag the elevator or

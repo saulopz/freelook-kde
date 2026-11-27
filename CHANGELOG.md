@@ -41,6 +41,10 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   between FreeLook and FreeLook Night keeps them right on open windows.
 - Experimental panels: `top-windows-kickoff`, the same top bar with Kickoff,
   whose "Workspace" text label follows the color scheme.
+- Experimental panels: the "Workspace ▽" button has its own colors, the deep
+  teal of the night wallpaper with cream text, since Kicker does not recolor
+  its picture. It stands out on the day and the night panels alike, without
+  pulling the eye all the time.
 - Konsole: the FreeLook Amber color scheme, in the spirit of the amber
   phosphor terminals. To stay retro without becoming flat, its colors are
   all amber, from deep orange to cream, and tell things apart by brightness,
@@ -60,8 +64,6 @@ Known issues (to investigate):
   switches; with Breeze it switches. KCalc switches with both styles. The
   title bars of some windows also keep the old colors, with Breeze too.
   Reopening the program fixes it.
-- The "Workspace" button picture is not recolored by Plasma, so it stays
-  gray at night.
 
 Next for FreeLook Night: stronger elevator and check box outlines on dark
 palettes, and a real screenshot for the global theme preview.

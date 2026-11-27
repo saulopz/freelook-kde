@@ -151,7 +151,7 @@ teste da decoração QML, os geradores do estilo do Plasma e a galeria do tema G
   partes com as cores antigas (a barra de menus de alguns programas, o título
   de algumas janelas); reabrir o programa resolve. Os programas em GTK, menos
   o Firefox, só trocam quando reabertos, porque o GTK 3 lê a preferência pelo
-  escuro ao iniciar. A imagem do botão "Workspace" fica cinza à noite.
+  escuro ao iniciar.
 - Programas em GTK 4 e libadwaita (a maioria dos aplicativos novos do GNOME)
   mantêm o visual deles: a libadwaita não aceita temas.
 - No GTK 3, o ▲ e o ▼ do elevador são só marcas: arraste o elevador ou clique

@@ -5,19 +5,15 @@
      Same drawing as an OPEN LOOK menu button: oblong, light upper half,
      soft shadow lower half, hollow triangle. Kicker scales the picture to the
      icon height, so the text fills most of it.
-     The background and text take the color scheme's colors where Plasma
-     recolors the picture (current-color-scheme); the relief is translucent so
-     it works on the day gray and on the night amber. -->
+     Kicker does not recolor the picture, so the button carries its own colors:
+     the deep teal of the night wallpaper with cream text and a black outline.
+     It stands out on the day gray and on the night amber panels alike,
+     without pulling the eye all the time. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="110" height="20" viewBox="0 0 110 20">
-  <style type="text/css" id="current-color-scheme">
-    .ColorScheme-Background { color:#cccccc; }
-    .ColorScheme-Text { color:#000000; }
-  </style>
-  <rect x="0.5" y="0.5" width="109" height="19" rx="9.5" ry="9.5" class="ColorScheme-Background" fill="currentColor"/>
-  <rect x="0.5" y="0.5" width="109" height="19" rx="9.5" ry="9.5" fill="none" stroke="#000000" stroke-opacity="0.5"/>
-  <path d="M 1.5 10 A 8.5 8.5 0 0 1 10 1.5 H 100 A 8.5 8.5 0 0 1 108.5 10" fill="none" stroke="#ffffff" stroke-opacity="0.6"/>
-  <path d="M 1.5 10 A 8.5 8.5 0 0 0 10 18.5 H 100 A 8.5 8.5 0 0 0 108.5 10" fill="none" stroke="#000000" stroke-opacity="0.25"/>
-  <text x="9" y="14.5" font-family="Go, sans-serif" font-size="13.5" class="ColorScheme-Text" fill="currentColor">Workspace</text>
-  <polygon points="89.5,8 98.5,8 94,13" class="ColorScheme-Background" fill="currentColor"/>
-  <polygon points="89.5,8 98.5,8 94,13" class="ColorScheme-Text" fill="none" stroke="currentColor" stroke-linejoin="miter"/>
+  <rect x="0.5" y="0.5" width="109" height="19" rx="9.5" ry="9.5" fill="#3e6a78"/>
+  <rect x="0.5" y="0.5" width="109" height="19" rx="9.5" ry="9.5" fill="none" stroke="#000000"/>
+  <path d="M 1.5 10 A 8.5 8.5 0 0 1 10 1.5 H 100 A 8.5 8.5 0 0 1 108.5 10" fill="none" stroke="#ffffff" stroke-opacity="0.3"/>
+  <path d="M 1.5 10 A 8.5 8.5 0 0 0 10 18.5 H 100 A 8.5 8.5 0 0 0 108.5 10" fill="none" stroke="#000000" stroke-opacity="0.4"/>
+  <text x="9" y="14.5" font-family="Go, sans-serif" font-size="13.5" fill="#f4ead8">Workspace</text>
+  <polygon points="89.5,8 98.5,8 94,13" fill="#3e6a78" stroke="#f4ead8" stroke-linejoin="miter"/>
 </svg>
