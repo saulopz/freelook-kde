@@ -45,10 +45,10 @@ read_setting() {   # read_setting <file> <group> <key>
 }
 
 in_use=""
-[ "$(read_setting kdeglobals KDE LookAndFeelPackage)" = "$LNF_ID" ] && in_use="$in_use global-theme"
+case "$(read_setting kdeglobals KDE LookAndFeelPackage)" in "$LNF_ID"|org.freelook.night.desktop) in_use="$in_use global-theme" ;; esac
 [ "$(read_setting kdeglobals KDE widgetStyle)" = "FreeLook" ] && in_use="$in_use application-style"
-[ "$(read_setting kdeglobals General ColorScheme)" = "FreeLook" ] && in_use="$in_use colors"
-[ "$(read_setting plasmarc Theme name)" = "FreeLook" ] && in_use="$in_use plasma-style"
+case "$(read_setting kdeglobals General ColorScheme)" in FreeLook|FreeLookNight) in_use="$in_use colors" ;; esac
+case "$(read_setting plasmarc Theme name)" in FreeLook|FreeLookNight) in_use="$in_use plasma-style" ;; esac
 case "$(read_setting kwinrc org.kde.kdecoration2 theme)" in
     kwin4_decoration_qml_freelook|__aurorae__svg__FreeLook) in_use="$in_use decoration" ;;
 esac
@@ -134,10 +134,14 @@ fi
 echo "==> Removing files"
 for path in \
     "$DATA/color-schemes/FreeLook.colors" \
+    "$DATA/color-schemes/FreeLookNight.colors" \
+    "$DATA/konsole/FreeLookAmber.colorscheme" \
     "$DATA/kwin/decorations/kwin4_decoration_qml_freelook" \
     "$DATA/aurorae/themes/FreeLook" \
     "$DATA/plasma/desktoptheme/FreeLook" \
+    "$DATA/plasma/desktoptheme/FreeLookNight" \
     "$DATA/plasma/look-and-feel/$LNF_ID" \
+    "$DATA/plasma/look-and-feel/org.freelook.night.desktop" \
     "$DATA/wallpapers/FreeLook" \
     "$DATA/themes/FreeLook" \
     "$DATA/fonts/FreeLook" \

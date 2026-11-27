@@ -41,6 +41,10 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   between FreeLook and FreeLook Night keeps them right on open windows.
 - Experimental panels: `top-windows-kickoff`, the same top bar with Kickoff,
   whose "Workspace" text label follows the color scheme.
+- Konsole: the FreeLook Amber color scheme, in the spirit of the amber
+  phosphor terminals. To stay retro without becoming flat, its colors are
+  all amber, from deep orange to cream, and tell things apart by brightness,
+  which also helps color-blind and dyslexic readers.
 
 Known issues (to investigate):
 

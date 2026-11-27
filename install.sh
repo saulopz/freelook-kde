@@ -38,11 +38,20 @@ copy_dir() {   # copy_dir <source> <destination>
 
 step "Installing theme files into $DATA"
 mkdir -p "$DATA/color-schemes"
-cp "$SRC/color-schemes/FreeLook.colors" "$DATA/color-schemes/FreeLook.colors"
-echo "    $DATA/color-schemes/FreeLook.colors"
+for scheme in FreeLook FreeLookNight; do
+    cp "$SRC/color-schemes/$scheme.colors" "$DATA/color-schemes/$scheme.colors"
+    echo "    $DATA/color-schemes/$scheme.colors"
+done
+mkdir -p "$DATA/konsole"
+cp "$SRC/konsole/FreeLookAmber.colorscheme" "$DATA/konsole/FreeLookAmber.colorscheme"
+echo "    $DATA/konsole/FreeLookAmber.colorscheme"
 copy_dir "$SRC/decoration/kwin4_decoration_qml_freelook" "$DATA/kwin/decorations/kwin4_decoration_qml_freelook"
-copy_dir "$SRC/plasma/desktoptheme/FreeLook" "$DATA/plasma/desktoptheme/FreeLook"
-copy_dir "$SRC/plasma/look-and-feel/$LNF_ID" "$DATA/plasma/look-and-feel/$LNF_ID"
+for style in FreeLook FreeLookNight; do
+    copy_dir "$SRC/plasma/desktoptheme/$style" "$DATA/plasma/desktoptheme/$style"
+done
+for lnf in "$LNF_ID" org.freelook.night.desktop; do
+    copy_dir "$SRC/plasma/look-and-feel/$lnf" "$DATA/plasma/look-and-feel/$lnf"
+done
 copy_dir "$SRC/plasma/wallpapers/FreeLook" "$DATA/wallpapers/FreeLook"
 copy_dir "$SRC/gtk/FreeLook" "$DATA/themes/FreeLook"
 copy_dir "$SRC/fonts/Go" "$DATA/fonts/FreeLook"

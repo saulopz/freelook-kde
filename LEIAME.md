@@ -35,6 +35,7 @@ ele me levou.
 | **Estilo do Plasma** | Painel, menus, dicas e plasmoides com a moldura das janelas pop-up do OPEN LOOK, botões oblongos, seleção afundada | Tema SVG do Plasma |
 | **Esquema de cores** | A paleta do OpenWindows 3: `#cccccc`, `#b7b7b7`, `#a0a0a0` e branco | Esquema de cores do KDE |
 | **FreeLook Noturno** | Uma variante noturna em âmbar, como um terminal antigo à noite (base `#423b33`, texto creme): esquema de cores, estilo do Plasma, tema global e papel de parede noturno. Escolha FreeLook e FreeLook Noturno como temas claro e escuro para alternar entre eles, à mão ou automaticamente | Esquema de cores, estilo do Plasma e tema global do KDE |
+| **FreeLook Âmbar** | Um esquema de cores para o Konsole como um terminal de fósforo âmbar: os detalhes se distinguem pelo brilho, do laranja forte ao creme. Escolha no Konsole em *Configurações > Editar o perfil atual > Aparência* | Esquema de cores do Konsole |
 | **Tema global** | Aplica tudo isso de uma vez, inclusive a ordem dos botões da barra de título | Pacote de tema global do Plasma |
 | **Papel de parede** | O azul do OpenWindows, `#40a0c0` | Pacote de papel de parede |
 

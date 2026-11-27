@@ -34,6 +34,7 @@ FreeLook is a way back to that desktop, on the free system it led me to.
 | **Plasma style** | Panel, menus, tooltips and widgets with the OPEN LOOK pop-up window frame, oblong buttons, sunken selection | Plasma SVG theme |
 | **Color scheme** | The OpenWindows 3 palette: `#cccccc`, `#b7b7b7`, `#a0a0a0` and white | KDE color scheme |
 | **FreeLook Night** | An amber night variant, like an old terminal at night (base `#423b33`, cream text): color scheme, Plasma style, global theme and a night wallpaper. Choose FreeLook and FreeLook Night as the light and dark themes to switch between them, by hand or automatically | KDE color scheme, Plasma style, global theme |
+| **FreeLook Amber** | A Konsole color scheme like an amber phosphor terminal: the details differ by brightness, from deep orange to cream. Choose it in Konsole under *Settings > Edit Current Profile > Appearance* | Konsole color scheme |
 | **Global theme** | Applies all of the above in one click, including the title bar button layout | Plasma look-and-feel package |
 | **Wallpaper** | The OpenWindows blue, `#40a0c0` | Plasma wallpaper package |
 
