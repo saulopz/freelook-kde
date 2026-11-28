@@ -39,6 +39,14 @@ Decoration {
     property int separatorHeight: 2                    // etched line under the title
     readonly property bool maximized: decoration.client.maximized
     readonly property bool active: decoration.client.active
+    // Wake up the window's palette (issue #1). KWin creates a window's palette
+    // only when someone first asks for it, and only then does the window tell
+    // its decoration that the color scheme changed. Breeze asks while
+    // painting; Aurorae listens for the change but never asks, so without
+    // this binding the title bar keeps the colors it had when the window
+    // opened. QML cannot look inside the QPalette, and it does not need to:
+    // a binding is always evaluated when the decoration is created.
+    readonly property var windowPalette: decoration.client.palette
 
     alpha: false
 

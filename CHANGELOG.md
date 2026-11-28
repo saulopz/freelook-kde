@@ -68,17 +68,19 @@ versions, each one tested on a real Plasma 6.8 session before the next.
   selection color (the same gray by day, visible at night). GTK programs
   switch when reopened; Firefox follows at once.
 
-Known issues (to investigate):
+- Window decoration: the title bars follow the switch between day and night
+  ([issue #1](https://github.com/saulopz/freelook-kde/issues/1)). KWin creates
+  a window's palette only when something first asks for it, and only then
+  does the window tell its decoration that the color scheme changed. Breeze
+  asks while painting; Aurorae listens for the change but never asks, so a
+  title bar kept the colors it had when the window opened, until something
+  else asked: the window operations menu (a right click on the title bar), or
+  a while with another decoration. The decoration now asks once, through a
+  binding to the window's palette. Found thanks to Saulo's observation that a
+  right click on a title bar made that window follow the theme.
 
-- Switching between FreeLook and FreeLook Night with windows open, the title
-  bar of some windows keeps the old colors. It is erratic: the same program
-  switches one time and not the next, and every window follows the system
-  colors (`kdeglobals`). It looks like a race in Aurorae, which rereads the
-  title bar colors from a cached copy of `kdeglobals` when a window's palette
-  changes, instead of using the new palette; with the Breeze decoration
-  everything switches. Choosing another window decoration and then FreeLook
-  again fixes it, and so does reopening the window. Tracked in
-  [issue #1](https://github.com/saulopz/freelook-kde/issues/1).
+Known issues:
+
 - An earlier report of Konsole's menu bar keeping the old colors with the
   FreeLook application style could not be reproduced after rebuilding the
   style.

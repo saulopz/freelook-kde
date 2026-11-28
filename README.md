@@ -213,13 +213,8 @@ files that are part of the project.
 - Calendars and a few other Plasma widgets still come from Breeze.
 - After updating the window decoration, log out and in again: KWin keeps the
   decoration it loaded at login.
-- FreeLook Night: switching between day and night with windows open, the
-  title bar of some windows may keep the old colors (it seems to be a timing
-  problem in KWin's QML decoration engine). Choosing another window
-  decoration and then FreeLook again fixes it, and so does reopening the
-  window. See [issue #1](https://github.com/saulopz/freelook-kde/issues/1); hints are welcome. GTK programs, except
-  Firefox, only switch when reopened, since GTK 3 reads the dark preference
-  when it starts.
+- FreeLook Night: GTK programs, except Firefox, only switch between day and
+  night when reopened, since GTK 3 reads the dark preference when it starts.
 - GTK 4 and libadwaita programs (most of the newer GNOME apps) keep their own
   look: libadwaita does not accept themes.
 - In GTK 3 the ▲ and ▼ on the elevator are only marks: drag the elevator or

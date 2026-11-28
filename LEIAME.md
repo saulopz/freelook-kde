@@ -150,13 +150,9 @@ teste da decoração QML, os geradores do estilo do Plasma e a galeria do tema G
 - O calendário e alguns outros widgets do Plasma ainda vêm do Breeze.
 - Depois de atualizar a decoração das janelas, saia e entre na sessão: o KWin
   mantém a decoração que carregou no login.
-- FreeLook Noturno: ao trocar entre dia e noite com janelas abertas, a barra
-  de título de algumas janelas pode ficar com as cores antigas (parece um
-  problema de tempo no motor de decorações QML do KWin). Escolher outra
-  decoração de janela e depois o FreeLook de novo resolve, e reabrir a janela
-  também. Veja a [issue #1](https://github.com/saulopz/freelook-kde/issues/1); dicas são bem-vindas. Os programas em GTK, menos
-  o Firefox, só trocam quando reabertos, porque o GTK 3 lê a preferência pelo
-  escuro ao iniciar.
+- FreeLook Noturno: os programas em GTK, menos o Firefox, só trocam entre dia
+  e noite quando reabertos, porque o GTK 3 lê a preferência pelo escuro ao
+  iniciar.
 - Programas em GTK 4 e libadwaita (a maioria dos aplicativos novos do GNOME)
   mantêm o visual deles: a libadwaita não aceita temas.
 - No GTK 3, o ▲ e o ▼ do elevador são só marcas: arraste o elevador ou clique
